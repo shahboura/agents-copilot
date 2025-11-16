@@ -2,6 +2,86 @@
 
 _Build Intelligent Workflow Systems with Context-Aware AI_
 
+---
+
+## ⚡ TL;DR - Quick Reference
+
+**For New Users:**
+- Start with `opencode --agent codebase-agent` for all development work
+- The agent handles planning, implementation, testing, and review automatically
+- Add your coding patterns to `.opencode/context/project/project-context.md`
+- Let the agent delegate to specialized subagents when needed
+
+**For Advanced Users:**
+- Read this document to understand how to create custom agents and commands
+- Learn how context loading works (the `@` symbol)
+- Extend the system with domain-specific context files
+- Build specialized workflows for repeated patterns
+
+**Core Concept:**
+```
+Commands load context → Agents execute with that context → Subagents handle specialized tasks
+```
+
+**When to read this document:**
+- ✅ You want to create custom agents or commands
+- ✅ You need to understand how context loading works
+- ✅ You want to extend the system for your specific needs
+- ❌ You just want to start building (use `codebase-agent` instead)
+
+---
+
+## 🎯 About This Document
+
+This blueprint is a **teaching document** that explains agent system architecture patterns. It uses examples to teach concepts like context loading, agent orchestration, and workflow management.
+
+> **📖 Installation & Usage:** See [README.md](../../README.md) in the repository root.
+
+### What You'll Learn
+
+This document teaches:
+- ✅ How context loading works (the `@` symbol magic)
+- ✅ Agent architecture and role separation
+- ✅ Workflow orchestration patterns
+- ✅ How to extend the system with custom agents/commands
+- ✅ How to add domain-specific context files
+
+### Understanding Examples in This Document
+
+**When you see commands like `/workflow`, `/plan-task`, `/create-frontend-component`:**
+- These are **pattern examples** showing how you COULD structure commands
+- Most aren't implemented in the repository
+- The existing `codebase-agent` already handles these workflows
+- Create them only if you have specific repeated patterns
+
+**When you see extensive context hierarchies:**
+- The repository includes `core/` and `project/` context files
+- Add domain-specific files (`frontend/`, `backend/`, `database/`) as needed
+- Start simple, expand based on your needs
+
+**When you see task management structures:**
+- The `task-manager` agent creates `tasks/` directories automatically
+- No need to pre-create structures
+
+### The Working System
+
+The repository provides a complete working system:
+
+```bash
+# This works right now:
+opencode --agent codebase-agent
+> "Create a user authentication system"
+
+# The agent will:
+# 1. Plan implementation
+# 2. Ask for approval
+# 3. Delegate to @task-manager for complex features
+# 4. Use @tester for tests
+# 5. Use @reviewer for security
+```
+
+---
+
 ## The Golden Rule
 
 **Context flows in one direction: Commands load context immediately, Agents can look up additional context deterministically.**
@@ -757,4 +837,143 @@ if (!validated.success) return { error: "Validation failed" };
 
 ---
 
+## Extending This System
+
+You can extend this system by adding the example commands and agents mentioned throughout this blueprint. Here's how:
+
+### Adding Workflow Commands (Optional)
+
+If you want specialized commands like `/workflow` or `/create-frontend-component`:
+
+1. **Create the command file:**
+   ```bash
+   # Example: .opencode/command/workflow.md
+   ---
+   name: workflow
+   agent: workflow-orchestrator
+   ---
+   
+   You are analyzing requests and routing to optimal workflows.
+   
+   **Request:** $ARGUMENTS
+   
+   @.opencode/context/core/essential-patterns.md
+   @.opencode/context/project/project-context.md
+   
+   Route to appropriate agent or handle directly.
+   ```
+
+2. **Or just use `codebase-agent` directly:**
+   ```bash
+   opencode --agent codebase-agent
+   > "Your request here"
+   ```
+
+### Adding Domain-Specific Context
+
+Extend the context hierarchy for your tech stack:
+
+```bash
+# Create domain-specific context files
+mkdir -p .opencode/context/frontend
+mkdir -p .opencode/context/backend
+mkdir -p .opencode/context/database
+
+# Add your patterns
+cat > .opencode/context/frontend/react-patterns.md << 'EOF'
+**React Component Pattern:**
+```tsx
+export function MyComponent({ prop }: Props) {
+  // Your pattern here
+}
+```
+EOF
+```
+
+Then reference in your commands:
+```markdown
+@.opencode/context/frontend/react-patterns.md
+@.opencode/context/backend/api-patterns.md
+```
+
+### Building Specialized Agents
+
+Create domain-specific agents following the patterns:
+
+```bash
+# Example: .opencode/agent/frontend-specialist.md
+---
+description: "React frontend development specialist"
+mode: primary
+tools: [read, edit, write, bash]
+---
+
+You are a React frontend specialist.
+
+**ANALYZE** the request and create components following patterns:
+@.opencode/context/frontend/react-patterns.md
+
+Execute implementation now.
+```
+
+### Recommended Extensions by Project Type:
+
+**Frontend Project:**
+- Add `context/frontend/react-patterns.md`
+- Add `context/styling/design-system.md`
+- Create `/create-component` command
+- Use `codebase-agent` with frontend context
+
+**Backend Project:**
+- Add `context/backend/api-patterns.md`
+- Add `context/database/query-patterns.md`
+- Create `/create-api-endpoint` command
+- Use `codebase-agent` with backend context
+
+**Full-Stack Project:**
+- Use all context files
+- Create domain-specific commands
+- Let `codebase-agent` coordinate between domains
+
+### The Simple Path (Recommended for Starters):
+
+**Don't create specialized commands/agents right away. Instead:**
+
+1. **Start with `codebase-agent`** for everything
+2. **Add context files** for your tech stack as needed
+3. **Use `@task-manager`** when features get complex
+4. **Let subagents** handle specialized work (@tester, @reviewer)
+5. **Create specialized commands** only when you have repeated workflows
+
+**Example progression:**
+```bash
+# Week 1: Use codebase-agent for everything
+opencode --agent codebase-agent
+
+# Week 2: Add project-specific context
+echo "Your patterns" > .opencode/context/project/api-patterns.md
+
+# Week 3: Reference in codebase-agent
+# The agent will automatically pick up context from project/
+
+# Week 4: Create a command if you have a repeated workflow
+# Only if you find yourself doing the same thing repeatedly
+```
+
+### How to Improve This System
+
+The system improves naturally as you:
+
+1. **Add context files** - Capture your coding patterns
+2. **Refine agent prompts** - Improve instructions based on results
+3. **Create project-specific commands** - Automate repeated workflows
+4. **Build subagents** - Extract specialized capabilities
+5. **Document in context/** - Every pattern you discover
+
+**The key principle:** Start simple, extend only when you have a clear need.
+
+---
+
 _Think of this system like a professional development team: each member has a specific role, they communicate clearly, they track their work systematically, and they validate quality at every step._
+
+_The `codebase-agent` is your senior developer who can handle most tasks. Add specialists only when needed._

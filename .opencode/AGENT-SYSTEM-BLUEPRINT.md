@@ -12,11 +12,11 @@ _Build Intelligent Workflow Systems with Context-Aware AI_
 - Add your coding patterns to `.opencode/context/project/project-context.md`
 - Let the agent delegate to specialized subagents when needed
 
-**For Advanced Users:**
-- Read this document to understand how to create custom agents and commands
+**For Advanced Users Building Custom Agents:**
+- Use `/prompt-enchancer` to create complex agents with workflows
+- Read this document to understand architecture patterns
 - Learn how context loading works (the `@` symbol)
 - Extend the system with domain-specific context files
-- Build specialized workflows for repeated patterns
 
 **Core Concept:**
 ```
@@ -31,25 +31,23 @@ Commands load context → Agents execute with that context → Subagents handle 
 
 ---
 
-## 🎯 About This Document
+## 🎯 What This Document Teaches
 
-This blueprint is a **teaching document** that explains agent system architecture patterns. It uses examples to teach concepts like context loading, agent orchestration, and workflow management.
+This blueprint explains the architecture patterns behind the OpenCode agent system. You'll learn:
+
+- How context loading works (the `@` symbol)
+- How agents, commands, and context files work together
+- How to create custom agents and commands
+- How to extend the system for your needs
 
 > **📖 Installation & Usage:** See [README.md](../../README.md) in the repository root.
 
-### What You'll Learn
+---
 
-This document teaches:
-- ✅ How context loading works (the `@` symbol magic)
-- ✅ Agent architecture and role separation
-- ✅ Workflow orchestration patterns
-- ✅ How to extend the system with custom agents/commands
-- ✅ How to add domain-specific context files
-
-### Understanding Examples in This Document
+## Understanding Examples in This Document
 
 **When you see commands like `/workflow`, `/plan-task`, `/create-frontend-component`:**
-- These are **pattern examples** showing how you COULD structure commands
+- These are pattern examples showing how you COULD structure commands
 - Most aren't implemented in the repository
 - The existing `codebase-agent` already handles these workflows
 - Create them only if you have specific repeated patterns
@@ -63,879 +61,345 @@ This document teaches:
 - The `task-manager` agent creates `tasks/` directories automatically
 - No need to pre-create structures
 
-### The Working System
-
-The repository provides a complete working system:
-
-```bash
-# This works right now:
-opencode --agent codebase-agent
-> "Create a user authentication system"
-
-# The agent will:
-# 1. Plan implementation
-# 2. Ask for approval
-# 3. Delegate to @task-manager for complex features
-# 4. Use @tester for tests
-# 5. Use @reviewer for security
-```
-
 ---
 
 ## The Golden Rule
 
 **Context flows in one direction: Commands load context immediately, Agents can look up additional context deterministically.**
 
-Like a well-organized library: the librarian (command) brings you the right books immediately, but you (agent) can look up specific references when needed.
+Think of it like a well-organized library: the librarian (command) brings you the right books immediately, but you (agent) can look up specific references when needed.
 
-## How @ Symbol Context Loading Works (FUNDAMENTAL)
+---
+
+## How @ Symbol Context Loading Works
 
 ### The Magic of Automatic Context Injection
 
-When you create a slash command with @ references, OpenCode automatically loads that context into the agent's memory BEFORE the agent starts thinking:
+When you create a slash command with `@` references, OpenCode automatically loads that context into the agent's memory BEFORE the agent starts thinking.
 
-```markdown
-# .opencode/command/create-component.md
+**Example command structure:**
+- Command file references context files using `@.opencode/context/...`
+- OpenCode reads those files automatically
+- Context is injected into the agent's working memory
+- Agent receives: user request + all loaded context + instructions
+- Agent can immediately use patterns without looking them up
 
----
+### Why This Is Powerful
 
-name: create-component
-agent: simple-coder
+**Without @ loading:**
+- Agent doesn't know your patterns
+- Has to search or use generic patterns
+- Inconsistent results, slower execution
 
----
+**With @ loading:**
+- Agent has your patterns loaded immediately
+- Follows your exact standards
+- Consistent, fast, high-quality results
 
-You are creating React components following our patterns.
+### Best Practices for Context Loading
 
-**Request:** $ARGUMENTS
-
-@.opencode/context/frontend/react-patterns.md
-@.opencode/context/styling/design-system.md
-@.opencode/context/core/validation-patterns.md
-
-Create the component now.
-```
-
-**What happens when user types `/create-component "user profile card"`:**
-
-1. ✅ OpenCode reads the command file
-2. ✅ **Automatically loads** react-patterns.md, design-system.md, validation-patterns.md
-3. ✅ **Injects all context** into the agent's working memory
-4. ✅ Agent receives: user request + all loaded context + instructions
-5. ✅ Agent can immediately use patterns without looking them up
-
-### Why This Mechanism Is Powerful
-
-**❌ Without @ loading:**
-
-```
-Agent: "I need to create a component but don't know your patterns. Let me search..."
-→ Agent uses generic patterns or has to look up files
-→ Inconsistent results, slower execution
-```
-
-**✅ With @ loading:**
-
-```
-Agent: "I have your React patterns, design system, and validation rules loaded. Creating component..."
-→ Agent immediately follows your exact patterns
-→ Consistent, fast, high-quality results
-```
-
-### Context Loading Strategy
-
-**Base Context (Always Load):**
-
-```markdown
-@.opencode/context/core/essential-patterns.md
-@.opencode/context/architecture/project-structure.md
-```
-
-**Domain-Specific Context (Load Based on Command Purpose):**
-
-```markdown
-# Frontend commands
-
-@.opencode/context/frontend/react-patterns.md
-@.opencode/context/styling/design-system.md
-
-# Backend commands
-
-@.opencode/context/backend/server-patterns.md
-@.opencode/context/database/query-patterns.md
-
-# Testing commands
-
-@.opencode/context/testing/test-patterns.md
-```
-
-### Dynamic Context Loading
-
-```markdown
-# Advanced: Conditional context based on request analysis
-
-@.opencode/context/core/essential-patterns.md
-!`if echo "$ARGUMENTS" | grep -i "component\|ui" > /dev/null; then echo "@.opencode/context/frontend/react-patterns.md"; fi`
-!`if echo "$ARGUMENTS" | grep -i "database\|query" > /dev/null; then echo "@.opencode/context/database/query-patterns.md"; fi`
-```
-
-### Best Practices for @ Context Loading
-
-1. **Load 2-4 context files maximum** (prevent cognitive overload)
-2. **Always include core patterns** (essential-patterns.md)
-3. **Load domain-specific patterns** based on command purpose
-4. **Keep context files focused** (50-150 lines each)
-5. **Use conditional loading** for dynamic context selection
+1. **Load 2-4 context files maximum** - Prevent cognitive overload
+2. **Always include core patterns** - Essential patterns every agent needs
+3. **Load domain-specific patterns** - Based on what the command does
+4. **Keep context files focused** - 50-150 lines each
+5. **Use conditional loading** - Load different context based on request analysis
 
 ### Why This Architecture Matters
 
-Understanding @ symbol auto-loading is crucial because:
-
 - **It's the foundation** of how agents get consistent context
-- **It determines command design** - you must anticipate what context agents need
-- **It explains the architecture** - why commands are "smart loaders" and agents are "focused executors"
-- **It guides best practices** - load the right context, not too much, not too little
+- **It determines command design** - You must anticipate what context agents need
+- **It explains the architecture** - Commands are "smart loaders", agents are "focused executors"
+- **It guides best practices** - Load the right context, not too much, not too little
 
-**This mechanism is what makes the system "intelligent" - agents always start with the right knowledge instead of having to discover it.**
+---
 
 ## Core Principles
 
 ### 1. Single-Level Context Loading
 
-**OpenCode processes `@` references only in command templates, NOT recursively in file contents.**
+OpenCode processes `@` references only in command templates, NOT recursively in file contents.
 
-```markdown
-# ✅ This works (in command template)
+- ✅ Works: `@` references in command files
+- ❌ Doesn't work: `@` references inside context files (treated as plain text)
 
-@.opencode/context/frontend/patterns.md
-@.opencode/context/styling/design-system.md
-
-# ❌ This doesn't work (inside patterns.md file)
-
-# If patterns.md contains @other-file.md, it's treated as plain text
-```
-
-**Critical Implication**: Commands must load ALL necessary context upfront using @ references. Agents can look up additional files using tools (read, grep, glob), but cannot use @ loading themselves.
+**Implication:** Commands must load ALL necessary context upfront. Agents can look up additional files using tools (read, grep, glob), but cannot use `@` loading themselves.
 
 ### 2. Deterministic vs Non-Deterministic Behavior
 
-- **Commands**: Non-deterministic - analyze requests and load appropriate context
-- **Agents**: Deterministic - predictable behavior, can look up additional context
+- **Commands**: Non-deterministic - Analyze requests and load appropriate context
+- **Agents**: Deterministic - Predictable behavior, can look up additional context
 
 ### 3. Context Optimization
 
-- **Maximum 4 context files per command** (250-450 lines total)
-- **50-150 lines per context file** (optimal range)
-- **Always load core patterns** + request-specific context
+- **Maximum 4 context files per command** - 250-450 lines total
+- **50-150 lines per context file** - Optimal range
+- **Always load core patterns** - Plus request-specific context
 
-## The 5-Part Intelligent System
+---
+
+## The System Components
 
 ### 1. Commands (.opencode/command/)
 
-**What:** Entry points that load immediate context based on request analysis
-**Rule:** Commands are non-deterministic - they adapt context to the request
+**What they do:** Entry points that load context based on request analysis
 
-```
-/workflow                    → Intelligent routing with dynamic context
-/plan-task                   → Task planning with architecture context
-/execute-task               → Step execution with progress tracking
-/create-frontend-component  → UI development with styling + frontend context
-/create-backend-operation   → Server logic with backend + database context
-/create-database-operation  → Database queries with focused database context
-/review-completion          → Quality assurance with minimal context
-/validate-with-tests        → Automated testing with testing context
-```
+**Examples:**
+- `/commit` - Smart git commits
+- `/optimize` - Code optimization
+- `/test` - Testing workflows
+- `/prompt-enchancer` - Improve prompts and create complex agents
 
-**Command Structure Pattern:**
-
-```markdown
----
-name: command-name
-agent: target-agent
-description: "What this command does"
----
-
-You are [doing specific task]. [Direct instructions to agent].
-
-**Request:** $ARGUMENTS
-
-**Your Instructions:**
-
-1. **ANALYZE** the request...
-2. **IMPLEMENT** following patterns...
-3. **VALIDATE** the results...
-
-**Context Loaded:**
-@.opencode/context/core/essential-patterns.md
-@.opencode/context/[domain]/[specific-patterns].md
-@.opencode/context/architecture/architecture-lite.md
-
-**Success Criteria:**
-
-- [Specific measurable outcomes]
-
-Execute this [task type] now.
-```
+**How they work:**
+- User types a command
+- Command analyzes the request
+- Loads appropriate context files using `@`
+- Passes everything to an agent
+- Agent executes with full context
 
 ### 2. Agents (.opencode/agent/)
 
-**What:** Deterministic AI workers with specific capabilities
-**Rule:** Agents can look up additional context but are predictable in behavior
+**What they do:** AI workers with specific capabilities and predictable behavior
 
-```
-Primary Agents:
-├── workflow-orchestrator.md  → Routes requests and analyzes complexity
-├── task-planner.md           → Creates detailed task plans with file tracking
-├── task-executor.md          → Executes planned steps systematically
-├── post-flight-reviewer.md   → Reviews completed work for compliance
-└── simple-coder.md           → Implements focused development tasks
+**Main agents in this repo:**
+- `codebase-agent` - Main development partner
+- `task-manager` - Breaks down complex features
+- `workflow-orchestrator` - Routes requests
+- `image-specialist` - Image generation
 
-Subagents (Specialized):
-├── subagents/code-reviewer.md    → Security and quality reviews (read-only)
-├── subagents/test-writer.md      → Test creation and validation (reports issues)
-├── subagents/pattern-finder.md   → Discovers existing implementations
-└── subagents/doc-writer.md       → Documentation creation and updates
-```
+**Subagents (specialized helpers):**
+- `reviewer` - Code review and security
+- `tester` - Test creation
+- `coder-agent` - Quick implementations
+- `documentation` - Docs generation
+- `build-agent` - Type checking
+- `codebase-pattern-analyst` - Pattern discovery
 
-**Agent Structure Pattern:**
-
-```markdown
----
-description: "What this agent does"
-mode: primary|subagent
-model: claude-4-sonnet
-temperature: 0.1-0.3
-tools:
-  read: true|false
-  edit: true|false
-  write: true|false
-  bash: true|false
-  task: true|false
-permissions:
-  edit:
-    "**/*.env*": "deny"
-    "**/*.secret": "deny"
----
-
-You are [specific role]. [Direct instructions for behavior].
-
-**EXECUTE** this [process type] for every [task type]:
-
-**1. [ACTION]** the [subject]:
-
-- [Specific instruction 1]
-- [Specific instruction 2]
-
-**2. [ACTION]** the [subject]:
-
-- [Specific instruction 1]
-- [Specific instruction 2]
-
-**RULES**:
-
-- **ALWAYS** [critical requirement]
-- **NEVER** [forbidden action]
-- **ONLY** [scope limitation]
-
-Execute [task type] now.
-```
+**Agent structure:**
+- Frontmatter with metadata (description, mode, tools, permissions)
+- Clear instructions for behavior
+- Specific rules and constraints
+- Structured response formats
 
 ### 3. Context (.opencode/context/)
 
-**What:** Layered knowledge system with focused domains
-**Rule:** Single-level loading - no recursive context references
+**What it is:** Layered knowledge system with your coding patterns
 
-```
-context/
-├── core/
-│   └── essential-patterns.md    (76 lines - always loaded)
-├── architecture/
-│   └── architecture-lite.md     (74 lines - project structure)
-├── frontend/
-│   ├── frontend-patterns.md     (230 lines - React patterns)
-│   └── styling/design-system.md (122 lines - UI standards)
-├── backend/
-│   ├── backend-patterns.md      (326 lines → split into focused files)
-│   └── server-actions.md        (100 lines - focused server action patterns)
-├── database/
-│   └── database-queries.md      (207 lines - query patterns)
-├── security/
-│   └── security-patterns.md     (205 lines - auth patterns)
-├── testing/
-│   ├── testing-patterns.md      (322 lines → split)
-│   └── unit-testing.md          (100 lines - focused test patterns)
-└── debugging/
-    └── common-errors.md          (304 lines → split by error type)
-```
+**Structure:**
+- `core/` - Essential patterns (always loaded)
+- `project/` - Your project-specific patterns
+- Add more as needed: `frontend/`, `backend/`, `database/`, etc.
 
-**Context File Structure Pattern:**
+**How it works:**
+- Context files contain your coding standards
+- Commands load relevant context using `@`
+- Agents follow those patterns automatically
+- Single-level loading (no recursive references)
 
-````markdown
-**[ACTION]** [subject] using these exact patterns:
-
-**[PATTERN NAME]** - [When to use]:
-
-```[language]
-// Example code with clear comments
-// Showing exactly what to do
-```
-````
-
-**[ANOTHER PATTERN]** - [When to use]:
-
-```[language]
-// Another example
-```
-
-**RULES**:
-
-- **ALWAYS** [critical requirement]
-- **NEVER** [forbidden action]
-- **USE** [specific tools/methods]
-
-```
+**Best practices:**
+- Keep files focused (50-150 lines)
+- Use clear pattern names
+- Include when to use each pattern
+- Add rules and constraints
 
 ### 4. Task Management (tasks/)
-**What:** File-based progress tracking with checkbox systems
-**Rule:** Every complex task gets a plan file with step-by-step tracking
 
-```
+**What it is:** File-based progress tracking with checkboxes
 
-tasks/
-├── features/ # Feature development
-│ └── [feature-name]/
-│ ├── task-plan.md # Main plan with checkboxes
-│ ├── execution-log.md # Detailed progress log
-│ └── review-report.md # Post-flight review
-├── fixes/ # Bug fixes
-│ └── [issue-name]/
-│ ├── task-plan.md
-│ └── fix-report.md
-├── improvements/ # Code improvements
-│ └── [improvement-name]/
-└── single/ # Simple tasks
-└── [task-name].md
+**Structure:**
+- `features/` - Feature development
+- `fixes/` - Bug fixes
+- `improvements/` - Code improvements
+- `single/` - Simple tasks
 
-````
-
-**Task Plan File Structure:**
-```markdown
-# Task: [Task Name]
-
-## Overview
-**Request**: [Original user request]
-**Complexity**: [Simple/Medium/Complex]
-**Estimated Duration**: [Time estimate]
-**Dependencies**: [List any blocking requirements]
-
-## Task Breakdown
-
-### Phase 1: [Phase Name]
-- [ ] **Step 1.1**: [Specific action]
-  - **Agent**: @[agent-name]
-  - **Context**: [Required context files]
-  - **Validation**: [How to verify completion]
-  - **Duration**: [Time estimate]
-
-- [ ] **Step 1.2**: [Specific action]
-  - **Agent**: @[agent-name]
-  - **Context**: [Required context files]
-  - **Validation**: [How to verify completion]
-  - **Duration**: [Time estimate]
-
-## Quality Gates
-- [ ] **Build Validation**: TypeScript compilation passes
-- [ ] **Code Review**: Security and quality review completed
-- [ ] **Testing**: All tests pass and coverage adequate
-- [ ] **Integration**: Feature works end-to-end
-
-## Acceptance Criteria
-- [ ] [Specific requirement 1]
-- [ ] [Specific requirement 2]
-
-## Progress Tracking
-**Started**: [Date/Time]
-**Last Updated**: [Date/Time]
-**Status**: [Planning/In Progress/Review/Complete]
-**Completed Steps**: 0/[Total Steps]
-````
+**How it works:**
+- `task-manager` creates task files automatically
+- Each task has a plan with checkboxes
+- Agents update progress as they work
+- Quality gates ensure standards are met
 
 ### 5. Workflow Orchestration
 
-**What:** Multi-agent coordination with quality gates
-**Rule:** Complex workflows use multiple agents with validation checkpoints
+**How agents coordinate:**
+- Simple tasks (< 30 min) - Direct execution
+- Medium tasks (30min-2hrs) - Task planning with tracking
+- Complex tasks (> 2hrs) - Multi-phase with quality gates
 
-```
-Workflow Types:
-├── Simple (< 30 min)     → Direct execution with focused context
-├── Medium (30min-2hrs)   → Task planning with step tracking
-└── Complex (> 2hrs)      → Multi-phase with quality gates
+**Quality gates:**
+- Build validation (TypeScript, linting)
+- Code review (security, quality)
+- Testing (automated tests)
+- Post-flight review (compliance check)
 
-Quality Gates:
-├── Build Validation      → TypeScript, linting, build checks
-├── Code Review          → Security and quality assessment
-├── Testing              → Automated test execution
-└── Post-Flight Review   → Instruction compliance verification
-```
+---
 
-## System Flow (Intelligent Workflow Management)
+## System Flow
 
-```mermaid
-flowchart TD
-    A[User Request] --> B[Workflow Orchestrator]
-    B --> C{Analyze Request}
-    C --> D{Complexity?}
-    D -->|Simple| E[Direct Execution]
-    D -->|Complex| F[Task Planning]
+**Simple workflow:**
+1. User makes request
+2. Agent analyzes and plans
+3. User approves
+4. Agent implements step-by-step
+5. Validation runs automatically
+6. Complete
 
-    E --> G[Load Focused Context]
-    G --> H[Execute with Agent]
-    H --> I[Validate Results]
-    I --> J[Complete]
+**Complex workflow:**
+1. User makes request
+2. Agent delegates to `@task-manager`
+3. Task manager creates detailed plan
+4. Agent implements one step at a time
+5. Progress tracked in task files
+6. Quality gates at milestones
+7. Subagents handle specialized work
+8. Post-flight review
+9. Complete
 
-    F --> K[Create Task Plan File]
-    K --> L[Step-by-Step Execution]
-    L --> M[Update Progress Tracking]
-    M --> N{More Steps?}
-    N -->|Yes| O[Next Step]
-    N -->|No| P[Quality Gates]
-    O --> L
-    P --> Q[Post-Flight Review]
-    Q --> R[Mark Complete]
-
-    style A fill:#E6F3FF
-    style J fill:#E6FFE6
-    style R fill:#E6FFE6
-```
+---
 
 ## Context Loading Strategy
 
-### Dynamic Context Loading Pattern
+### Dynamic Context Loading
 
-```markdown
-# In workflow orchestrator
+Commands can load different context based on request analysis:
 
-**ANALYZE** request: "$ARGUMENTS"
-
-**BASE CONTEXT** (always loaded):
-@.opencode/context/core/essential-patterns.md
-@.opencode/context/architecture/architecture-lite.md
-
-**CONDITIONAL CONTEXT** (based on request analysis):
-!`if echo "$ARGUMENTS" | grep -i -E "(component|ui|frontend)" > /dev/null; then echo "@.opencode/context/styling/design-system.md"; fi`
-!`if echo "$ARGUMENTS" | grep -i -E "(server|backend|action)" > /dev/null; then echo "@.opencode/context/backend/server-actions.md"; fi`
-!`if echo "$ARGUMENTS" | grep -i -E "(database|query|data)" > /dev/null; then echo "@.opencode/context/database/database-queries.md"; fi`
-```
+- Analyze the user's request
+- Determine domain (frontend, backend, database, etc.)
+- Load base context (core patterns)
+- Load domain-specific context conditionally
+- Pass everything to agent
 
 ### Context Size Guidelines
 
-- **✅ Optimal**: 50-150 lines (focused, actionable patterns)
-- **⚠️ Acceptable**: 150-250 lines (comprehensive but manageable)
-- **❌ Too Large**: 250+ lines (should be split into focused files)
+- ✅ **Optimal**: 50-150 lines (focused, actionable)
+- ⚠️ **Acceptable**: 150-250 lines (comprehensive but manageable)
+- ❌ **Too Large**: 250+ lines (split into focused files)
 
 ### Context Loading Rules
 
-1. **Always load core patterns** (essential-patterns.md + architecture-lite.md)
-2. **Maximum 4 context files** per command (prevent overload)
-3. **Load based on request analysis** (dynamic, not static)
-4. **Use bash commands** for conditional loading
+1. Always load core patterns
+2. Maximum 4 context files per command
+3. Load based on request analysis (dynamic, not static)
+4. Use bash commands for conditional loading
 
-## Implementation Guide
+---
 
-### Step 1: Create Your Workflow Commands
+## Building Your Own Agents
 
-```markdown
-# Essential Commands to Create:
+### Use /prompt-enchancer
 
-/workflow # Main entry with intelligent routing
-/plan-task # Complex task breakdown
-/execute-task # Step-by-step execution
-/create-frontend-component # UI development
-/create-backend-operation # Server logic
-/review-completion # Quality assurance
+**If you're building custom agents with complex workflows, use the `/prompt-enchancer` command:**
+
+- Helps you create well-structured agent prompts
+- Guides you through best practices
+- Ensures proper formatting and instructions
+- Creates agents that work well with the system
+
+**How to use it:**
+```
+/prompt-enchancer "I want to create an agent that does X"
 ```
 
-### Step 2: Build Your Agent System
+The command will help you:
+- Structure your agent properly
+- Add appropriate context loading
+- Define clear instructions
+- Set up permissions and tools
+- Create workflow patterns
 
-```markdown
-# Core Agents Needed:
+### Agent Design Best Practices
 
-workflow-orchestrator.md # Request analysis and routing
-task-planner.md # Detailed planning with file tracking
-task-executor.md # Step execution with progress updates
-post-flight-reviewer.md # Compliance and quality review
-simple-coder.md # Focused implementation work
+1. **Make agents deterministic** - Predictable behavior
+2. **Give clear, direct instructions** - Not documentation
+3. **Separate concerns** - One agent, one responsibility
+4. **Use structured response formats** - Consistent output
+5. **Define permissions** - Control what agents can do
+6. **Specify tools** - Only give access to what's needed
 
-# Specialized Subagents:
+### When to Create Custom Agents
 
-subagents/code-reviewer.md # Security and quality (read-only)
-subagents/test-writer.md # Test creation (reports issues)
-```
+Create custom agents when:
+- You have repeated workflows
+- You need specialized behavior
+- You want domain-specific expertise
+- You have unique quality requirements
 
-### Step 3: Structure Your Context
+Don't create custom agents when:
+- `codebase-agent` already handles it
+- It's a one-time task
+- You're just starting out
 
-```markdown
-# Context Organization:
+---
 
-core/essential-patterns.md # Always loaded (76 lines)
-architecture/architecture-lite.md # Project structure (74 lines)
-frontend/frontend-patterns.md # React patterns (230 lines)
-styling/design-system.md # UI standards (122 lines)
-backend/server-actions.md # Server patterns (100 lines)
-database/database-queries.md # Query patterns (207 lines)
-```
+## Extending the System
 
-### Step 4: Implement Task Management
+### Adding Domain-Specific Context
 
-```markdown
-# Task File Structure:
+1. Create context directory for your domain
+2. Add pattern files (50-150 lines each)
+3. Reference in commands using `@`
+4. Agents automatically use your patterns
 
-tasks/features/[name]/task-plan.md # Main planning file
-tasks/features/[name]/review-report.md # Post-completion review
-tasks/fixes/[name]/task-plan.md # Bug fix planning
-tasks/single/[name].md # Simple tasks
-```
+**Example domains:**
+- Frontend (React, Vue, etc.)
+- Backend (APIs, servers)
+- Database (queries, schemas)
+- Testing (unit, integration)
+- Security (auth, validation)
 
-### Step 5: Add Quality Gates
+### Creating Custom Commands
 
-```markdown
-# Automated Validation:
+1. Identify repeated workflows
+2. Determine what context is needed
+3. Create command file with `@` references
+4. Specify target agent
+5. Add clear instructions
+6. Test and refine
 
-!`pnpm tsc --noEmit` # TypeScript check
-!`pnpm lint` # Code quality
-!`pnpm build` # Build validation
-!`pnpm test` # Test execution
-```
+**Use `/prompt-enchancer` to help create complex commands.**
+
+### Building Specialized Subagents
+
+1. Identify specialized capability needed
+2. Define clear scope and responsibility
+3. Set appropriate permissions
+4. Create focused instructions
+5. Test with main agents
+
+---
 
 ## Best Practices
 
 ### Context Management
 
-1. **Keep context files focused** (50-150 lines)
-2. **Use single-level loading** (no recursive `@` references)
-3. **Load dynamically** based on request analysis
-4. **Always include core patterns** + architecture
+- Keep context files focused (50-150 lines)
+- Use single-level loading (no recursive `@` references)
+- Load dynamically based on request analysis
+- Always include core patterns
 
 ### Agent Design
 
-1. **Make agents deterministic** (predictable behavior)
-2. **Give clear, direct instructions** (not documentation)
-3. **Separate concerns** (one agent, one responsibility)
-4. **Use structured response formats**
+- Make agents deterministic (predictable behavior)
+- Give clear, direct instructions (not documentation)
+- Separate concerns (one agent, one responsibility)
+- Use structured response formats
+- **Use `/prompt-enchancer` for complex agents**
 
 ### Task Management
 
-1. **Break complex work into steps** (15-30 minutes each)
-2. **Use checkbox tracking** for progress visibility
-3. **Include validation criteria** for each step
-4. **Implement quality gates** at key milestones
+- Break complex work into steps (15-30 minutes each)
+- Use checkbox tracking for progress visibility
+- Include validation criteria for each step
+- Implement quality gates at key milestones
 
 ### Workflow Orchestration
 
-1. **Analyze before routing** (complexity and domain)
-2. **Use appropriate workflows** (simple vs complex)
-3. **Coordinate multiple agents** for complex tasks
-4. **Validate at every step** (build, test, review)
-
-## System Architecture
-
-```mermaid
-graph TB
-    subgraph "User Interface"
-        CMD[workflow plantask execute-task]
-    end
-
-    subgraph ".opencode/command/"
-        C1[workflow.md]
-        C2[plan-task.md]
-        C3[execute-task.md]
-        C4[create-frontend-component.md]
-        C5[create-backend-operation.md]
-    end
-
-    subgraph ".opencode/agent/"
-        A1[workflow-orchestrator.md]
-        A2[task-planner.md]
-        A3[task-executor.md]
-        A4[simple-coder.md]
-        A5[post-flight-reviewer.md]
-    end
-
-    subgraph ".opencode/context/"
-        CTX1[core/essential-patterns.md]
-        CTX2[architecture/architecture-lite.md]
-        CTX3[frontend/frontend-patterns.md]
-        CTX4[backend/server-actions.md]
-        CTX5[database/database-queries.md]
-    end
-
-    subgraph "tasks/"
-        T1[features/name/task-plan.md]
-        T2[fixes/name/task-plan.md]
-        T3[single/name.md]
-    end
-
-    CMD --> C1
-    CMD --> C2
-    CMD --> C3
-
-    C1 --> A1
-    C2 --> A2
-    C3 --> A3
-    C4 --> A4
-    C5 --> A4
-
-    A1 --> CTX1
-    A1 --> CTX2
-    A2 --> CTX2
-    A3 --> CTX1
-    A4 --> CTX3
-    A4 --> CTX4
-
-    A2 --> T1
-    A3 --> T1
-    A3 --> T2
-```
-
-## Using the System (User Guide)
-
-### How Slash Commands Work
-
-**Slash commands automatically inject context into agents using @ references:**
-
-```bash
-# User types this:
-/create-component "user profile card with avatar upload"
-
-# OpenCode automatically:
-# 1. Loads the command file: .opencode/command/create-component.md
-# 2. Reads all @ referenced context files
-# 3. Injects context + user request into the agent
-# 4. Agent starts with full knowledge of your patterns
-```
-
-### Basic Commands
-
-- `/workflow "your request"` - Main entry point for any development task
-- `/plan-task "complex feature"` - For multi-step planning
-- `/execute-task` - Continue working on planned tasks
-
-### Command Examples
-
-- `/workflow "Create a user profile component with form validation"`
-- `/create-frontend-component "Dashboard header with user menu"`
-- `/review-completion` - Check completed work for quality
-
-### When to Use Which Command
-
-- Simple tasks (< 30 min) → `/workflow`
-- Complex features → `/plan-task` then `/execute-task`
-- Specialized work → `/create-frontend-component`, `/create-backend-operation`
-
-### Why This Works Better Than Chat
-
-- **Consistent patterns**: Agents always use YOUR coding standards
-- **Faster execution**: No time spent discovering or asking about patterns
-- **Quality results**: Context-aware from the first response
-- **Scalable knowledge**: Add new patterns once, use everywhere
-
-## Quick Start Implementation
-
-### 1. Start with Core System
-
-```bash
-# Create essential structure
-mkdir -p .opencode/{command,agent,context/{core,architecture}}
-mkdir -p tasks/{features,fixes,single}
-```
-
-### 2. Create Main Entry Point
-
-```markdown
-# .opencode/command/workflow.md
+- Analyze before routing (complexity and domain)
+- Use appropriate workflows (simple vs complex)
+- Coordinate multiple agents for complex tasks
+- Validate at every step (build, test, review)
 
 ---
 
-name: workflow
-agent: workflow-orchestrator
-
----
-
-You are analyzing requests and routing to optimal workflows.
-
-**Request:** $ARGUMENTS
-
-**Context Loaded:**
-@.opencode/context/core/essential-patterns.md
-@.opencode/context/architecture/architecture-lite.md
-
-Route to appropriate specialized workflow now.
-```
-
-### 3. Build Workflow Orchestrator
-
-```markdown
-# .opencode/agent/workflow-orchestrator.md
-
----
-
-description: "Routes requests to specialized workflows"
-mode: primary
-tools: [read, grep, glob, task]
-
----
-
-You are analyzing requests and routing to specialized workflows.
-
-**ANALYZE** the request and **ROUTE** to appropriate command:
-
-- Feature development → /plan-task or /create-frontend-component
-- Bug fixes → /fix-issue
-- Code review → /review-code
-
-Execute routing now.
-```
-
-### 4. Add Essential Context
-
-````markdown
-# .opencode/context/core/essential-patterns.md
-
-**CORE PATTERNS** - Essential patterns for all development:
-
-**AUTHENTICATION PATTERN**:
-
-```typescript
-const user = await getCurrentUser();
-if (!user) return { error: "Unauthorized" };
-```
-````
-
-**VALIDATION PATTERN**:
-
-```typescript
-const validated = schema.safeParse(data);
-if (!validated.success) return { error: "Validation failed" };
-```
-
-````
-
-### 5. Test Your System
-```bash
-# Test the workflow
-/workflow "Create a user profile component"
-# Should route to appropriate workflow with right context
-````
-
-## Remember
-
-1. **Context flows one direction** - Commands load immediately, Agents look up deterministically
-2. **Keep context focused** - 50-150 lines per file, maximum 4 files per command
-3. **Make agents predictable** - Deterministic behavior with clear instructions
-4. **Track everything** - File-based task management with checkbox progress
-5. **Validate continuously** - Quality gates and post-flight reviews
-6. **Start simple** - Build core system first, add complexity gradually
-
----
-
-## Extending This System
-
-You can extend this system by adding the example commands and agents mentioned throughout this blueprint. Here's how:
-
-### Adding Workflow Commands (Optional)
-
-If you want specialized commands like `/workflow` or `/create-frontend-component`:
-
-1. **Create the command file:**
-   ```bash
-   # Example: .opencode/command/workflow.md
-   ---
-   name: workflow
-   agent: workflow-orchestrator
-   ---
-   
-   You are analyzing requests and routing to optimal workflows.
-   
-   **Request:** $ARGUMENTS
-   
-   @.opencode/context/core/essential-patterns.md
-   @.opencode/context/project/project-context.md
-   
-   Route to appropriate agent or handle directly.
-   ```
-
-2. **Or just use `codebase-agent` directly:**
-   ```bash
-   opencode --agent codebase-agent
-   > "Your request here"
-   ```
-
-### Adding Domain-Specific Context
-
-Extend the context hierarchy for your tech stack:
-
-```bash
-# Create domain-specific context files
-mkdir -p .opencode/context/frontend
-mkdir -p .opencode/context/backend
-mkdir -p .opencode/context/database
-
-# Add your patterns
-cat > .opencode/context/frontend/react-patterns.md << 'EOF'
-**React Component Pattern:**
-```tsx
-export function MyComponent({ prop }: Props) {
-  // Your pattern here
-}
-```
-EOF
-```
-
-Then reference in your commands:
-```markdown
-@.opencode/context/frontend/react-patterns.md
-@.opencode/context/backend/api-patterns.md
-```
-
-### Building Specialized Agents
-
-Create domain-specific agents following the patterns:
-
-```bash
-# Example: .opencode/agent/frontend-specialist.md
----
-description: "React frontend development specialist"
-mode: primary
-tools: [read, edit, write, bash]
----
-
-You are a React frontend specialist.
-
-**ANALYZE** the request and create components following patterns:
-@.opencode/context/frontend/react-patterns.md
-
-Execute implementation now.
-```
-
-### Recommended Extensions by Project Type:
-
-**Frontend Project:**
-- Add `context/frontend/react-patterns.md`
-- Add `context/styling/design-system.md`
-- Create `/create-component` command
-- Use `codebase-agent` with frontend context
-
-**Backend Project:**
-- Add `context/backend/api-patterns.md`
-- Add `context/database/query-patterns.md`
-- Create `/create-api-endpoint` command
-- Use `codebase-agent` with backend context
-
-**Full-Stack Project:**
-- Use all context files
-- Create domain-specific commands
-- Let `codebase-agent` coordinate between domains
-
-### The Simple Path (Recommended for Starters):
+## The Simple Path (Recommended)
 
 **Don't create specialized commands/agents right away. Instead:**
 
@@ -944,36 +408,80 @@ Execute implementation now.
 3. **Use `@task-manager`** when features get complex
 4. **Let subagents** handle specialized work (@tester, @reviewer)
 5. **Create specialized commands** only when you have repeated workflows
+6. **Use `/prompt-enchancer`** when building custom agents
 
-**Example progression:**
-```bash
-# Week 1: Use codebase-agent for everything
-opencode --agent codebase-agent
+### Example Progression
 
-# Week 2: Add project-specific context
-echo "Your patterns" > .opencode/context/project/api-patterns.md
+**Week 1:** Use `codebase-agent` for everything
+**Week 2:** Add project-specific context to `project/project-context.md`
+**Week 3:** Agent automatically picks up your patterns
+**Week 4:** Create a command if you have repeated workflows (use `/prompt-enchancer`)
 
-# Week 3: Reference in codebase-agent
-# The agent will automatically pick up context from project/
-
-# Week 4: Create a command if you have a repeated workflow
-# Only if you find yourself doing the same thing repeatedly
-```
-
-### How to Improve This System
+### How the System Improves
 
 The system improves naturally as you:
 
-1. **Add context files** - Capture your coding patterns
-2. **Refine agent prompts** - Improve instructions based on results
-3. **Create project-specific commands** - Automate repeated workflows
-4. **Build subagents** - Extract specialized capabilities
-5. **Document in context/** - Every pattern you discover
+1. Add context files - Capture your coding patterns
+2. Refine agent prompts - Improve instructions based on results
+3. Create project-specific commands - Automate repeated workflows
+4. Build subagents - Extract specialized capabilities
+5. Document in context/ - Every pattern you discover
 
 **The key principle:** Start simple, extend only when you have a clear need.
 
 ---
 
+## Project Structure
+
+```
+.opencode/
+├── agent/              # AI agents
+│   ├── codebase-agent.md
+│   ├── task-manager.md
+│   ├── workflow-orchestrator.md
+│   ├── image-specialist.md
+│   └── subagents/      # Specialized helpers
+│       ├── reviewer.md
+│       ├── tester.md
+│       ├── coder-agent.md
+│       ├── documentation.md
+│       ├── build-agent.md
+│       └── codebase-pattern-analyst.md
+├── command/            # Slash commands
+│   ├── commit.md
+│   ├── optimize.md
+│   ├── test.md
+│   ├── clean.md
+│   ├── context.md
+│   ├── prompt-enchancer.md  # Use this to build agents!
+│   └── worktrees.md
+├── context/            # Coding patterns
+│   ├── core/           # Essential patterns (always loaded)
+│   │   └── essential-patterns.md
+│   └── project/        # Your patterns (add here!)
+│       └── project-context.md
+├── plugin/             # Optional: Telegram notifications
+└── tool/               # Optional: Gemini AI image tools
+```
+
+---
+
+## Key Takeaways
+
+1. **Context flows one direction** - Commands load immediately, Agents look up deterministically
+2. **Keep context focused** - 50-150 lines per file, maximum 4 files per command
+3. **Make agents predictable** - Deterministic behavior with clear instructions
+4. **Track everything** - File-based task management with checkbox progress
+5. **Validate continuously** - Quality gates and post-flight reviews
+6. **Start simple** - Build core system first, add complexity gradually
+7. **Use `/prompt-enchancer`** - When building custom agents with workflows
+
+---
+
+## Remember
+
 _Think of this system like a professional development team: each member has a specific role, they communicate clearly, they track their work systematically, and they validate quality at every step._
 
 _The `codebase-agent` is your senior developer who can handle most tasks. Add specialists only when needed._
+
+_When you need to build custom agents, use `/prompt-enchancer` to create well-structured, complex agents with proper workflows._

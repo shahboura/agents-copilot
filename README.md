@@ -231,30 +231,6 @@ cp env.example .env
 
 ---
 
-## How It Compares
-
-### vs GitHub Copilot
-- ✅ **Plan-first workflow** - Proposes plans before executing (Copilot executes immediately)
-- ✅ **Approval-based** - You review and approve each step (Copilot auto-completes)
-- ✅ **Multi-agent system** - Specialized agents for testing, review, docs (Copilot is single-purpose)
-- ✅ **Context-aware** - Follows your coding patterns from context files
-
-### vs Cursor
-- ✅ **IDE-agnostic** - Works with any editor (Cursor is IDE-specific)
-- ✅ **Multi-agent coordination** - Task delegation between specialized agents
-- ✅ **Workflow orchestration** - Manages complex multi-step features
-- ✅ **Open source** - Fully customizable and extensible
-
-### vs Aider
-- ✅ **Visual workflow** - Interactive menus and progress tracking (Aider is CLI-only)
-- ✅ **Subagent system** - Automatic delegation to specialized agents
-- ✅ **Built-in validation** - Type checking, testing, and review integrated
-- ✅ **Installation profiles** - Choose your feature set (core, developer, full)
-
-**Key Differentiator:** OpenCode Agents is the only framework that combines plan-first workflows, approval-based execution, and multi-agent coordination with your custom coding patterns.
-
----
-
 ## Common Questions
 
 **Q: What's the main way to use this?**  

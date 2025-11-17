@@ -6,6 +6,7 @@ A set of OpenCode configurations, prompts, agents, and plugins for enhanced deve
 
 ## Why Use This?
 
+- ✅ **Multi-language support** - Works with TypeScript, Python, Go, Rust, and more
 - ✅ **Plan-first workflow** - Agents propose plans before implementing
 - ✅ **Incremental execution** - Step-by-step implementation with validation
 - ✅ **Quality built-in** - Automatic testing, type checking, and code review
@@ -104,7 +105,7 @@ codebase-agent (main coordinator)
 - **/worktrees** - Git worktree management
 
 ### 📚 Context Files
-- `core/essential-patterns.md` - Core coding patterns
+- `core/essential-patterns.md` - Universal coding patterns
 - `project/project-context.md` - Your project-specific patterns
 
 ---
@@ -211,6 +212,9 @@ A: Global (`~/.opencode/`) works for most. Project-specific (`.opencode/`) if yo
 
 **Q: How do I add my own coding patterns?**  
 A: Edit `~/.opencode/context/project/project-context.md` - agents automatically load this file.
+
+**Q: What languages are supported?**  
+A: The agents work with any language (TypeScript, Python, Go, Rust, etc.) and adapt based on your project files.
 
 **Q: What's the AGENT-SYSTEM-BLUEPRINT.md for?**  
 A: It's a teaching document explaining architecture patterns and how to extend the system.

@@ -1,250 +1,135 @@
 # Essential Patterns - Core Knowledge Base
 
+These are language-agnostic patterns that apply to all programming languages. Language-specific implementations are loaded from context files based on project detection.
+
 ## Error Handling Pattern
 
 **ALWAYS** handle errors gracefully:
 
-```typescript
-try {
-  const result = await riskyOperation();
-  return { success: true, data: result };
-} catch (error) {
-  console.error('Operation failed:', error);
-  return { success: false, error: error.message };
-}
-```
+- Catch specific errors, not generic ones
+- Log errors with context
+- Return meaningful error messages
+- Don't expose internal implementation details
+- Use language-specific error handling mechanisms (try/catch, Result, error returns)
 
 ## Validation Pattern
 
 **ALWAYS** validate input data:
 
-```typescript
-function validateInput(input: any): { valid: boolean; errors?: string[] } {
-  const errors: string[] = [];
-
-  if (!input) errors.push('Input is required');
-  if (typeof input !== 'string') errors.push('Input must be a string');
-  if (input.length < 3) errors.push('Input must be at least 3 characters');
-
-  return {
-    valid: errors.length === 0,
-    errors: errors.length > 0 ? errors : undefined
-  };
-}
-```
+- Check for null/nil/None values
+- Validate data types
+- Validate data ranges and constraints
+- Sanitize user input
+- Return clear validation error messages
 
 ## Logging Pattern
 
 **USE** consistent logging levels:
 
-```typescript
-// Debug information (development only)
-console.debug('Processing request:', requestId);
-
-// Info for important events
-console.info('User authenticated:', userId);
-
-// Warning for potential issues
-console.warn('Rate limit approaching for user:', userId);
-
-// Error for failures
-console.error('Database connection failed:', error);
-```
+- **Debug**: Detailed information for debugging (development only)
+- **Info**: Important events and milestones
+- **Warning**: Potential issues that don't stop execution
+- **Error**: Failures and exceptions
 
 ## Security Pattern
 
 **NEVER** expose sensitive information:
 
-```typescript
-// ❌ BAD: Exposing internal errors
-return { error: 'Internal server error: ' + error.message };
-
-// ✅ GOOD: Generic error message
-return { error: 'An unexpected error occurred. Please try again.' };
-```
+- Don't log passwords, tokens, or API keys
+- Don't expose internal error details to users
+- Validate and sanitize all user input
+- Use environment variables for secrets
+- Follow principle of least privilege
 
 ## File System Safety Pattern
 
 **ALWAYS** validate file paths:
 
-```typescript
-import path from 'path';
-
-function safeReadFile(userPath: string): string | null {
-  const resolvedPath = path.resolve(userPath);
-  const allowedDir = path.resolve('./allowed-directory');
-
-  // Ensure path is within allowed directory
-  if (!resolvedPath.startsWith(allowedDir)) {
-    throw new Error('Access denied: Invalid path');
-  }
-
-  return fs.readFileSync(resolvedPath, 'utf8');
-}
-```
-
-## Type Safety Pattern
-
-**ALWAYS** use strict TypeScript types:
-
-```typescript
-interface User {
-  id: string;
-  name: string;
-  email: string;
-  createdAt: Date;
-}
-
-interface ApiResponse<T> {
-  success: boolean;
-  data?: T;
-  error?: string;
-}
-
-// Use generics for type-safe responses
-function createUser(userData: Omit<User, 'id' | 'createdAt'>): ApiResponse<User> {
-  // Implementation
-}
-```
-
-## Async/Await Pattern
-
-**ALWAYS** handle promises properly:
-
-```typescript
-// ❌ BAD: Nested promises
-fetchUser().then(user => {
-  return fetchPosts(user.id).then(posts => {
-    return { user, posts };
-  });
-});
-
-// ✅ GOOD: Async/await with error handling
-async function getUserWithPosts(userId: string) {
-  try {
-    const user = await fetchUser(userId);
-    const posts = await fetchPosts(user.id);
-    return { user, posts };
-  } catch (error) {
-    console.error('Failed to fetch user data:', error);
-    throw error;
-  }
-}
-```
+- Prevent path traversal attacks
+- Check file permissions before operations
+- Use absolute paths when possible
+- Handle file not found errors gracefully
+- Close file handles properly
 
 ## Configuration Pattern
 
 **ALWAYS** use environment variables for configuration:
 
-```typescript
-// config.ts
-export const config = {
-  port: parseInt(process.env.PORT || '3000'),
-  databaseUrl: process.env.DATABASE_URL,
-  jwtSecret: process.env.JWT_SECRET,
-  nodeEnv: process.env.NODE_ENV || 'development',
-};
-
-// Validate required config
-if (!config.databaseUrl) {
-  throw new Error('DATABASE_URL environment variable is required');
-}
-```
+- Never hardcode secrets or credentials
+- Provide sensible defaults
+- Validate required configuration on startup
+- Document all configuration options
+- Use different configs for dev/staging/production
 
 ## Testing Pattern
 
 **ALWAYS** write testable code:
 
-```typescript
-// ❌ BAD: Hard to test
-export function processPayment(amount: number) {
-  const apiKey = process.env.STRIPE_KEY;
-  // Direct API call
-}
-
-// ✅ GOOD: Dependency injection
-export interface PaymentService {
-  processPayment(amount: number): Promise<boolean>;
-}
-
-export function createPaymentProcessor(service: PaymentService) {
-  return {
-    async process(amount: number) {
-      return service.processPayment(amount);
-    }
-  };
-}
-```
+- Use dependency injection
+- Keep functions pure when possible
+- Write unit tests for business logic
+- Write integration tests for external dependencies
+- Use test fixtures and mocks appropriately
 
 ## Documentation Pattern
 
-**ALWAYS** document complex logic:
+**DOCUMENT** complex logic and public APIs:
 
-```typescript
-/**
- * Calculates the total price including tax and discounts
- * @param basePrice - The original price before modifications
- * @param taxRate - Tax rate as decimal (e.g., 0.08 for 8%)
- * @param discountPercent - Discount percentage (0-100)
- * @returns The final price after tax and discount
- */
-function calculateTotalPrice(
-  basePrice: number,
-  taxRate: number = 0.08,
-  discountPercent: number = 0
-): number {
-  const discountAmount = basePrice * (discountPercent / 100);
-  const discountedPrice = basePrice - discountAmount;
-  const taxAmount = discountedPrice * taxRate;
-  return discountedPrice + taxAmount;
-}
-```
+- Explain the "why", not just the "what"
+- Document function parameters and return values
+- Include usage examples
+- Keep documentation up to date with code
+- Use language-specific documentation tools
 
 ## Performance Pattern
 
-**AVOID** unnecessary operations in loops:
+**AVOID** unnecessary operations:
 
-```typescript
-// ❌ BAD: Repeated calculations
-const results = [];
-for (let i = 0; i < items.length; i++) {
-  results.push(items[i] * calculateTax(items[i])); // calculateTax called repeatedly
-}
-
-// ✅ GOOD: Pre-calculate or cache
-const results = [];
-const taxRate = getCurrentTaxRate(); // Calculate once
-for (let i = 0; i < items.length; i++) {
-  results.push(items[i] * taxRate);
-}
-```
+- Don't repeat expensive calculations
+- Cache results when appropriate
+- Use efficient data structures
+- Profile before optimizing
+- Consider time and space complexity
 
 ## Code Organization Pattern
 
-**KEEP** functions focused and small:
+**KEEP** code modular and focused:
 
-```typescript
-// ❌ BAD: One function doing too much
-function processOrder(orderData) {
-  // Validate input
-  // Calculate pricing
-  // Save to database
-  // Send email
-  // Log analytics
-}
+- Single Responsibility Principle - one function, one purpose
+- Don't Repeat Yourself (DRY)
+- Separate concerns (business logic, data access, presentation)
+- Use meaningful names for functions and variables
+- Keep functions small and focused (< 50 lines ideally)
 
-// ✅ GOOD: Separated concerns
-function validateOrder(orderData) { /* validation logic */ }
-function calculatePricing(orderData) { /* pricing logic */ }
-function saveOrder(orderData) { /* database logic */ }
-function sendConfirmation(orderData) { /* email logic */ }
-function logAnalytics(orderData) { /* analytics logic */ }
+## Dependency Management
 
-async function processOrder(orderData) {
-  validateOrder(orderData);
-  const pricing = calculatePricing(orderData);
-  await saveOrder({ ...orderData, pricing });
-  await sendConfirmation(orderData);
-  logAnalytics(orderData);
-}
-```
+**MANAGE** dependencies carefully:
+
+- Pin dependency versions for reproducibility
+- Regularly update dependencies for security
+- Minimize number of dependencies
+- Audit dependencies for security vulnerabilities
+- Document why each dependency is needed
+
+## Version Control
+
+**FOLLOW** git best practices:
+
+- Write clear, descriptive commit messages
+- Make atomic commits (one logical change per commit)
+- Use feature branches for development
+- Review code before merging
+- Keep main/master branch stable
+
+## Code Review Checklist
+
+**REVIEW** for these common issues:
+
+- Error handling is comprehensive
+- Input validation is present
+- No hardcoded secrets or credentials
+- Tests cover new functionality
+- Documentation is updated
+- Code follows project conventions
+- No obvious security vulnerabilities
+- Performance considerations addressed

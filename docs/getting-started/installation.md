@@ -1,335 +1,674 @@
-# Install Script - Collision Handling
+# OpenAgents Installation Guide
 
-## Overview
-
-The install script now intelligently detects and handles file collisions when installing OpenCode components into an existing `.opencode/` directory.
-
-## How It Works
-
-### 1. Collision Detection
-
-Before installing any files, the script:
-- Scans all components you've selected to install
-- Checks if any files already exist in your `.opencode/` directory
-- Groups collisions by type (agents, subagents, commands, tools, etc.)
-- Presents a clear report of what would be overwritten
-
-### 2. Installation Strategies
-
-When collisions are detected, you get **4 options**:
-
-#### Option 1: Skip Existing (Recommended for Updates)
-```
-✅ Only install new files
-✅ Keep ALL existing files unchanged
-✅ Your customizations are preserved
-✅ Safe for incremental updates
-```
-
-**Use when:**
-- You've customized existing agents/commands
-- You only want to add new components
-- You're updating and want to keep your changes
-
-**Example:**
-```
-Selected: 10 components
-Existing: 5 files
-Result: 5 new files installed, 5 existing files untouched
-```
+Complete guide to installing OpenAgents components using the automated installer script.
 
 ---
 
-#### Option 2: Overwrite All (Use with Caution)
-```
-⚠️  Replace ALL existing files with new versions
-⚠️  Your customizations will be LOST
-⚠️  Requires confirmation (type 'yes')
-```
+## Quick Start
 
-**Use when:**
-- You want the latest versions of everything
-- You haven't made customizations
-- You want to reset to defaults
-
-**Example:**
-```
-Selected: 10 components
-Existing: 5 files
-Result: All 10 files installed (5 overwritten, 5 new)
-```
-
----
-
-#### Option 3: Backup & Overwrite (Safe Update)
-```
-✅ Backs up existing files to .opencode.backup.{timestamp}/
-✅ Then installs new versions
-✅ You can restore from backup if needed
-✅ Best of both worlds
-```
-
-**Use when:**
-- You want new versions but want to keep a backup
-- You're not sure if you've customized files
-- You want the ability to restore
-
-**Example:**
-```
-Selected: 10 components
-Existing: 5 files
-Result: 
-  - 5 files backed up to .opencode.backup.20251118-143022/
-  - All 10 files installed (5 updated, 5 new)
-```
-
-**Restore from backup:**
-```bash
-# View backup
-ls -la .opencode.backup.*/
-
-# Restore specific file
-cp .opencode.backup.20251118-143022/.opencode/agent/my-agent.md .opencode/agent/
-
-# Restore all
-rm -rf .opencode
-mv .opencode.backup.20251118-143022/.opencode .opencode
-```
-
----
-
-#### Option 4: Cancel
-```
-❌ Exit without making any changes
-```
-
-**Use when:**
-- You need to review what would be changed
-- You want to manually backup first
-- You're not ready to proceed
-
----
-
-## Example Session
+### Default Installation (Local Directory)
 
 ```bash
-$ bash <(curl -fsSL https://raw.githubusercontent.com/darrenhinde/OpenAgents/main/install.sh) --developer
+# Interactive mode - choose components
+bash <(curl -fsSL https://raw.githubusercontent.com/darrenhinde/OpenAgents/main/install.sh)
 
-╔════════════════════════════════════════════════════════════════╗
-║                                                                ║
-║           OpenAgents Installer v1.0.0                    ║
-║                                                                ║
-╚════════════════════════════════════════════════════════════════╝
+# Quick install with profile
+bash <(curl -fsSL https://raw.githubusercontent.com/darrenhinde/OpenAgents/main/install.sh) developer
+```
 
-▶ Checking dependencies...
-✓ All dependencies found
+Installs to `.opencode/` in your current directory.
 
-▶ Fetching component registry...
-✓ Registry fetched successfully
+---
 
-▶ Installation Preview
+## Installation Methods
 
-Profile: developer
+### 1. Interactive Installation (Recommended for First-Time Users)
 
-Components to install (22 total):
+Run the installer without arguments to get an interactive experience:
 
-Agents (4): task-manager codebase-agent image-specialist workflow-orchestrator
-Subagents (6): reviewer tester documentation coder-agent build-agent codebase-pattern-analyst
-Commands (6): test commit context clean optimize prompt-enhancer
-Tools (2): env gemini
-Contexts (2): essential-patterns project-context
-Config (2): env-example readme
+```bash
+curl -fsSL https://raw.githubusercontent.com/darrenhinde/OpenAgents/main/install.sh | bash
+```
 
-Proceed with installation? [Y/n]: y
+**Interactive Flow:**
+1. **Choose Installation Location**
+   - Local (`.opencode/` in current directory)
+   - Global (`~/.config/opencode/`)
+   - Custom (enter any path)
 
-▶ Preparing installation...
+2. **Choose Installation Mode**
+   - Quick Install (select a profile)
+   - Custom Install (pick individual components)
+   - List Available Components
 
-▶ Checking for file collisions...
+3. **Select Components** (if custom mode)
+   - Choose from agents, subagents, commands, tools, contexts, config
 
-⚠ Found 8 file collision(s):
+4. **Review & Confirm**
+   - See what will be installed
+   - Confirm installation directory
+   - Proceed or cancel
 
-  Agents (2):
-    .opencode/agent/task-manager.md
-    .opencode/agent/codebase-agent.md
-  Subagents (3):
-    .opencode/agent/subagents/reviewer.md
-    .opencode/agent/subagents/tester.md
-    .opencode/agent/subagents/coder-agent.md
-  Commands (2):
-    .opencode/command/test.md
-    .opencode/command/commit.md
-  Context (1):
-    .opencode/context/core/essential-patterns.md
+### 2. Profile-Based Installation (Quick Setup)
 
-How would you like to proceed?
+Install a pre-configured set of components:
 
-  1) Skip existing - Only install new files, keep all existing files unchanged
-  2) Overwrite all - Replace existing files with new versions (your changes will be lost)
-  3) Backup & overwrite - Backup existing files, then install new versions
-  4) Cancel - Exit without making changes
+```bash
+# Essential - Minimal setup with core agents
+bash <(curl -fsSL https://raw.githubusercontent.com/darrenhinde/OpenAgents/main/install.sh) essential
 
-Enter your choice [1-4]: 1
+# Developer - Code-focused development tools
+bash <(curl -fsSL https://raw.githubusercontent.com/darrenhinde/OpenAgents/main/install.sh) developer
 
-▶ Installing components...
+# Business - Content and business-focused tools
+bash <(curl -fsSL https://raw.githubusercontent.com/darrenhinde/OpenAgents/main/install.sh) business
 
-✓ Installed agent: image-specialist
-✓ Installed agent: workflow-orchestrator
-ℹ Skipped existing: agent:task-manager
-ℹ Skipped existing: agent:codebase-agent
-ℹ Skipped existing: subagent:reviewer
-ℹ Skipped existing: subagent:tester
-✓ Installed subagent: documentation
-ℹ Skipped existing: subagent:coder-agent
-✓ Installed subagent: build-agent
-✓ Installed subagent: codebase-pattern-analyst
-ℹ Skipped existing: command:test
-ℹ Skipped existing: command:commit
-✓ Installed command: context
-✓ Installed command: clean
-✓ Installed command: optimize
-✓ Installed command: prompt-enhancer
-✓ Installed tool: env
-✓ Installed tool: gemini
-ℹ Skipped existing: context:essential-patterns
-✓ Installed context: project-context
-✓ Installed config: env-example
-✓ Installed config: readme
+# Full - Everything except system-builder
+bash <(curl -fsSL https://raw.githubusercontent.com/darrenhinde/OpenAgents/main/install.sh) full
 
-✓ Installation complete!
-  Installed: 14
-  Skipped: 8
+# Advanced - Complete system with all components
+bash <(curl -fsSL https://raw.githubusercontent.com/darrenhinde/OpenAgents/main/install.sh) advanced
+```
 
-▶ Next Steps
+### 3. Download & Run (For Offline or Repeated Use)
 
-1. Review the installed components in .opencode/
-2. Copy env.example to .env and configure:
-   cp env.example .env
-3. Start using OpenCode agents:
-   opencode
+```bash
+# Download the installer
+curl -fsSL https://raw.githubusercontent.com/darrenhinde/OpenAgents/main/install.sh -o install.sh
 
-ℹ Documentation: https://github.com/darrenhinde/OpenAgents
+# Make it executable
+chmod +x install.sh
+
+# Run interactively
+./install.sh
+
+# Or with a profile
+./install.sh developer
 ```
 
 ---
 
-## Collision Report Details
+## Installation Locations
 
-The collision report groups files by type for easy review:
+### Local Installation (Default)
 
-| Category | Location | Description |
-|----------|----------|-------------|
-| **Agents** | `.opencode/agent/*.md` | Main orchestrator agents |
-| **Subagents** | `.opencode/agent/subagents/*.md` | Specialized worker agents |
-| **Commands** | `.opencode/command/*.md` | Slash commands |
-| **Tools** | `.opencode/tool/*/` | Tool implementations |
-| **Plugins** | `.opencode/plugin/*.ts` | Plugin integrations |
-| **Context** | `.opencode/context/**/*.md` | Context files |
-| **Config** | Root level files | Configuration files |
+Installs to `.opencode/` in your current directory.
+
+**Best for:**
+- Project-specific agents
+- Testing and development
+- Multiple isolated installations
+
+```bash
+# Default behavior
+./install.sh developer
+
+# Explicit local installation
+./install.sh developer --install-dir .opencode
+```
+
+**Result:**
+```
+your-project/
+├── .opencode/
+│   ├── agent/
+│   ├── command/
+│   ├── context/
+│   └── tool/
+└── your-project-files...
+```
+
+### Global Installation
+
+Installs to `~/.config/opencode/` for user-wide access.
+
+**Best for:**
+- System-wide agent availability
+- Single installation for all projects
+- Consistent agent versions
+
+```bash
+# Using CLI argument
+./install.sh developer --install-dir ~/.config/opencode
+
+# Using environment variable
+export OPENCODE_INSTALL_DIR=~/.config/opencode
+./install.sh developer
+```
+
+**Result:**
+```
+~/.config/
+└── opencode/
+    ├── agent/
+    ├── command/
+    ├── context/
+    └── tool/
+```
+
+### Custom Installation
+
+Install to any directory you choose.
+
+**Best for:**
+- Custom organizational structures
+- Shared team installations
+- Non-standard setups
+
+```bash
+# Custom path
+./install.sh developer --install-dir ~/my-agents
+
+# Path with spaces (use quotes)
+./install.sh developer --install-dir "~/My Agents/opencode"
+
+# Absolute path
+./install.sh developer --install-dir /opt/opencode
+```
 
 ---
 
-## Best Practices
+## Installation Directory Options
 
-### For First-Time Installation
-- No collisions will be detected
-- All files install cleanly
-- No strategy selection needed
+### CLI Argument
 
-### For Updates (Adding New Components)
-- **Use Option 1 (Skip existing)** - Safest choice
-- Only new components are added
+Use `--install-dir` to specify installation directory:
+
+```bash
+# Format 1: --install-dir=PATH
+./install.sh developer --install-dir=~/.config/opencode
+
+# Format 2: --install-dir PATH
+./install.sh developer --install-dir ~/.config/opencode
+```
+
+### Environment Variable
+
+Set `OPENCODE_INSTALL_DIR` for persistent configuration:
+
+```bash
+# Set once, use multiple times
+export OPENCODE_INSTALL_DIR=~/.config/opencode
+
+# Now all installations use this directory
+./install.sh developer
+./install.sh --list
+```
+
+**Add to your shell profile for persistence:**
+```bash
+# ~/.bashrc or ~/.zshrc
+export OPENCODE_INSTALL_DIR=~/.config/opencode
+```
+
+### Interactive Selection
+
+When running in interactive mode, you'll be prompted to choose:
+
+```
+Choose installation location:
+
+  1) Local - Install to .opencode/ in current directory
+     (Best for project-specific agents)
+     
+  2) Global - Install to ~/.config/opencode/
+     (Best for user-wide agents available everywhere)
+     
+  3) Custom - Enter exact path
+     Examples:
+       Linux/Mac:  /home/user/my-agents or ~/my-agents
+       Windows:    C:/Users/user/my-agents or ~/my-agents
+     
+Enter your choice [1-3]:
+```
+
+### Priority Order
+
+Installation directory is determined by (highest to lowest priority):
+
+1. `--install-dir` CLI argument
+2. `OPENCODE_INSTALL_DIR` environment variable
+3. Interactive selection (if in interactive mode)
+4. Default: `.opencode`
+
+---
+
+## Platform-Specific Installation
+
+### Linux
+
+```bash
+# Standard installation
+curl -fsSL https://raw.githubusercontent.com/darrenhinde/OpenAgents/main/install.sh | bash -s developer
+
+# Global installation
+./install.sh developer --install-dir ~/.config/opencode
+
+# System-wide (requires sudo)
+sudo ./install.sh developer --install-dir /opt/opencode
+```
+
+### macOS
+
+```bash
+# Standard installation
+curl -fsSL https://raw.githubusercontent.com/darrenhinde/OpenAgents/main/install.sh | bash -s developer
+
+# Global installation (XDG standard)
+./install.sh developer --install-dir ~/.config/opencode
+
+# macOS native location
+./install.sh developer --install-dir ~/Library/Application\ Support/opencode
+```
+
+### Windows (Git Bash)
+
+```bash
+# Standard installation
+curl -fsSL https://raw.githubusercontent.com/darrenhinde/OpenAgents/main/install.sh | bash -s developer
+
+# Global installation
+./install.sh developer --install-dir ~/.config/opencode
+
+# Windows-style path
+./install.sh developer --install-dir C:/Users/username/opencode
+```
+
+### Windows (WSL)
+
+```bash
+# Same as Linux
+curl -fsSL https://raw.githubusercontent.com/darrenhinde/OpenAgents/main/install.sh | bash -s developer
+
+# Global installation
+./install.sh developer --install-dir ~/.config/opencode
+```
+
+---
+
+## Available Profiles
+
+### Essential
+**Minimal setup with core agents**
+
+Components:
+- Core agents: openagent
+- Essential contexts
+- Basic configuration
+
+```bash
+./install.sh essential
+```
+
+### Developer
+**Code-focused development tools**
+
+Components:
+- Development agents: codebase-agent, task-manager
+- Code subagents: reviewer, tester, coder-agent, build-agent
+- Development commands: test, commit, context
+- Development tools and contexts
+
+```bash
+./install.sh developer
+```
+
+### Business
+**Content and business-focused tools**
+
+Components:
+- Business agents
+- Content creation tools
+- Documentation agents
+- Business contexts
+
+```bash
+./install.sh business
+```
+
+### Full
+**Everything except system-builder**
+
+Components:
+- All agents and subagents
+- All commands
+- All tools
+- All contexts
+- All configuration
+
+```bash
+./install.sh full
+```
+
+### Advanced
+**Complete system with all components**
+
+Components:
+- Everything in Full profile
+- System-builder agents
+- Advanced configuration
+- Complete toolset
+
+```bash
+./install.sh advanced
+```
+
+---
+
+## Post-Installation
+
+### 1. Verify Installation
+
+```bash
+# Check installed files
+ls -la .opencode/
+
+# Or for global installation
+ls -la ~/.config/opencode/
+```
+
+### 2. Configure Environment
+
+```bash
+# Copy example environment file
+cp env.example .env
+
+# Edit with your settings
+nano .env
+```
+
+### 3. Start Using OpenCode
+
+```bash
+# Run OpenCode CLI
+opencode
+
+# Or use specific agents/commands
+# (depends on your OpenCode CLI setup)
+```
+
+---
+
+## Collision Handling
+
+When installing into an existing directory, the installer detects file collisions and offers 4 options:
+
+### Option 1: Skip Existing (Safest)
+- Only install new files
+- Keep all existing files unchanged
 - Your customizations are preserved
 
-### For Full Refresh
-- **Use Option 3 (Backup & overwrite)** - Safest for updates
-- Get latest versions of everything
-- Keep backup just in case
+### Option 2: Overwrite All (Destructive)
+- Replace all existing files with new versions
+- Your customizations will be lost
+- Requires confirmation
 
-### For Clean Slate
-- **Use Option 2 (Overwrite all)** - Only if you're sure
-- Resets everything to defaults
-- Requires explicit confirmation
+### Option 3: Backup & Overwrite (Recommended)
+- Backs up existing files to `.opencode.backup.{timestamp}/`
+- Then installs new versions
+- You can restore from backup if needed
+
+### Option 4: Cancel
+- Exit without making changes
+
+**See [Collision Handling Guide](collision-handling.md) for detailed information.**
 
 ---
 
-## Technical Details
+## Updating Installations
 
-### What Gets Checked
-- All files in the selected components list
-- Paths are resolved from `registry.json`
-- Only actual file existence is checked (not content)
+### Add New Components
 
-### What Gets Backed Up (Option 3)
-- Only files that would be overwritten
-- Preserves directory structure
-- Timestamped folder: `.opencode.backup.YYYYMMDD-HHMMSS/`
+```bash
+# Run installer again with "Skip existing" option
+./install.sh developer
 
-### What Gets Skipped (Option 1)
-- Any file that already exists
-- Reported in "Skipped" count
-- Logged with component type and ID
+# When prompted for collision handling, choose:
+# Option 1: Skip existing
+```
+
+Only new components will be installed, existing files remain unchanged.
+
+### Update All Components
+
+```bash
+# Run installer with "Backup & overwrite" option
+./install.sh developer
+
+# When prompted for collision handling, choose:
+# Option 3: Backup & overwrite
+```
+
+All components updated, backup created for safety.
+
+### Migrate to Different Location
+
+```bash
+# Option 1: Move existing installation
+mv .opencode ~/.config/opencode
+
+# Option 2: Fresh install to new location
+./install.sh developer --install-dir ~/.config/opencode
+```
 
 ---
 
 ## Troubleshooting
 
-### "I chose skip but want to update one file"
-```bash
-# Delete the specific file first
-rm .opencode/agent/task-manager.md
+### Dependencies Missing
 
-# Run installer again with skip mode
-# Only the deleted file will be reinstalled
+**Error:** `curl: command not found` or `jq: command not found`
+
+**Solution:**
+```bash
+# macOS
+brew install curl jq
+
+# Ubuntu/Debian
+sudo apt-get install curl jq
+
+# Fedora/RHEL
+sudo dnf install curl jq
+
+# Arch Linux
+sudo pacman -S curl jq
 ```
 
-### "I chose overwrite by accident"
-```bash
-# If you chose Option 3 (backup), restore from backup:
-cp .opencode.backup.*/path/to/file .opencode/path/to/file
+### Permission Denied
 
-# If you chose Option 2 (overwrite), check git history:
-git checkout HEAD -- .opencode/
+**Error:** `Permission denied` when creating directories
+
+**Solution:**
+```bash
+# Install to a directory you own
+./install.sh developer --install-dir ~/opencode
+
+# Or create parent directory first
+mkdir -p ~/.config
+./install.sh developer --install-dir ~/.config/opencode
 ```
 
-### "I want to see what changed"
-```bash
-# If you have a backup:
-diff .opencode/agent/my-agent.md .opencode.backup.*/agent/my-agent.md
+### Path with Spaces
 
-# If you have git:
-git diff .opencode/
+**Error:** Installation fails with paths containing spaces
+
+**Solution:**
+```bash
+# Quote the path
+./install.sh developer --install-dir "~/My Agents/opencode"
 ```
 
-### "I want to merge changes manually"
+### Parent Directory Doesn't Exist
+
+**Error:** `Parent directory does not exist`
+
+**Solution:**
 ```bash
-# Use Option 3 to create backup
-# Then manually merge:
-vimdiff .opencode/agent/my-agent.md .opencode.backup.*/agent/my-agent.md
+# Create parent directory first
+mkdir -p ~/.config
+
+# Then install
+./install.sh developer --install-dir ~/.config/opencode
+```
+
+### Bash Version Too Old
+
+**Error:** `This script requires Bash 3.2 or higher`
+
+**Solution:**
+```bash
+# Check your bash version
+bash --version
+
+# macOS: Install newer bash via Homebrew
+brew install bash
+
+# Linux: Update bash via package manager
+sudo apt-get update && sudo apt-get upgrade bash
 ```
 
 ---
 
-## Future Enhancements
+## Advanced Usage
 
-Potential improvements for future versions:
+### View Available Components
 
-- [ ] Per-file selection (interactive mode)
-- [ ] Diff preview before overwriting
-- [ ] Smart merge for specific file types
-- [ ] Version detection and upgrade paths
-- [ ] Rollback command
-- [ ] Dry-run mode (show what would happen)
+```bash
+# List all components without installing
+./install.sh --list
+```
+
+### Get Help
+
+```bash
+# Show all options and examples
+./install.sh --help
+```
+
+### Specify Git Branch
+
+```bash
+# Install from a different branch
+export OPENCODE_BRANCH=develop
+./install.sh developer
+```
+
+### Non-Interactive Installation (CI/CD)
+
+```bash
+# Set environment variables for automation
+export OPENCODE_INSTALL_DIR=/opt/opencode
+export OPENCODE_BRANCH=main
+
+# Run with profile (no prompts)
+./install.sh developer
+```
+
+---
+
+## Environment Variables
+
+| Variable | Description | Default | Example |
+|----------|-------------|---------|---------|
+| `OPENCODE_INSTALL_DIR` | Installation directory | `.opencode` | `~/.config/opencode` |
+| `OPENCODE_BRANCH` | Git branch to install from | `main` | `develop` |
+
+---
+
+## Examples
+
+### Example 1: First-Time Local Installation
+```bash
+# Download and run installer
+curl -fsSL https://raw.githubusercontent.com/darrenhinde/OpenAgents/main/install.sh | bash -s developer
+
+# Result: Installs to .opencode/ in current directory
+```
+
+### Example 2: Global Installation for All Projects
+```bash
+# Install to global config directory
+./install.sh developer --install-dir ~/.config/opencode
+
+# Now available to all projects
+```
+
+### Example 3: Team Shared Installation
+```bash
+# Install to shared directory
+sudo ./install.sh full --install-dir /opt/opencode
+
+# Team members can access from /opt/opencode
+```
+
+### Example 4: Multiple Installations
+```bash
+# Project A - local installation
+cd ~/projects/project-a
+./install.sh developer
+
+# Project B - different local installation
+cd ~/projects/project-b
+./install.sh business
+
+# Each project has its own .opencode/ directory
+```
+
+### Example 5: Update Existing Installation
+```bash
+# Run installer again
+./install.sh developer
+
+# Choose "Skip existing" to add only new components
+# Or "Backup & overwrite" to update everything
+```
+
+---
+
+## Next Steps
+
+After installation:
+
+1. **Review Components**
+   ```bash
+   ls -la .opencode/
+   ```
+
+2. **Configure Environment**
+   ```bash
+   cp env.example .env
+   nano .env
+   ```
+
+3. **Read Documentation**
+   - [Collision Handling](collision-handling.md)
+   - [Platform Compatibility](platform-compatibility.md)
+   - [Building with OpenCode](../guides/building-with-opencode.md)
+
+4. **Start Using OpenCode**
+   ```bash
+   opencode
+   ```
+
+---
+
+## Getting Help
+
+- **View installer help:** `./install.sh --help`
+- **List components:** `./install.sh --list`
+- **Documentation:** [GitHub Repository](https://github.com/darrenhinde/OpenAgents)
+- **Report issues:** [GitHub Issues](https://github.com/darrenhinde/OpenAgents/issues)
 
 ---
 
 ## Summary
 
-The collision handling system provides:
+The OpenAgents installer provides:
 
-✅ **Safety** - Never overwrites without asking  
-✅ **Flexibility** - Multiple strategies for different needs  
-✅ **Transparency** - Clear reporting of what will change  
-✅ **Recoverability** - Backup option for peace of mind  
-✅ **Simplicity** - Easy to understand and use  
+✅ **Flexible installation locations** - Local, global, or custom  
+✅ **Multiple installation methods** - Interactive, profile-based, or custom  
+✅ **Cross-platform support** - Linux, macOS, Windows  
+✅ **Safe updates** - Collision detection and backup options  
+✅ **Easy to use** - Simple commands, clear prompts  
 
-Choose the strategy that fits your situation, and install with confidence!
+Choose the installation method that fits your needs and get started with OpenAgents!

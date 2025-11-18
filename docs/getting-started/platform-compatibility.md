@@ -151,6 +151,7 @@ wsl bash install.sh core
 |----------|--------------|--------|-------|
 | macOS 13+ | 3.2.57 | ✅ Pass | Default system bash |
 | macOS 13+ | 5.2 (Homebrew) | ✅ Pass | Upgraded bash |
+| Ubuntu 24.04 | 5.2.21 | ✅ Pass | Fixed in v1.1.0 |
 | Ubuntu 22.04 | 5.1.16 | ✅ Pass | Default |
 | Ubuntu 20.04 | 5.0.17 | ✅ Pass | Default |
 | Debian 11 | 5.1.4 | ✅ Pass | Default |
@@ -172,11 +173,24 @@ The installer is specifically designed to work with bash 3.2 (macOS default):
 ✅ **POSIX-compliant** - Avoids bash 4+ specific features  
 ✅ **Array operations** - Uses bash 3.2 compatible syntax  
 
+### Bash 5.x Compatibility (Fixed in v1.1.0)
+The installer now works correctly with bash 5.x (Ubuntu 24.04, modern Linux):
+
+✅ **set -e compatible arithmetic** - Uses `variable=$((variable + 1))` instead of `((variable++))`  
+✅ **No premature exits** - Fixed issue where counters starting at 0 caused script exit  
+✅ **Tested on bash 5.2.21** - Fully compatible with Ubuntu 24.04 and newer systems  
+
+**What was fixed:**
+- Changed all arithmetic increment operations from `((variable++))` to `variable=$((variable + 1))`
+- This prevents `set -e` from triggering exit when variables start at 0
+- Maintains error detection while ensuring compatibility across all bash versions
+
 ### Cross-Platform Features
 ✅ **Platform detection** - Automatically detects macOS/Linux/Windows  
 ✅ **Color support detection** - Disables colors on unsupported terminals  
-✅ **Path handling** - Works with Unix and Windows paths  
+✅ **Path handling** - Works with Unix and Windows paths (tilde expansion, backslash conversion)  
 ✅ **Line endings** - Handles both LF and CRLF  
+✅ **Custom install directories** - Supports local, global, and custom installation paths  
 
 ---
 
@@ -213,12 +227,27 @@ The test checks:
 
 ## Troubleshooting
 
+### Script exits immediately on Ubuntu 24.04 / bash 5.x
+**Cause:** Older versions of the installer had a `set -e` compatibility issue with bash 5.x  
+**Status:** ✅ **FIXED in v1.1.0**  
+**Solution:** Update to the latest installer:
+```bash
+curl -fsSL https://raw.githubusercontent.com/darrenhinde/OpenAgents/main/install.sh > install.sh
+bash install.sh developer
+```
+
+**Technical Details:**
+- Issue: `((variable++))` returns 0 when variable is 0, triggering `set -e` exit in bash 5.x
+- Fix: Changed to `variable=$((variable + 1))` which is safe with `set -e`
+- Affected: Ubuntu 24.04 (bash 5.2.21) and other modern Linux distributions
+- All arithmetic operations now use the safe pattern
+
 ### "mapfile: command not found"
 **Cause:** Using bash version < 4.0  
 **Solution:** This should be fixed in the latest version. Update the installer:
 ```bash
 curl -fsSL https://raw.githubusercontent.com/darrenhinde/OpenAgents/main/install.sh > install.sh
-bash install.sh core
+bash install.sh developer
 ```
 
 ### "curl: command not found"

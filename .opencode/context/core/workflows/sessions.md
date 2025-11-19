@@ -1,5 +1,17 @@
 # Session Management
 
+## Quick Reference
+
+**Key Principle**: Lazy initialization - only create when needed
+
+**Session ID**: `{timestamp}-{random-4-chars}` (e.g., `20250118-143022-a4f2`)
+
+**Cleanup**: Always ask user confirmation before deleting
+
+**Safety**: NEVER delete outside current session, ONLY delete tracked files, ALWAYS confirm
+
+---
+
 ## Lazy Initialization
 
 **Only create session when first context file needed**

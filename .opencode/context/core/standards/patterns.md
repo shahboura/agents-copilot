@@ -1,5 +1,17 @@
 # Essential Patterns - Core Knowledge Base
 
+## Quick Reference
+
+**Critical Patterns**: Error Handling, Validation, Security, Logging
+
+**ALWAYS**: Handle errors gracefully, validate input, use env vars for secrets
+
+**NEVER**: Expose sensitive info, hardcode credentials, skip input validation
+
+**Language-agnostic**: Apply to all programming languages
+
+---
+
 These are language-agnostic patterns that apply to all programming languages. Language-specific implementations are loaded from context files based on project detection.
 
 ## Error Handling Pattern

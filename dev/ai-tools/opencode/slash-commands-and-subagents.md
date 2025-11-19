@@ -371,3 +371,168 @@ Task(
 - ✅ Test with: "Can you [task description]"
 
 That's it! Main agent reads AGENTS.md, sees the patterns, and knows how to invoke slash commands through subagents.
+
+---
+
+## Appendix: Path Resolution Test Findings
+
+**Date:** November 19, 2025  
+**Test Objective:** Verify path resolution behavior for portable agent installation strategy
+
+### 🔍 Discovery Phase Results
+
+#### OpenCode Directory Structure
+
+**Global Configuration:**
+- **Location:** `~/.config/opencode/`
+- **Contents:** `opencode.json`, `config.json`, plugins, providers
+- **Note:** No `agent/`, `command/`, or `context/` folders found in default installation
+
+**Authentication & Data:**
+- **Location:** `~/.local/share/opencode/`
+- **Contents:** `auth.json`, bin, log, project, snapshot, storage
+
+**Local Repository:**
+- **Location:** `.opencode/` (in git repository root)
+- **Structure:** `agent/`, `command/`, `context/`, `plugin/`, `tool/`
+
+#### Key Findings
+
+1. ✅ **Global config path confirmed:** `~/.config/opencode/`
+2. ✅ **Local structure confirmed:** `.opencode/` in repo root
+3. ⚠️ **Current agents don't use `@` references** - Context loaded via different mechanism
+4. ✅ **Context files exist** in `.opencode/context/` with subdirectories
+
+### 📊 Path Resolution Analysis
+
+#### From OpenCode Documentation
+
+**`@` Symbol Resolution Order:**
+1. Check if starts with `~/` → resolve to home directory
+2. Check if absolute path → use as-is
+3. Otherwise → resolve relative to repo root (`Instance.worktree`)
+4. If not found → look for agent with that name
+
+#### Implications for Installation
+
+**Local Installation (in repo):**
+```
+Repo structure:
+  .opencode/
+  ├── agent/security/scanner.md
+  └── context/security/patterns.md
+
+Reference: @.opencode/context/security/patterns.md
+Resolution: {repo-root}/.opencode/context/security/patterns.md ✅
+```
+
+**Global Installation:**
+```
+Global structure:
+  ~/.config/opencode/
+  ├── agent/security/scanner.md
+  └── context/security/patterns.md
+
+Reference: @.opencode/context/security/patterns.md
+Resolution: Tries to find .opencode/ relative to... what? ❌
+Problem: No "repo root" for global agents!
+```
+
+### 🎯 Path Pattern Testing
+
+#### Test Setup
+
+Created global test agent with three path patterns:
+
+```markdown
+# Pattern 1: With .opencode prefix
+@.opencode/context/test/global-test-data.md
+
+# Pattern 2: Without .opencode prefix  
+@context/test/global-test-data.md
+
+# Pattern 3: Explicit home path
+@~/.config/opencode/context/test/global-test-data.md
+```
+
+#### Expected Results (Based on Documentation)
+
+| Pattern | Local Install | Global Install | Notes |
+|---------|--------------|----------------|-------|
+| `@.opencode/context/file.md` | ✅ Works | ❌ Fails | No .opencode in global path |
+| `@context/file.md` | ❌ Fails | ❓ Unknown | Might resolve to ~/.config/opencode/context/ |
+| `@~/.config/opencode/context/file.md` | ❌ Fails | ✅ Works | Explicit path, but breaks local |
+
+#### Critical Issue
+
+**No single path pattern works for both local AND global installations!**
+
+This confirms our installation script approach is necessary.
+
+### ✅ Validated Assumptions
+
+1. ✅ **Global path is `~/.config/opencode/`** - Confirmed
+2. ✅ **Local path is `.opencode/`** - Confirmed  
+3. ✅ **Path transformation is required** - Confirmed (no universal pattern)
+4. ✅ **Context folder structure works** - Confirmed (exists in current repo)
+
+### ❌ Invalidated Assumptions
+
+1. ❌ **`@context/file.md` might work universally** - Unconfirmed, likely fails locally
+2. ❌ **Current agents use `@` references** - They don't (different loading mechanism)
+
+### 🔧 Installation Strategy Confirmation
+
+#### Source Code Convention
+
+**All context references MUST use:**
+```markdown
+@.opencode/context/{category}/{file}.md
+```
+
+#### Installation Script Transformation
+
+**Local Installation:**
+- Keep references as-is: `@.opencode/context/...`
+- Copy to: `{repo}/.opencode/`
+
+**Global Installation:**  
+- Transform: `@.opencode/context/` → `@~/.config/opencode/context/`
+- Copy to: `~/.config/opencode/`
+
+#### Transformation Rules
+
+```bash
+# For global installation
+sed 's|@\.opencode/context/|@~/.config/opencode/context/|g'
+
+# Also transform shell commands
+sed 's|\.opencode/context/|~/.config/opencode/context/|g'
+```
+
+### 🚨 Additional Considerations
+
+#### Shell Commands in Templates
+
+**Problem:** Commands like `!`ls .opencode/context/`` also need transformation
+
+**Solution:** Transform both `@` references AND bare paths in shell commands
+
+#### Context Cross-References
+
+**Problem:** Context files may reference other context files
+
+**Solution:** Transform context files too, not just agents/commands
+
+#### Platform Compatibility
+
+**macOS/Linux:** `~/.config/opencode/` ✅  
+**Windows:** Need to verify (likely `%APPDATA%\opencode` or similar)
+
+### 📝 Recommendations
+
+1. **Proceed with Installation Script Approach** - The two-tier distribution with path transformation is necessary and correct
+2. **Strict Convention Enforcement** - Create validation script to ensure all references follow `@.opencode/context/` pattern
+3. **Transform All File Types** - Agent files, command files, AND context files
+4. **Test on Actual OpenCode Installation** - Runtime testing would confirm edge cases
+5. **Platform-Specific Paths** - Verify global paths on Windows before production release

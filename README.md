@@ -2,572 +2,333 @@
 
 # OpenAgents
 
-### AI agent framework for plan-first development workflows with approval-based execution
+### GitHub Copilot Custom Agents for Plan-First Development
 
 [![GitHub stars](https://img.shields.io/github/stars/darrenhinde/OpenAgents?style=social)](https://github.com/darrenhinde/OpenAgents/stargazers)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 [![GitHub last commit](https://img.shields.io/github/last-commit/darrenhinde/OpenAgents)](https://github.com/darrenhinde/OpenAgents/commits/main)
-[![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg)](docs/contributing/CONTRIBUTING.md)
-[![Buy Me A Coffee](https://img.shields.io/badge/Buy%20Me%20A%20Coffee-support-yellow.svg?style=flat&logo=buy-me-a-coffee)](https://buymeacoffee.com/darrenhinde)
+[![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg)](https://github.com/darrenhinde/OpenAgents/pulls)
 
-**Multi-language support:** TypeScript • Python • Go • Rust  
-**Features:** Automatic testing • Code review • Validation
-
-> **🚀 Future Plans:** Currently optimized for OpenCode CLI. Support for other AI coding tools (Cursor, Claude Code, etc.) will be added after stabilizing the OpenCode integration.
+**Specialized agents:** @codebase • @docs • @review  
+**Auto-detection:** TypeScript • Python • .NET • Generic  
+**Workflow:** Plan → Approve → Implement → Review
 
 </div>
-
-[![Watch Demo](https://img.youtube.com/vi/EOIzFMdmox8/maxresdefault.jpg)](https://youtu.be/EOIzFMdmox8?si=4ZSsVlAkhMxVmF2R)
-
-> **Note:** This repository has evolved since the demo video with continuous improvements to make it easier for others to use in their projects. The core concepts remain the same, but installation and component organization have been streamlined.
-
-> 📹 **Following along with the video?** The simplified structure shown in the tutorial is available on the [`video-simple`](https://github.com/darrenhinde/OpenAgents/tree/video-simple) branch.
-
-
-## Why Use This?
-
-- ✅ **Multi-language support** - Works with TypeScript, Python, Go, Rust, and more
-- ✅ **Plan-first workflow** - Agents propose plans before implementing
-- ✅ **Incremental execution** - Step-by-step implementation with validation
-- ✅ **Quality built-in** - Automatic testing, type checking, and code review
-- ✅ **Your patterns** - Agents follow your coding standards from context files
 
 ---
 
 ## Quick Start
 
-### Step 1: Install OpenCode CLI (Follow official guide)
-```bash
-https://opencode.ai/docs# 
-```
-### Step 2: Install Agents & Commands
-
-**Option A: Interactive Installer**
-
-> **Note:** Interactive mode requires downloading the script first (can't run through pipe)
-
-<details open>
-<summary><b>macOS / Linux</b></summary>
-
-```bash
-# Download the installer
-curl -fsSL https://raw.githubusercontent.com/darrenhinde/OpenAgents/main/install.sh -o install.sh
-
-# Run interactively
-bash install.sh
-```
-</details>
-
-<details>
-<summary><b>Windows (Git Bash)</b></summary>
-
-```bash
-# Download the installer
-curl -fsSL https://raw.githubusercontent.com/darrenhinde/OpenAgents/main/install.sh -o install.sh
-
-# Run interactively
-bash install.sh
-```
-</details>
-
-<details>
-<summary><b>Windows (PowerShell)</b></summary>
-
-```powershell
-# Download the script
-Invoke-WebRequest -Uri "https://raw.githubusercontent.com/darrenhinde/OpenAgents/main/install.sh" -OutFile "install.sh"
-
-# Run with Git Bash
-& "C:\Program Files\Git\bin\bash.exe" install.sh
-
-# Or run with WSL
-wsl bash install.sh
-```
-
-> **Note:** Git Bash comes with Git for Windows. [Download here](https://git-scm.com/download/win)
-</details>
-
-The installer offers:
-- 🎯 **Quick Profiles**: Essential, Developer, Business, Full, or Advanced
-- 🎨 **Custom Selection**: Pick exactly what you need
-- 📦 **Smart Dependencies**: Auto-installs required components
-- ✨ **Interactive Menus**: User-friendly component browser
-- 🛡️ **Collision Detection**: Safely handles existing files with 4 strategies (skip/overwrite/backup/cancel)
-- 🖥️ **Cross-Platform**: Works on macOS, Linux, and Windows (Git Bash/WSL)
-
-> **Updating?** The installer detects existing files and lets you choose: skip existing (keep your changes), overwrite all (get latest), or backup & overwrite (safe update). [Learn more](docs/getting-started/collision-handling.md)
-
-**Option B: Profile-Based Install (Recommended)**
-
-> **Fastest method:** One command, no interaction needed
-
-<details open>
-<summary><b>macOS / Linux / Git Bash / WSL</b></summary>
-
-```bash
-# Essential - Minimal essentials (9 components)
-curl -fsSL https://raw.githubusercontent.com/darrenhinde/OpenAgents/main/install.sh | bash -s essential
-
-# Developer - Recommended for daily work (19 components)
-curl -fsSL https://raw.githubusercontent.com/darrenhinde/OpenAgents/main/install.sh | bash -s developer
-
-# Business - Business automation and content creation (15 components)
-curl -fsSL https://raw.githubusercontent.com/darrenhinde/OpenAgents/main/install.sh | bash -s business
-
-# Full - Everything included (25 components)
-curl -fsSL https://raw.githubusercontent.com/darrenhinde/OpenAgents/main/install.sh | bash -s full
-
-# Advanced - Full + System Builder (32 components)
-curl -fsSL https://raw.githubusercontent.com/darrenhinde/OpenAgents/main/install.sh | bash -s advanced
-```
-</details>
-
-<details>
-<summary><b>Windows PowerShell</b></summary>
-
-```powershell
-# Download script
-Invoke-WebRequest -Uri "https://raw.githubusercontent.com/darrenhinde/OpenAgents/main/install.sh" -OutFile "install.sh"
-
-# Essential profile
-& "C:\Program Files\Git\bin\bash.exe" install.sh essential
-
-# Developer profile
-& "C:\Program Files\Git\bin\bash.exe" install.sh developer
-
-# Business profile
-& "C:\Program Files\Git\bin\bash.exe" install.sh business
-
-# Full profile
-& "C:\Program Files\Git\bin\bash.exe" install.sh full
-
-# Advanced profile
-& "C:\Program Files\Git\bin\bash.exe" install.sh advanced
-```
-</details>
-
-> **New!** The `advanced` profile includes the **System Builder** - an interactive tool that generates complete custom AI systems tailored to your domain. [Learn more](docs/features/system-builder/)
-
-**Option C: Manual Install**
+### 1. Copy Agents to Your Project
 ```bash
 # Clone this repository
 git clone https://github.com/darrenhinde/OpenAgents.git
-cd OpenAgents
 
-# Install to OpenCode directory (global)
-mkdir -p ~/.opencode
-cp -r .opencode/agent ~/.opencode/
-cp -r .opencode/command ~/.opencode/
-cp -r .opencode/context ~/.opencode/
+# Copy agent files to your project
+mkdir -p your-project/.github/agents
+cp OpenAgents/.github/agents/*.agent.md your-project/.github/agents/
+
+# Or use them directly in this repo (already configured)
 ```
 
-### Step 3: Start Building
-```bash
-# Start the universal agent (recommended for new users)
-opencode --agent openagent
+### 2. Start Using Agents
 
-# Ask questions or request tasks
-> "Create a React todo list with TypeScript"
+**In VS Code:**
+1. Open GitHub Copilot Chat (Ctrl+Shift+I or Cmd+Shift+I)
+2. Select agent from dropdown: `@codebase`, `@docs`, or `@review`
+3. Describe what you want
+
+**Example:**
+```
+@codebase Create a REST API endpoint for user authentication with JWT
 ```
 
-**What happens next:**
-1. OpenAgent analyzes your request (question or task)
-2. For tasks: proposes a plan and asks for approval
-3. Executes step-by-step with validation
-4. Delegates to specialists (@task-manager, @tester, @reviewer) when needed
-5. Confirms completion and offers cleanup
+The agent will:
+1. ✅ Propose an implementation plan
+2. ⏸️ Wait for your approval  
+3. 🔨 Implement step-by-step with validation
+4. ✨ Suggest handoffs to @docs or @review
 
 ---
 
-## How It Works
+## Available Agents
 
-```
-User Request
-    ↓
-openagent (universal coordinator)
-    ↓
-    ├─→ @task-manager (breaks down complex features)
-    ├─→ @tester (writes and runs tests)
-    ├─→ @reviewer (security and code review)
-    ├─→ @documentation (generates docs)
-    ├─→ @coder-agent (implementation tasks)
-    └─→ @build-agent (type checking and validation)
-```
+### 🔧 @codebase - Development Agent
+Multi-language implementation specialist with profile auto-detection.
 
-**The workflow:**
-1. **You describe** what you want to build
-2. **Agent plans** the implementation steps
-3. **You approve** the plan
-4. **Agent implements** incrementally with validation
-5. **Quality checks** run automatically (tests, types, linting)
-6. **Subagents handle** specialized tasks (testing, review, docs)
+**Detects and adapts to:**
+- **.NET** - Clean Architecture, async/await, nullable types
+- **Python** - Type hints, virtual env, testing  
+- **TypeScript** - Strict types, build validation
+- **Generic** - Polyglot projects
 
-**Context-aware:** Agents automatically load patterns from `.opencode/context/` to follow your coding standards.
+**Use for:**
+- Feature implementation
+- Bug fixes
+- Refactoring
+- Code generation
 
----
+### 📝 @docs - Documentation Agent
+Creates and maintains documentation with consistent formatting.
 
-## What's Included
+**Use for:**
+- README files
+- API documentation
+- Architecture docs
+- User guides
 
-### 🤖 Main Agents
-- **openagent** - Universal agent for questions and tasks (recommended default)
-- **codebase-agent** - Specialized development agent with multi-profile language support (dotnet, python, typescript, generic)
-- **documentation-agent** - Orchestrates documentation & wiki generation with persistent memory
-- **task-manager** (subagent) - Breaks complex features into manageable subtasks
-- **image-specialist** (subagent) - Generates images with Gemini AI
+### 🔍 @review - Code Review Agent
+Security and quality-focused reviewer.
 
-### 🔧 Specialized Subagents (Auto-delegated)
-- **reviewer** - Code review and security analysis
-- **tester** - Test creation and validation
-- **coder-agent** - Quick implementation tasks
-- **documentation** - Atomic documentation generation (invoked by documentation-agent)
-- **build-agent** - Build and type checking
-- **codebase-pattern-analyst** - Pattern discovery
-
-### ⚡ Commands
-- **/commit** - Smart git commits with conventional format
-- **/optimize** - Code optimization
-- **/test** - Testing workflows
-- **/clean** - Cleanup operations
-- **/context** - Context management
-- **/prompt-enchancer** - Improve your prompts
-- **/worktrees** - Git worktree management
-- **/validate-repo** - Validate repository consistency
-
-### 📚 Context Files
-- `core/essential-patterns.md` - Universal coding patterns
-- `project/project-context.md` - Your project-specific patterns
- - (Dotnet / language contexts when installed)
-
-### 🧠 Persistent Memory
-Agents now persist high-signal decisions & summaries:
-- `.opencode/memory/agents/codebase-agent.json` – architecture & implementation checkpoints
-- `.opencode/memory/agents/documentation-agent.json` – doc/wiki change sets (created on first use)
-Memory is compacted automatically (see `.opencode/memory/README.md`).
-
-### 🗂 Multi-Profile Language Support
-The codebase agent auto-detects dominant language and adapts:
-- `dotnet-developer` (solution architecture, build, test specialization)
-- `python-developer` (virtual env & dependency focus)
-- `typescript-developer` (type safety & build optimization)
-- `generic-developer` (polyglot repositories)
-Override detection by exporting `OPENAGENTS_ACTIVE_PROFILE`.
-
-### 🧩 GitHub Copilot Custom Agents Integration
-You can expose these agents directly inside VS Code via Copilot Custom Agents.
-See: `docs/getting-started/installation.md` → “Enable GitHub Copilot Custom Agents”.
-Create `.vscode/copilot-agents.json` pointing to `.opencode/agent/*.md` entries to enable.
+**Use for:**
+- Security audits
+- Performance reviews
+- Best practices validation
+- Code quality checks
 
 ---
 
 ## Example Workflows
 
-### Build a Feature
-```bash
-opencode --agent openagent
-> "Create a user authentication system with email/password"
-
-# OpenAgent will:
-# 1. Analyze the request (complex task)
-# 2. Propose implementation plan
-# 3. Wait for your approval
-# 4. Delegate to @task-manager (creates task breakdown)
-# 5. Coordinate implementation step-by-step
-# 6. Use @tester for tests and @reviewer for security
-# 7. Validate, summarize, and confirm completion
+### Feature Implementation
+```
+@codebase Create a user service with CRUD operations following repository pattern.
+Include:
+- UserService with dependency injection
+- IUserRepository interface
+- Entity Framework implementation  
+- Unit tests using xUnit and Moq
 ```
 
-### Make a Commit
-```bash
-# Make your changes
-git add .
+**Agent response:**
+```markdown
+DIGGING IN...
 
-# Use the commit command
-/commit
+Detected active profile: dotnet
 
-# Auto-generates: ✨ feat: add user authentication system
+## Implementation Plan
+1. Create domain entities and interfaces
+2. Implement repository pattern with EF Core
+3. Create service layer with DI
+4. Add unit tests with Moq
+5. Validate with dotnet build & test
+
+Approval needed before proceeding.
 ```
 
-### Add Your Patterns
-```bash
-# Edit your project context
-nano ~/.opencode/context/project/project-context.md
+### Documentation Update
+```
+@docs Update README with:
+- New authentication endpoints
+- JWT configuration steps
+- Example requests/responses
+```
 
-# Add your patterns:
-# **API Endpoint Pattern:**
-# ```typescript
-# export async function POST(request: Request) {
-#   // Your standard pattern
-# }
-# ```
-
-# Agents will automatically use these patterns!
+### Code Review
+```
+@review Audit the authentication module for security issues
 ```
 
 ---
 
-## 🏗️ System Builder (New!)
+## Workflow Features
 
-**Build complete custom AI systems tailored to your domain in minutes.**
+### ✅ Plan-First Approach
+Every agent proposes a plan before executing. You review and approve before any changes.
 
-The System Builder is an interactive tool that generates complete `.opencode` architectures customized to your needs.
+### 🔄 Step-by-Step Execution  
+Agents implement one step at a time, validating after each step.
 
-### Quick Start
-```bash
-# Install advanced profile (includes system builder)
-curl -fsSL https://raw.githubusercontent.com/darrenhinde/OpenAgents/main/install.sh | bash -s advanced
+### 🎯 Profile Auto-Detection
+The @codebase agent detects your project type and adapts:
 
-# Run the interactive builder
-/build-context-system
+| Profile | Detection | Adaptations |
+|---------|-----------|-------------|
+| **dotnet** | `*.sln`, `*.csproj` | Clean Architecture, async/await, nullable types |
+| **python** | `pyproject.toml`, `requirements.txt` | Virtual env, type hints, pytest |
+| **typescript** | `package.json`, `tsconfig.json` | Strict types, incremental builds |
+| **generic** | Mixed or unclear | Language-agnostic patterns |
+
+### 🔗 Agent Handoffs
+Seamless transitions between specialized agents:
+```
+@codebase → @review → @docs
 ```
 
-### What It Does
-- 🎯 **Interactive Interview** - Asks about your domain, use cases, and requirements
-- 🤖 **Generates Complete System** - Creates orchestrator, subagents, context files, workflows, and commands
-- 🔗 **Integrates with Existing** - Detects and reuses your existing agents
-- 🛡️ **Safe Merging** - Won't overwrite your work, offers merge strategies
-- 📚 **Production-Ready** - Includes documentation, testing guides, and examples
-
-### Example
-```bash
-$ /build-context-system
-
-Domain: E-commerce Operations
-Purpose: Automate order processing and customer support
-
-# After answering questions, generates:
-# - ecommerce-orchestrator (main agent)
-# - order-processor, ticket-router, report-generator (subagents)
-# - 12 context files (domain knowledge, processes, standards)
-# - 5 workflows (process-order, route-ticket, etc.)
-# - 5 custom commands (/process-order, /route-ticket, etc.)
-# - Complete documentation
-```
-
-**Learn more:** [System Builder Documentation](docs/features/system-builder/)
+Each agent suggests relevant next steps with pre-filled prompts.
 
 ---
 
-## Optional Add-ons
+## Customization
 
-### 📱 Telegram Notifications
-Get notified when OpenCode sessions go idle.
+### Add Project Context
+Create `.github/copilot-instructions.md` to provide project-specific context:
 
-```bash
-# Copy plugin directory
-cp -r .opencode/plugin ~/.opencode/
+```markdown
+# Project Context
+This is a microservices architecture using:
+- Clean Architecture pattern
+- CQRS with MediatR
+- Entity Framework Core
+- JWT authentication
 
-# Install dependencies
-cd ~/.opencode/plugin
-npm install
+## Coding Standards
+- Use async/await for all I/O operations
+- Apply repository pattern for data access
+- Write unit tests for all public methods
+- Follow conventional commits format
 
-# Configure
-cd ~/OpenAgents
-cp env.example .env
-# Edit .env with TELEGRAM_BOT_TOKEN and TELEGRAM_CHAT_ID
+## Architecture
+```
+src/
+├── Domain/           # Entities, ValueObjects, Interfaces
+├── Application/      # Services, DTOs, Validators  
+├── Infrastructure/   # DbContext, Repositories
+└── WebAPI/          # Controllers, Program.cs
+```
 ```
 
-**Get credentials:** Message @BotFather on Telegram → `/newbot` → Save token
-
-See [`.opencode/plugin/README.md`](.opencode/plugin/README.md) for detailed documentation.
-
-### 🎨 Gemini AI Image Tools
-Generate and edit images using Gemini AI.
-
-```bash
-# Copy tool directory
-cp -r .opencode/tool ~/.opencode/
-
-# Install dependencies
-cd ~/.opencode/tool
-npm install
-
-# Configure
-cd ~/OpenAgents
-cp env.example .env
-# Edit .env with GEMINI_API_KEY
-```
-
-**Get API key:** https://makersuite.google.com/app/apikey
+Agents will automatically use this context!
 
 ---
 
-## Common Questions
+## Installation Options
 
-**Q: What's the main way to use this?**  
-A: Use `opencode --agent openagent` as your default. It handles both questions and tasks, coordinating with specialists as needed.
-
-**Q: Does this work on Windows?**  
-A: Yes! Use Git Bash (recommended) or WSL. See [Platform Compatibility Guide](docs/getting-started/platform-compatibility.md) for details.
-
-**Q: What bash version do I need?**  
-A: Bash 3.2+ (works on macOS default bash). Run `bash scripts/tests/test-compatibility.sh` to check your system.
-
-**Q: Do I need to install plugins/tools?**  
-A: No, they're optional. Only install if you want Telegram notifications or Gemini AI features.
-
-**Q: Where should I install - globally or per-project?**  
-A: Global (`~/.opencode/`) works for most. Project-specific (`.opencode/`) if you need different configs per project.
-
-**Q: How do I add my own coding patterns?**  
-A: Edit `~/.opencode/context/project/project-context.md` - agents automatically load this file.
-
-**Q: What languages are supported?**  
-A: The agents work with any language (TypeScript, Python, Go, Rust, etc.) and adapt based on your project files.
-
-**Q: What's the Agent System Blueprint for?**  
-A: It's a teaching document explaining architecture patterns and how to extend the system. See [docs/features/agent-system-blueprint.md](docs/features/agent-system-blueprint.md)
-
-**Q: Can I use just one command or agent?**  
-A: Yes! Use the installer's list feature to see all components:
+### Option 1: Per-Project (Recommended)
+Copy agent files directly into your project:
 ```bash
-./install.sh --list
+mkdir -p .github/agents
+cp path/to/OpenAgents/.github/agents/*.agent.md .github/agents/
 ```
-Or cherry-pick individual files with curl:
+
+### Option 2: Reference from This Repo
+Clone once, reference from multiple projects:
 ```bash
-curl -o ~/.opencode/agent/codebase-agent.md \
-  https://raw.githubusercontent.com/darrenhinde/OpenAgents/main/.opencode/agent/codebase-agent.md
+# In your .github/copilot-instructions.md
+See agent definitions at: https://github.com/darrenhinde/OpenAgents
+```
+
+### Option 3: Fork and Customize
+1. Fork this repository
+2. Modify agents in `.github/agents/`
+3. Reference your fork in projects
+
+---
+
+## Agent File Structure
+
+```
+.github/agents/
+├── codebase.agent.md   # Development specialist
+├── docs.agent.md       # Documentation specialist
+└── review.agent.md     # Code review specialist
+```
+
+Each agent file contains:
+- **YAML frontmatter** - Configuration (name, description, tools, handoffs)
+- **Markdown body** - Instructions and guidelines
+
+Example structure:
+```markdown
+---
+name: codebase
+description: Multi-language development agent
+tools: ['read', 'edit', 'write', 'search']
+handoffs:
+  - label: Generate Documentation
+    agent: docs
+    prompt: Create docs for changes above
+---
+
+# Agent Instructions
+Your detailed instructions here...
 ```
 
 ---
 
-## Installation Profiles
+## Best Practices
 
-The installer offers five pre-configured profiles:
+### 1. Be Specific in Prompts
+❌ "Add authentication"  
+✅ "Create JWT authentication with refresh tokens, rate limiting, and secure password hashing using bcrypt"
 
-### 🎯 Essential (Minimal - 9 components)
-Minimal starter kit - universal agent with core subagents.
-- **Agents**: openagent
-- **Subagents**: task-manager, documentation
-- **Commands**: context, clean
-- **Tools**: env
-- **Context**: essential-patterns, project-context
-- **Config**: env-example
-- **Best for**: Learning the system, lightweight tasks, minimal setup
+### 2. Review Plans Carefully
+Always review the proposed implementation plan before approving.
 
-### 💼 Developer (Recommended - 30 components)
-Complete software development environment with code generation, testing, review, and build tools.
-- Everything in Essential, plus:
-- **Agents**: codebase-agent
-- **Subagents**: coder-agent, reviewer, tester, build-agent, codebase-pattern-analyst
-- **Commands**: commit, test, optimize, validate-repo
-- **Context**: All standards and workflow files (code, patterns, tests, docs, analysis, delegation, sessions, task-breakdown, review, context-guide)
-- **Config**: readme
-- **Best for**: Most developers, daily use, full-featured development
+### 3. Use Handoffs
+Let agents transition between tasks:
+```
+@codebase (implement) → @review (audit) → @docs (document)
+```
 
-### 📊 Business (15 components)
-Business process automation, content creation, and visual workflows.
-- **Agents**: openagent
-- **Subagents**: task-manager, documentation, image-specialist
-- **Commands**: context, clean, prompt-enhancer
-- **Tools**: env, gemini (AI image generation)
-- **Plugins**: notify, telegram-notify
-- **Context**: essential-patterns, project-context
-- **Config**: env-example, readme
-- **Best for**: Business automation, content creation, non-developers
+### 4. Add Project Context
+Use `.github/copilot-instructions.md` to provide persistent context about your project's architecture, standards, and conventions.
 
-### 📦 Full (36 components)
-Everything included - all agents, subagents, tools, and plugins.
-- Everything in Developer and Business combined, plus:
-- **Commands**: worktrees (git worktree management), validate-repo
-- **Best for**: Power users, exploring all features
-
-### 🚀 Advanced (43 components)
-Full installation plus **System Builder** for creating custom AI architectures.
-- Everything in Full, plus:
-- **System Builder**: Interactive AI system generator
-  - system-builder agent
-  - domain-analyzer, agent-generator, context-organizer, workflow-designer, command-creator subagents
-  - build-context-system command
-- **Best for**: Building custom AI systems, contributors, learning the architecture
-
-## Updating Components
-
-Keep your components up to date:
-
-```bash
-# Update all installed components
-./update.sh
-
-# Or re-run the installer
-curl -fsSL https://raw.githubusercontent.com/darrenhinde/OpenAgents/main/install.sh | bash
+### 5. Leverage Profile Detection
+Trust the @codebase agent to detect your project type, or explicitly mention it:
+```
+@codebase Using .NET Clean Architecture, create...
 ```
 
 ---
 
-## Advanced
+## Troubleshooting
 
-### Understanding the System
-Read [Agent System Blueprint](docs/features/agent-system-blueprint.md) to learn:
-- How context loading works (the `@` symbol)
-- Agent architecture patterns
-- How to create custom agents and commands
-- How to extend the system for your needs
+**Q: Agent not showing in dropdown?**  
+A: Ensure files are in `.github/agents/` with `.agent.md` extension. Reload VS Code window.
 
-### Safety & Security
-- **Approval-first workflow** - Agents propose plans before execution
-- **Configurable permissions** - Granular control over agent capabilities
-- **Secure credentials** - Environment variables for sensitive data
-- **Input sanitization** - Protection against injection attacks
+**Q: Agent not following instructions?**  
+A: Add more context in your prompt or use `.github/copilot-instructions.md` for persistent instructions.
 
-### Project Structure
-```
-.opencode/
-├── agent/              # Orchestrator agents & subagents
-│   ├── codebase-agent.md
-│   ├── documentation-agent.md
-│   └── subagents/      # Specialized helpers (e.g. core/task-manager.md)
-├── command/            # Slash commands
-│   ├── commit.md
-│   └── optimize.md
-├── context/            # Coding patterns
-│   ├── core/           # Essential patterns
-│   └── project/        # Your patterns
-├── memory/             # Persistent agent memory (summaries & decisions)
-├── plugin/             # Optional: Telegram
-└── tool/               # Optional: Gemini AI
-```
+**Q: Wrong profile detected?**  
+A: Explicitly mention the language/framework in your prompt or add it to project context.
+
+**Q: How do I modify agent behavior?**  
+A: Edit the corresponding `.agent.md` file in `.github/agents/` directory.
 
 ---
 
 ## Contributing
 
-We welcome contributions! Please see our [Contributing Guide](docs/contributing/CONTRIBUTING.md) for details.
+We welcome contributions!
 
-1. Follow the established naming conventions and coding standards
-2. Write comprehensive tests for new features
-3. Update documentation for any changes
-4. Ensure security best practices are followed
+1. Fork this repository
+2. Create a feature branch
+3. Modify/add agents in `.github/agents/`
+4. Test your changes
+5. Submit a pull request
 
-See also: [Code of Conduct](docs/contributing/CODE_OF_CONDUCT.md)
+**Ideas for new agents:**
+- @test - Testing specialist
+- @refactor - Refactoring specialist  
+- @deploy - Deployment specialist
+- @api - API design specialist
+
+---
+
+## Resources
+
+- **GitHub Docs:** [Custom Agents Guide](https://docs.github.com/en/copilot/concepts/agents/coding-agent/about-custom-agents)
+- **VS Code Docs:** [Custom Agents in VS Code](https://code.visualstudio.com/docs/copilot/customization/custom-agents)
+- **Examples:** [Awesome Copilot Repository](https://github.com/github/awesome-copilot)
 
 ---
 
 ## License
 
-This project is licensed under the MIT License.
+MIT License - See LICENSE file for details
 
 ---
 
-## Recommended for New Users
+## Support
 
-**Start with `openagent`** - it's your universal assistant that handles everything from simple questions to complex multi-step workflows. It follows a systematic 6-stage workflow (Analyze → Approve → Execute → Validate → Summarize → Confirm) and automatically delegates to specialized subagents when needed.
-
-```bash
-opencode --agent openagent
-> "How do I implement authentication in Next.js?"  # Questions
-> "Create a user authentication system"            # Tasks
-```
-
-OpenAgent will guide you through with a plan-first, approval-based approach. For questions, you get direct answers. For tasks, you see the plan before execution.
-
-**Learn more:** See the [OpenAgent Guide](docs/agents/openagent.md) for detailed workflow diagrams and tips.
+If you find this useful, consider:
+- ⭐ Starring the repository
+- 🐛 Reporting issues
+- 💡 Suggesting improvements
+- 🔀 Contributing new agents
 
 ---
-## Support This Work
 
-If this helped you out and you're feeling generous, consider funding my coffee habit ☕
-
-[![Buy Me A Coffee](https://img.shields.io/badge/Buy%20Me%20A%20Coffee-Support-yellow?style=for-the-badge&logo=buy-me-a-coffee)](https://buymeacoffee.com/darrenhinde)
-
-Totally optional, but appreciated.
+**Made with ❤️ for the GitHub Copilot community**
 

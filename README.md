@@ -1,8 +1,6 @@
-<div align="center">
+# GitHub Copilot Agents
 
-# OpenAgents
-
-### GitHub Copilot Custom Agents for Plan-First Development
+## GitHub Copilot Custom Agents for Plan-First Development
 
 [![GitHub stars](https://img.shields.io/github/stars/darrenhinde/OpenAgents?style=social)](https://github.com/darrenhinde/OpenAgents/stargazers)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
@@ -12,8 +10,6 @@
 **Specialized agents:** @codebase • @docs • @review  
 **Auto-detection:** TypeScript • Python • .NET • Generic  
 **Workflow:** Plan → Approve → Implement → Review
-
-</div>
 
 ---
 

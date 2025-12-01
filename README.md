@@ -179,14 +179,15 @@ This is a microservices architecture using:
 - Follow conventional commits format
 
 ## Architecture
+
 ```
 src/
 ├── Domain/           # Entities, ValueObjects, Interfaces
 ├── Application/      # Services, DTOs, Validators  
 ├── Infrastructure/   # DbContext, Repositories
-└── WebAPI/          # Controllers, Program.cs
+└── WebAPI/           # Controllers, Program.cs
 ```
-```
+
 
 Agents will automatically use this context!
 
@@ -285,6 +286,12 @@ A: Explicitly mention the language/framework in your prompt or add it to project
 
 **Q: How do I modify agent behavior?**  
 A: Edit the corresponding `.agent.md` file in `.github/agents/` directory.
+
+**Q: Do agents persist context after task completion?**  
+A: Agents maintain context **within the current chat session only**. They remember decisions, patterns, and files discussed during the conversation. For persistence across sessions, document important decisions in `.github/copilot-instructions.md` or your project's documentation.
+
+**Q: What happens when I start a new chat?**  
+A: Each new chat session starts fresh. Use `.github/copilot-instructions.md` to provide context that should persist across all sessions (coding standards, architecture decisions, project-specific patterns).
 
 ---
 

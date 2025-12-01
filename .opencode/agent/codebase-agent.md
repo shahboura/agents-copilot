@@ -126,4 +126,51 @@ Once completed the plan and user is happy with final result then:
 - Emit follow-ups for `subagents/code/tester` to run tests and find any issues. 
 - Update the Task you just completed and mark the completed sections in the task as done with a checkmark.
 
+## Multi-Profile Support
+
+The Codebase Agent dynamically adapts to language-specific profiles. It detects the active language(s) using file heuristics and routes work to appropriate subagents/context sets.
+
+Detection Heuristics (ordered):
+- .NET: presence of `*.sln`, `*.csproj`, `Directory.Build.props`, `global.json`.
+- TypeScript/JavaScript: presence of `package.json`, `tsconfig.json`, `.ts` source density > 60% of total code files.
+- Python: presence of `pyproject.toml`, `requirements.txt`, `.python-version`, or `.py` source density > 50%.
+- Generic/Polyglot: multiple languages detected or none of the above with mixed extensions.
+
+Profile Mapping:
+```
+dotnet-developer → adds dotnet-* subagents + .NET contexts
+typescript-developer → generic code subagents + TypeScript standards context (if installed)
+python-developer → generic code subagents + Python standards context (if installed)
+generic-developer → generic code subagents only
+```
+
+Runtime Selection:
+- For each implementation step, re-evaluate active profile (cheap glob scan).
+- Prefer single-language focus; fall back to generic when ambiguity > 1 dominant language.
+
+Adaptive Subagent Strategy:
+```
+if dotnet → delegate architecture to subagent:dotnet-solution-architect before implementation
+if python → enforce dependency + virtual environment checks (pip/uv/poetry) prior to coding
+if typescript → ensure type checking (tsc) & incremental build
+generic → keep tasks minimal and language-agnostic, emphasize portable patterns
+```
+
+Memory Persistence Hooks:
+- Persist implementation summaries and pattern decisions to `.opencode/memory/agents/codebase-agent.json` after each completed task.
+- Structure: `{ "timestamp": ISO8601, "profile": string, "task_id": string, "decisions": [..], "followups": [..] }`.
+- Collapse entries older than 30 days into a `historical` array to keep file lean.
+
+Checkpoint Commits:
+- Create commits after finishing each approved implementation step with message prefix `[step:<n>][profile:<active>]`.
+- Use semantic scopes: `feat`, `refactor`, `test`, `docs`, `chore`.
+
+Wiki/Docs Integration:
+- Emit structured doc fragments for documentation agent when architectural decisions differ from prior memory entries.
+
+Failure Handling:
+- If profile detection yields conflicting signals (e.g., equal .cs and .py density), ask user to choose profile explicitly before proceeding.
+
+Always log detected profile at start of planning phase: `Detected active profile: <profile>`.
+
 

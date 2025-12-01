@@ -398,6 +398,18 @@ When installing into an existing directory, the installer detects file collision
 - Keep all existing files unchanged
 - Your customizations are preserved
 
+### 4. Enable GitHub Copilot Custom Agents (Optional)
+
+You can integrate OpenAgents component definitions with GitHub Copilot's Custom Agents feature to run them directly inside VS Code.
+
+References:
+- GitHub Docs: https://docs.github.com/en/copilot/concepts/agents/coding-agent/about-custom-agents
+- VS Code Customization: https://code.visualstudio.com/docs/copilot/customization/custom-agents
+
+#### Local (Project-Scoped) Copilot Agents
+Use when agents are tightly coupled to a single repository.
+```bash
+
 ### Option 2: Overwrite All (Destructive)
 - Replace all existing files with new versions
 - Your customizations will be lost
@@ -427,6 +439,10 @@ When installing into an existing directory, the installer detects file collision
 # Option 1: Skip existing
 ```
 
+
+#### Global (User-Wide) Copilot Agents
+Use when you want the same agents accessible from multiple projects.
+```bash
 Only new components will be installed, existing files remain unchanged.
 
 ### Update All Components
@@ -449,20 +465,40 @@ mv .opencode ~/.config/opencode
 
 # Option 2: Fresh install to new location
 ./install.sh developer --install-dir ~/.config/opencode
+
+#### Multi-Profile Usage
+Select or auto-detect profile per project:
+```bash
 ```
 
 ---
 
+Agents can inspect `OPENAGENTS_ACTIVE_PROFILE`; if unset they fall back to file heuristics.
+
+#### Validation Before Activation
+Run validation scripts to ensure integrity:
+```bash
 ## Troubleshooting
 
 ### Dependencies Missing
 
+
+#### Recommended Commit Hooks
+Add a pre-commit hook to keep memory & agents valid:
+```bash
 **Error:** `curl: command not found` or `jq: command not found`
 
 **Solution:**
 ```bash
 # macOS
 brew install curl jq
+
+#### Troubleshooting
+- Agent not listed: Check that `copilot-agents.json` is in `.vscode/` or user config path.
+- Capability denied: Ensure corresponding tool permissions exist in agent frontmatter.
+- Memory file missing: Create empty JSON `{ "entries": [], "historical": [] }`.
+
+This integration allows GitHub Copilot to orchestrate OpenAgents workflows directly within your IDE.
 
 # Ubuntu/Debian
 sudo apt-get install curl jq

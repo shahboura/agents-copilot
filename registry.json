@@ -68,6 +68,44 @@
           "subagent:command-creator"
         ],
         "category": "meta"
+      },
+      {
+        "id": "dotnet-orchestrator",
+        "name": ".NET Development Orchestrator",
+        "type": "agent",
+        "path": ".opencode/agent/dotnet-orchestrator.md",
+        "description": "Main orchestrator for .NET development workflows with intelligent routing",
+        "tags": [
+          "dotnet",
+          "csharp",
+          {
+            "id": "documentation-agent",
+            "name": "Documentation & Wiki Agent",
+            "type": "agent",
+            "path": ".opencode/agent/documentation-agent.md",
+            "description": "Orchestrates documentation, wiki, and knowledge base generation with memory persistence",
+            "tags": [
+              "docs",
+              "wiki",
+              "knowledge",
+              "documentation"
+            ],
+            "dependencies": [
+              "subagent:documentation",
+              "subagent:task-manager"
+            ],
+            "category": "standard"
+          }
+          "orchestration",
+          "aspnet-core"
+        ],
+        "dependencies": [
+          "subagent:dotnet-solution-architect",
+          "subagent:dotnet-implementation",
+          "subagent:dotnet-testing",
+          "subagent:dotnet-build"
+        ],
+        "category": "specialized"
       }
     ],
     "subagents": [
@@ -254,6 +292,66 @@
         ],
         "dependencies": [],
         "category": "meta"
+      },
+      {
+        "id": "dotnet-solution-architect",
+        "name": ".NET Solution Architect",
+        "type": "subagent",
+        "path": ".opencode/agent/subagents/dotnet/solution-architect.md",
+        "description": "Manages .NET solution architecture, project structure, and dependencies",
+        "tags": [
+          "dotnet",
+          "architecture",
+          "nuget",
+          "csproj"
+        ],
+        "dependencies": [],
+        "category": "specialized"
+      },
+      {
+        "id": "dotnet-implementation",
+        "name": ".NET Implementation Agent",
+        "type": "subagent",
+        "path": ".opencode/agent/subagents/dotnet/implementation.md",
+        "description": "C# implementation specialist for .NET development",
+        "tags": [
+          "dotnet",
+          "csharp",
+          "implementation",
+          "solid"
+        ],
+        "dependencies": [],
+        "category": "specialized"
+      },
+      {
+        "id": "dotnet-testing",
+        "name": ".NET Testing Agent",
+        "type": "subagent",
+        "path": ".opencode/agent/subagents/dotnet/testing.md",
+        "description": "Testing specialist for .NET using xUnit, integration tests, and mocking",
+        "tags": [
+          "dotnet",
+          "testing",
+          "xunit",
+          "moq"
+        ],
+        "dependencies": [],
+        "category": "specialized"
+      },
+      {
+        "id": "dotnet-build",
+        "name": ".NET Build & Validation Agent",
+        "type": "subagent",
+        "path": ".opencode/agent/subagents/dotnet/build.md",
+        "description": "Build validation, code formatting, and quality assurance for .NET projects",
+        "tags": [
+          "dotnet",
+          "build",
+          "validation",
+          "quality-gates"
+        ],
+        "dependencies": [],
+        "category": "specialized"
       }
     ],
     "commands": [
@@ -619,6 +717,36 @@
         ],
         "dependencies": [],
         "category": "standard"
+      },
+      {
+        "id": "dotnet-project-structure",
+        "name": ".NET Project Structure",
+        "type": "context",
+        "path": ".opencode/context/dotnet/project-structure.md",
+        "description": "Clean Architecture, layered patterns, and .NET solution organization",
+        "tags": [
+          "dotnet",
+          "architecture",
+          "clean-architecture",
+          "patterns"
+        ],
+        "dependencies": [],
+        "category": "specialized"
+      },
+      {
+        "id": "dotnet-csharp-standards",
+        "name": ".NET C# Standards",
+        "type": "context",
+        "path": ".opencode/context/dotnet/csharp-standards.md",
+        "description": "C# coding standards, naming conventions, async/await, and LINQ patterns",
+        "tags": [
+          "dotnet",
+          "csharp",
+          "standards",
+          "best-practices"
+        ],
+        "dependencies": [],
+        "category": "specialized"
       }
     ],
     "config": [
@@ -819,6 +947,103 @@
       "additionalPaths": [
         ".Building/",
         ".github/workflows/"
+      ]
+    }
+    ,
+    "dotnet-developer": {
+      "name": "Dotnet Developer",
+      "description": "Focused .NET development environment with architecture, implementation, testing, and build validation agents.",
+      "components": [
+        "agent:dotnet-orchestrator",
+        "agent:codebase-agent",
+        "subagent:task-manager",
+        "subagent:documentation",
+        "subagent:reviewer",
+        "subagent:tester",
+        "subagent:build-agent",
+        "subagent:dotnet-solution-architect",
+        "subagent:dotnet-implementation",
+        "subagent:dotnet-testing",
+        "subagent:dotnet-build",
+        "command:test",
+        "command:commit",
+        "command:context",
+        "command:clean",
+        "tool:env",
+        "context:project-context",
+        "context:essential-patterns",
+        "context:dotnet-project-structure",
+        "context:dotnet-csharp-standards",
+        "config:env-example",
+        "config:readme"
+      ]
+    },
+    "python-developer": {
+      "name": "Python Developer",
+      "description": "Python-focused profile using generic code subagents with testing & build validation.",
+      "components": [
+        "agent:codebase-agent",
+        "agent:openagent",
+        "subagent:task-manager",
+        "subagent:documentation",
+        "subagent:reviewer",
+        "subagent:tester",
+        "subagent:build-agent",
+        "command:test",
+        "command:commit",
+        "command:context",
+        "command:clean",
+        "tool:env",
+        "context:project-context",
+        "context:essential-patterns",
+        "config:env-example",
+        "config:readme"
+      ]
+    },
+    "typescript-developer": {
+      "name": "TypeScript Developer",
+      "description": "TypeScript-focused profile with code analysis and build tooling.",
+      "components": [
+        "agent:codebase-agent",
+        "agent:openagent",
+        "subagent:task-manager",
+        "subagent:documentation",
+        "subagent:reviewer",
+        "subagent:tester",
+        "subagent:build-agent",
+        "subagent:codebase-pattern-analyst",
+        "command:test",
+        "command:commit",
+        "command:context",
+        "command:clean",
+        "command:optimize",
+        "tool:env",
+        "context:project-context",
+        "context:essential-patterns",
+        "config:env-example",
+        "config:readme"
+      ]
+    },
+    "generic-developer": {
+      "name": "Generic Developer",
+      "description": "Language-agnostic profile for polyglot repositories.",
+      "components": [
+        "agent:codebase-agent",
+        "agent:openagent",
+        "subagent:task-manager",
+        "subagent:documentation",
+        "subagent:reviewer",
+        "subagent:tester",
+        "subagent:build-agent",
+        "command:test",
+        "command:commit",
+        "command:context",
+        "command:clean",
+        "tool:env",
+        "context:project-context",
+        "context:essential-patterns",
+        "config:env-example",
+        "config:readme"
       ]
     }
   },

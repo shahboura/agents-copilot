@@ -210,16 +210,16 @@ openagent (universal coordinator)
 
 ### 🤖 Main Agents
 - **openagent** - Universal agent for questions and tasks (recommended default)
-- **codebase-agent** - Specialized development agent for code-focused workflows
-- **task-manager** - Breaks complex features into manageable subtasks
-- **workflow-orchestrator** - Routes requests to appropriate workflows
-- **image-specialist** - Generates images with Gemini AI
+- **codebase-agent** - Specialized development agent with multi-profile language support (dotnet, python, typescript, generic)
+- **documentation-agent** - Orchestrates documentation & wiki generation with persistent memory
+- **task-manager** (subagent) - Breaks complex features into manageable subtasks
+- **image-specialist** (subagent) - Generates images with Gemini AI
 
 ### 🔧 Specialized Subagents (Auto-delegated)
 - **reviewer** - Code review and security analysis
 - **tester** - Test creation and validation
 - **coder-agent** - Quick implementation tasks
-- **documentation** - Documentation generation
+- **documentation** - Atomic documentation generation (invoked by documentation-agent)
 - **build-agent** - Build and type checking
 - **codebase-pattern-analyst** - Pattern discovery
 
@@ -236,6 +236,26 @@ openagent (universal coordinator)
 ### 📚 Context Files
 - `core/essential-patterns.md` - Universal coding patterns
 - `project/project-context.md` - Your project-specific patterns
+ - (Dotnet / language contexts when installed)
+
+### 🧠 Persistent Memory
+Agents now persist high-signal decisions & summaries:
+- `.opencode/memory/agents/codebase-agent.json` – architecture & implementation checkpoints
+- `.opencode/memory/agents/documentation-agent.json` – doc/wiki change sets (created on first use)
+Memory is compacted automatically (see `.opencode/memory/README.md`).
+
+### 🗂 Multi-Profile Language Support
+The codebase agent auto-detects dominant language and adapts:
+- `dotnet-developer` (solution architecture, build, test specialization)
+- `python-developer` (virtual env & dependency focus)
+- `typescript-developer` (type safety & build optimization)
+- `generic-developer` (polyglot repositories)
+Override detection by exporting `OPENAGENTS_ACTIVE_PROFILE`.
+
+### 🧩 GitHub Copilot Custom Agents Integration
+You can expose these agents directly inside VS Code via Copilot Custom Agents.
+See: `docs/getting-started/installation.md` → “Enable GitHub Copilot Custom Agents”.
+Create `.vscode/copilot-agents.json` pointing to `.opencode/agent/*.md` entries to enable.
 
 ---
 
@@ -492,16 +512,17 @@ Read [Agent System Blueprint](docs/features/agent-system-blueprint.md) to learn:
 ### Project Structure
 ```
 .opencode/
-├── agent/              # AI agents
+├── agent/              # Orchestrator agents & subagents
 │   ├── codebase-agent.md
-│   ├── task-manager.md
-│   └── subagents/      # Specialized helpers
+│   ├── documentation-agent.md
+│   └── subagents/      # Specialized helpers (e.g. core/task-manager.md)
 ├── command/            # Slash commands
 │   ├── commit.md
 │   └── optimize.md
 ├── context/            # Coding patterns
 │   ├── core/           # Essential patterns
 │   └── project/        # Your patterns
+├── memory/             # Persistent agent memory (summaries & decisions)
 ├── plugin/             # Optional: Telegram
 └── tool/               # Optional: Gemini AI
 ```

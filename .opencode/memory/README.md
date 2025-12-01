@@ -1,3 +1,7 @@
+---
+description: "Persistent agent memory schema and maintenance guidelines"
+---
+
 # Agent Memory Persistence
 
 Persistent memory supplements ephemeral session data (`.tmp/sessions/*`). It stores durable summaries of decisions, architecture choices, and documentation deltas enabling seamless work resumption.

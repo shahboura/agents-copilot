@@ -19,31 +19,22 @@
 
 ## Quick Start
 
-### 1. Copy Agents to Your Project
-```bash
-# Clone this repository
-git clone https://github.com/darrenhinde/OpenAgents.git
-
-# Copy agent files to your project
-mkdir -p your-project/.github/agents
-cp OpenAgents/.github/agents/*.agent.md your-project/.github/agents/
-
-# Or use them directly in this repo (already configured)
-```
-
-### 2. Start Using Agents
+### 1. Start Using Agents
 
 **In VS Code:**
+
 1. Open GitHub Copilot Chat (Ctrl+Shift+I or Cmd+Shift+I)
 2. Select agent from dropdown: `@codebase`, `@docs`, or `@review`
 3. Describe what you want
 
 **Example:**
+
 ```
 @codebase Create a REST API endpoint for user authentication with JWT
 ```
 
 The agent will:
+
 1. ✅ Propose an implementation plan
 2. ⏸️ Wait for your approval  
 3. 🔨 Implement step-by-step with validation
@@ -54,33 +45,40 @@ The agent will:
 ## Available Agents
 
 ### 🔧 @codebase - Development Agent
+
 Multi-language implementation specialist with profile auto-detection.
 
 **Detects and adapts to:**
+
 - **.NET** - Clean Architecture, async/await, nullable types
 - **Python** - Type hints, virtual env, testing  
 - **TypeScript** - Strict types, build validation
 - **Generic** - Polyglot projects
 
 **Use for:**
+
 - Feature implementation
 - Bug fixes
 - Refactoring
 - Code generation
 
 ### 📝 @docs - Documentation Agent
+
 Creates and maintains documentation with consistent formatting.
 
 **Use for:**
+
 - README files
 - API documentation
 - Architecture docs
 - User guides
 
 ### 🔍 @review - Code Review Agent
+
 Security and quality-focused reviewer.
 
 **Use for:**
+
 - Security audits
 - Performance reviews
 - Best practices validation
@@ -91,6 +89,7 @@ Security and quality-focused reviewer.
 ## Example Workflows
 
 ### Feature Implementation
+
 ```
 @codebase Create a user service with CRUD operations following repository pattern.
 Include:
@@ -101,6 +100,7 @@ Include:
 ```
 
 **Agent response:**
+
 ```markdown
 DIGGING IN...
 
@@ -117,6 +117,7 @@ Approval needed before proceeding.
 ```
 
 ### Documentation Update
+
 ```
 @docs Update README with:
 - New authentication endpoints
@@ -125,6 +126,7 @@ Approval needed before proceeding.
 ```
 
 ### Code Review
+
 ```
 @review Audit the authentication module for security issues
 ```
@@ -134,12 +136,15 @@ Approval needed before proceeding.
 ## Workflow Features
 
 ### ✅ Plan-First Approach
+
 Every agent proposes a plan before executing. You review and approve before any changes.
 
 ### 🔄 Step-by-Step Execution  
+
 Agents implement one step at a time, validating after each step.
 
 ### 🎯 Profile Auto-Detection
+
 The @codebase agent detects your project type and adapts:
 
 | Profile | Detection | Adaptations |
@@ -150,7 +155,9 @@ The @codebase agent detects your project type and adapts:
 | **generic** | Mixed or unclear | Language-agnostic patterns |
 
 ### 🔗 Agent Handoffs
+
 Seamless transitions between specialized agents:
+
 ```
 @codebase → @review → @docs
 ```
@@ -162,6 +169,7 @@ Each agent suggests relevant next steps with pre-filled prompts.
 ## Customization
 
 ### Add Project Context
+
 Create `.github/copilot-instructions.md` to provide project-specific context:
 
 ```markdown
@@ -181,38 +189,17 @@ This is a microservices architecture using:
 ## Architecture
 
 ```
+
 src/
 ├── Domain/           # Entities, ValueObjects, Interfaces
 ├── Application/      # Services, DTOs, Validators  
 ├── Infrastructure/   # DbContext, Repositories
 └── WebAPI/           # Controllers, Program.cs
+
 ```
 
 
 Agents will automatically use this context!
-
----
-
-## Installation Options
-
-### Option 1: Per-Project (Recommended)
-Copy agent files directly into your project:
-```bash
-mkdir -p .github/agents
-cp path/to/OpenAgents/.github/agents/*.agent.md .github/agents/
-```
-
-### Option 2: Reference from This Repo
-Clone once, reference from multiple projects:
-```bash
-# In your .github/copilot-instructions.md
-See agent definitions at: https://github.com/darrenhinde/OpenAgents
-```
-
-### Option 3: Fork and Customize
-1. Fork this repository
-2. Modify agents in `.github/agents/`
-3. Reference your fork in projects
 
 ---
 
@@ -226,10 +213,12 @@ See agent definitions at: https://github.com/darrenhinde/OpenAgents
 ```
 
 Each agent file contains:
+
 - **YAML frontmatter** - Configuration (name, description, tools, handoffs)
 - **Markdown body** - Instructions and guidelines
 
 Example structure:
+
 ```markdown
 ---
 name: codebase
@@ -250,23 +239,30 @@ Your detailed instructions here...
 ## Best Practices
 
 ### 1. Be Specific in Prompts
+
 ❌ "Add authentication"  
 ✅ "Create JWT authentication with refresh tokens, rate limiting, and secure password hashing using bcrypt"
 
 ### 2. Review Plans Carefully
+
 Always review the proposed implementation plan before approving.
 
 ### 3. Use Handoffs
+
 Let agents transition between tasks:
+
 ```
 @codebase (implement) → @review (audit) → @docs (document)
 ```
 
 ### 4. Add Project Context
+
 Use `.github/copilot-instructions.md` to provide persistent context about your project's architecture, standards, and conventions.
 
 ### 5. Leverage Profile Detection
+
 Trust the @codebase agent to detect your project type, or explicitly mention it:
+
 ```
 @codebase Using .NET Clean Architecture, create...
 ```
@@ -288,10 +284,13 @@ A: Explicitly mention the language/framework in your prompt or add it to project
 A: Edit the corresponding `.agent.md` file in `.github/agents/` directory.
 
 **Q: Do agents persist context after task completion?**  
-A: Agents maintain context **within the current chat session only**. They remember decisions, patterns, and files discussed during the conversation. For persistence across sessions, document important decisions in `.github/copilot-instructions.md` or your project's documentation.
+A: **Yes, with your approval.** Agents will propose updates to `.github/copilot-instructions.md` at task completion to save important decisions, patterns, and architectural choices. You must approve each edit, but once saved, all future sessions automatically load this context.
 
-**Q: What happens when I start a new chat?**  
-A: Each new chat session starts fresh. Use `.github/copilot-instructions.md` to provide context that should persist across all sessions (coding standards, architecture decisions, project-specific patterns).
+**Q: What gets persisted?**  
+A: Architectural decisions, design patterns, technical constraints, documentation standards, code review insights, and project-specific conventions.
+
+**Q: How do I preserve important information across sessions?**  
+A: Agents handle this automatically by updating `.github/copilot-instructions.md`. You can also manually edit this file to add context that should persist for all future sessions.
 
 ---
 
@@ -306,6 +305,7 @@ We welcome contributions!
 5. Submit a pull request
 
 **Ideas for new agents:**
+
 - @test - Testing specialist
 - @refactor - Refactoring specialist  
 - @deploy - Deployment specialist
@@ -330,6 +330,7 @@ MIT License - See LICENSE file for details
 ## Support
 
 If you find this useful, consider:
+
 - ⭐ Starring the repository
 - 🐛 Reporting issues
 - 💡 Suggesting improvements
@@ -338,4 +339,3 @@ If you find this useful, consider:
 ---
 
 **Made with ❤️ for the GitHub Copilot community**
-

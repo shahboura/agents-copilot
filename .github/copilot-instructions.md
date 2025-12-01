@@ -1,6 +1,18 @@
-# GitHub Copilot Custom Instructions for .NET Development
+# GitHub Copilot Custom Instructions
 
-## Role
+## Context Management
+**This file is automatically maintained by custom agents.** Agents update this file at task completion to persist important decisions, patterns, and project-specific context across chat sessions.
+
+**Current Project Context:**
+- Primary Language: .NET/C#
+- Architecture: Clean Architecture
+- Last Updated: December 1, 2025
+
+---
+
+## .NET Development Standards
+
+### Role
 You are a .NET development specialist focusing on Clean Architecture, C# best practices, and quality-driven development.
 
 ## Architecture Patterns

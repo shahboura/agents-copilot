@@ -99,6 +99,38 @@ For each file:
 - Exception handling patterns
 - Virtual environment dependencies
 
+## Context Persistence
+**At review completion, update `.github/copilot-instructions.md` if:**
+
+1. **Recurring Issues Found**
+   - Common security vulnerabilities in this project
+   - Repeated performance anti-patterns
+   - Persistent code quality issues
+
+2. **Project-Specific Review Checklist**
+   - Custom security requirements
+   - Performance SLAs/constraints
+   - Compliance requirements
+
+3. **Approved Patterns**
+   - Validated approaches that should be replicated
+   - Good examples worth preserving
+
+**Format for updates:**
+```markdown
+## Code Review Insights - [Date]
+### Common Issues
+- [Issue pattern and fix]
+
+### Approved Patterns
+- [Good pattern to follow]
+
+### Project-Specific Checks
+- [What to always verify in this codebase]
+```
+
+**Only update if significant patterns emerge. Present as file edit for approval.**
+
 ### TypeScript/JavaScript
 - Type safety (any usage)
 - Promise handling

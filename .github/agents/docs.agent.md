@@ -98,6 +98,39 @@ docs/
 ## Version Control
 - Document breaking changes
 - Maintain changelog
+
+## Context Persistence
+**At task completion, ALWAYS update `.github/copilot-instructions.md` with:**
+
+1. **Documentation Standards Established**
+   - New file structures created
+   - Documentation patterns introduced
+   - Style guidelines applied
+
+2. **Content Organization Decisions**
+   - Where specific docs are located
+   - Cross-reference patterns
+   - Navigation structure
+
+3. **Project-Specific Documentation Patterns**
+   - Custom sections added to README
+   - Special formatting requirements
+   - Documentation workflow decisions
+
+**Format for updates:**
+```markdown
+## Documentation - [Topic] - [Date]
+### Structure
+[How documentation is organized]
+
+### Standards Applied
+[Formatting, style choices]
+
+### Location Guide
+[Where to find specific types of docs]
+```
+
+**Present the update as file edit for approval before ending task.**
 - Update version numbers
 - Note migration paths
 

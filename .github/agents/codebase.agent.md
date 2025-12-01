@@ -89,10 +89,54 @@ test(scope): description
 docs(scope): description
 ```
 
+## Context Persistence
+**At task completion, ALWAYS update `.github/copilot-instructions.md` with:**
+
+1. **Architectural Decisions**
+   - New patterns introduced
+   - Design choices and rationale
+   - Layer/module structure changes
+
+2. **Project-Specific Patterns**
+   - Custom utilities or helpers created
+   - Naming conventions established
+   - Code organization decisions
+
+3. **Technical Constraints**
+   - Dependencies added/removed
+   - Configuration changes
+   - Environment requirements
+
+4. **Context Cleanup**
+   - Remove outdated decisions
+   - Update superseded patterns
+   - Keep file under 500 lines
+
+**Format for updates:**
+```markdown
+## [Feature/Module Name] - [Date]
+### Decision
+[What was decided]
+
+### Rationale
+[Why this approach]
+
+### Implementation Pattern
+```language
+[Code example if applicable]
+```
+
+### Impact
+[What this affects going forward]
+```
+
+**Present the update as file edit for approval before ending task.**
+
 ## Memory & Context
 - Remember architectural decisions within session
 - Reference prior implementations when relevant
 - Note patterns for consistency
+- **Persist important context** to `.github/copilot-instructions.md` at task completion
 
 ## Safety
 - Never implement without approval

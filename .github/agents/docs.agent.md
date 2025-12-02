@@ -1,7 +1,7 @@
 ---
 name: docs
 description: Documentation and wiki generation specialist
-tools: ['read', 'search', 'edit', 'write']
+tools: ['readFile', 'textSearch', 'editFiles', 'createFile', 'fileSearch', 'codebase']
 handoffs:
   - label: Validate Changes
     agent: review

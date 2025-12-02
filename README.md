@@ -89,6 +89,34 @@ Security and quality-focused reviewer.
 
 ---
 
+## Agent Capabilities Summary
+
+Each agent has access to specific tools that enable their specialized functionality:
+
+| Agent | Available Tools | Capabilities |
+|-------|----------------|-------------|
+| **@orchestrator** | `readFile`, `textSearch`, `editFiles`, `createFile`, `runInTerminal`, `fileSearch`, `codebase`, `problems` | • Read and analyze code<br>• Edit and create files<br>• Run terminal commands<br>• Search codebase<br>• Access problems/errors<br>• Coordinate multi-phase workflows |
+| **@codebase** | `readFile`, `editFiles`, `createFile`, `textSearch`, `usages`, `runInTerminal`, `problems`, `fileSearch`, `codebase` | • Read and edit code<br>• Create new files<br>• Find code usages/references<br>• Run builds and tests<br>• Check compilation errors<br>• Search across workspace |
+| **@docs** | `readFile`, `textSearch`, `editFiles`, `createFile`, `fileSearch`, `codebase` | • Read existing documentation<br>• Search for content<br>• Edit and create docs<br>• Find files and references<br>• Analyze codebase for documentation |
+| **@review** | `readFile`, `textSearch`, `usages`, `problems`, `fileSearch`, `codebase`, `changes` | • Read code for review<br>• Find all references<br>• Check compilation/lint errors<br>• Search for patterns<br>• Review source control changes<br>• Analyze security issues |
+
+### Tool Definitions
+
+| Tool | Description |
+|------|-------------|
+| `readFile` | Read file contents |
+| `editFiles` | Apply edits to existing files |
+| `createFile` | Create new files in workspace |
+| `textSearch` | Search text within files |
+| `fileSearch` | Find files by name/pattern |
+| `usages` | Find references, implementations, and definitions |
+| `runInTerminal` | Execute shell commands |
+| `problems` | Access compiler/linter errors and warnings |
+| `codebase` | Semantic code search across workspace |
+| `changes` | Access source control changes |
+
+---
+
 ## Example Workflows
 
 ### Complex Multi-Phase Project

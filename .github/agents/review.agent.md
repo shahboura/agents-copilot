@@ -1,7 +1,12 @@
 ---
 name: review
 description: Code review specialist focusing on security, performance, and best practices
-tools: ['read', 'search', 'usages']
+tools: ['read', 'search', 'usages', 'error']
+handoffs:
+  - label: Implement Fixes
+    agent: codebase
+    prompt: Implement the critical and high-priority fixes identified in the review above
+    send: false
 ---
 
 # Code Review Agent

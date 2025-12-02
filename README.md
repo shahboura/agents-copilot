@@ -2,12 +2,7 @@
 
 ## GitHub Copilot Custom Agents for Plan-First Development
 
-[![GitHub stars](https://img.shields.io/github/stars/darrenhinde/OpenAgents?style=social)](https://github.com/darrenhinde/OpenAgents/stargazers)
-[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
-[![GitHub last commit](https://img.shields.io/github/last-commit/darrenhinde/OpenAgents)](https://github.com/darrenhinde/OpenAgents/commits/main)
-[![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg)](https://github.com/darrenhinde/OpenAgents/pulls)
-
-**Specialized agents:** @codebase • @docs • @review  
+**Specialized agents:** @orchestrator • @codebase • @docs • @review  
 **Auto-detection:** TypeScript • Python • .NET • Generic  
 **Workflow:** Plan → Approve → Implement → Review
 
@@ -20,7 +15,7 @@
 **In VS Code:**
 
 1. Open GitHub Copilot Chat (Ctrl+Shift+I or Cmd+Shift+I)
-2. Select agent from dropdown: `@codebase`, `@docs`, or `@review`
+2. Select agent from dropdown: `@orchestrator`, `@codebase`, `@docs`, or `@review`
 3. Describe what you want
 
 **Example:**
@@ -39,6 +34,18 @@ The agent will:
 ---
 
 ## Available Agents
+
+### 🎯 @orchestrator - Task Coordinator
+
+Orchestrates complex multi-step workflows requiring coordination between specialized agents.
+
+**Use for:**
+
+- Complex features requiring implementation + docs + review
+- Multi-phase projects with dependencies
+- Tasks spanning multiple domains
+- Refactoring projects affecting multiple modules
+- Migration projects with validation steps
 
 ### 🔧 @codebase - Development Agent
 
@@ -83,6 +90,21 @@ Security and quality-focused reviewer.
 ---
 
 ## Example Workflows
+
+### Complex Multi-Phase Project
+
+```
+@orchestrator Build a user authentication system with JWT, including API endpoints, 
+tests, security review, and documentation
+```
+
+**Orchestrator will:**
+1. Create implementation plan with phases
+2. Hand off to @codebase for development
+3. Coordinate @review for security audit
+4. Route fixes back to @codebase
+5. Engage @docs for documentation
+6. Provide final validation
 
 ### Feature Implementation
 

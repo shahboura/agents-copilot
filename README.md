@@ -122,11 +122,11 @@ Each agent has access to specific tools that enable their specialized functional
 
 | Agent | Available Tools | Capabilities |
 |-------|----------------|-------------|
-| **@orchestrator** | `search/readFile`, `search/textSearch`, `edit/editFiles`, `edit/createFile`, `terminal/runInTerminal`, `search/fileSearch`, `search/codebase`, `problems` | • Read and analyze code<br>• Edit and create files<br>• Run terminal commands<br>• Search codebase<br>• Access problems/errors<br>• Coordinate multi-phase workflows |
-| **@codebase** | `search/readFile`, `edit/editFiles`, `edit/createFile`, `search/textSearch`, `search/usages`, `terminal/runInTerminal`, `problems`, `search/fileSearch`, `search/codebase` | • Read and edit code<br>• Create new files<br>• Find code usages/references<br>• Run builds and tests<br>• Check compilation errors<br>• Search across workspace |
-| **@docs** | `search/readFile`, `search/textSearch`, `edit/editFiles`, `edit/createFile`, `search/fileSearch`, `search/codebase` | • Read existing documentation<br>• Search for content<br>• Edit and create docs<br>• Find files and references<br>• Analyze codebase for documentation |
-| **@review** | `search/readFile`, `search/textSearch`, `search/usages`, `problems`, `search/fileSearch`, `search/codebase`, `sourceControl/changes` | • Read code for review<br>• Find all references<br>• Check compilation/lint errors<br>• Search for patterns<br>• Review source control changes<br>• Analyze security issues |
-| **@em-advisor** | `search/readFile`, `search/textSearch`, `search/codebase`, `problems`, `search/fileSearch` | • Read codebase for context<br>• Search for patterns and issues<br>• Analyze technical challenges<br>• Provide leadership frameworks<br>• Strategic thinking partner<br>• No editing (advisor only) |
+| **@orchestrator** | `search/readFile`, `search/textSearch`, `edit/editFiles`, `edit/createFile`, `terminal/runInTerminal`, `search/fileSearch`, `search/codebase`, `problems`, `fetch` | • Read and analyze code<br>• Edit and create files<br>• Run terminal commands<br>• Search codebase<br>• Access problems/errors<br>• Fetch web content/docs<br>• Coordinate multi-phase workflows |
+| **@codebase** | `search/readFile`, `edit/editFiles`, `edit/createFile`, `search/textSearch`, `search/usages`, `terminal/runInTerminal`, `problems`, `search/fileSearch`, `search/codebase`, `fetch` | • Read and edit code<br>• Create new files<br>• Find code usages/references<br>• Run builds and tests<br>• Check compilation errors<br>• Fetch external documentation<br>• Search across workspace |
+| **@docs** | `search/readFile`, `search/textSearch`, `edit/editFiles`, `edit/createFile`, `search/fileSearch`, `search/codebase`, `fetch` | • Read existing documentation<br>• Search for content<br>• Edit and create docs<br>• Find files and references<br>• Fetch web resources<br>• Analyze codebase for documentation |
+| **@review** | `search/readFile`, `search/textSearch`, `search/usages`, `problems`, `search/fileSearch`, `search/codebase`, `sourceControl/changes`, `fetch` | • Read code for review<br>• Find all references<br>• Check compilation/lint errors<br>• Search for patterns<br>• Review source control changes<br>• Fetch security advisories<br>• Analyze security issues |
+| **@em-advisor** | `search/readFile`, `search/textSearch`, `search/codebase`, `problems`, `search/fileSearch`, `fetch` | • Read codebase for context<br>• Search for patterns and issues<br>• Analyze technical challenges<br>• Fetch leadership resources<br>• Provide leadership frameworks<br>• Strategic thinking partner<br>• No editing (advisor only) |
 
 ### Tool Definitions
 
@@ -142,6 +142,7 @@ Each agent has access to specific tools that enable their specialized functional
 | `problems` | Access compiler/linter errors and warnings |
 | `search/codebase` | Semantic code search across workspace |
 | `sourceControl/changes` | Access source control changes |
+| `fetch` | Fetch content from web pages (documentation, APIs, resources) |
 
 ---
 

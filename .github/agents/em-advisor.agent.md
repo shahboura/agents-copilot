@@ -2,7 +2,7 @@
 name: em-advisor
 description: Engineering Manager advisor for leadership decisions, team dynamics, and technical strategy
 argument-hint: Ask about team management, technical strategy, or leadership challenges
-tools: ['search/readFile', 'search/textSearch', 'search/codebase', 'problems', 'search/fileSearch']
+tools: ['search/readFile', 'search/textSearch', 'search/codebase', 'problems', 'search/fileSearch', 'fetch']
 ---
 
 # Engineering Manager Advisor Agent

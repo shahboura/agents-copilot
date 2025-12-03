@@ -1,7 +1,6 @@
 ---
 description: Python best practices with type hints, proper structure, and testing
-patterns:
-  - '**/*.py'
+applyTo: '**/*.py'
 ---
 
 # Python Best Practices Instructions

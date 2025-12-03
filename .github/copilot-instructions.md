@@ -1,19 +1,44 @@
 # GitHub Copilot Custom Instructions
 
 ## Context Management
-**This file is automatically maintained by custom agents.** Agents update this file at task completion to persist important decisions, patterns, and project-specific context across chat sessions.
+**Auto-maintained by agents.** Persists decisions, patterns, and context across sessions.
 
-**Current Project Context:**
-- Primary Language: .NET/C#
-- Architecture: Clean Architecture
-- Last Updated: December 1, 2025
+**Project Context:**
+- Multi-language: .NET, Python, TypeScript
+- Architecture: Clean Architecture (.NET), modular patterns (Python/TS)
+- Last Updated: December 3, 2025
+
+---
+
+## Custom Agent System
+
+### 6 Agents Created
+1. **@planner** - Read-only planning (no edits, prevents mistakes)
+2. **@orchestrator** - Multi-phase workflow coordinator
+3. **@codebase** - Multi-language dev with profile auto-detection
+4. **@docs** - Documentation specialist
+5. **@review** - Security/quality reviewer
+6. **@em-advisor** - Engineering Manager strategic advisor
+
+### 5 Reusable Prompts
+- `/create-readme` - Professional README generation
+- `/code-review` - Comprehensive code review
+- `/generate-tests` - Unit test generation
+- `/1-on-1-prep` - EM meeting preparation
+- `/architecture-decision` - ADR creation
+
+### 3 Auto-Applied Instructions
+Pattern-based context injection (no manual prompting):
+- `**/*.{cs,csproj}` → .NET Clean Architecture standards
+- `**/*.py` → Python best practices (type hints, pytest)
+- `**/*.{ts,tsx}` → TypeScript strict mode
 
 ---
 
 ## .NET Development Standards
 
 ### Role
-You are a .NET development specialist focusing on Clean Architecture, C# best practices, and quality-driven development.
+.NET specialist: Clean Architecture, C# best practices, quality-driven development.
 
 ## Architecture Patterns
 
@@ -24,18 +49,16 @@ Domain → Application → Infrastructure → WebAPI
 
 **Dependency Rules:**
 - ✅ Infrastructure → Application → Domain
-- ❌ Domain → Application (forbidden)
-- ❌ Application → Infrastructure (forbidden)
+- ❌ Domain must NOT depend on Application
+- ❌ Application must NOT depend on Infrastructure
 
 ### Project Structure
 ```
-MySolution/
-├── src/
-│   ├── Domain/              (Entities, ValueObjects, Interfaces)
-│   ├── Application/         (Services, DTOs, Validators)
-│   ├── Infrastructure/      (DbContext, Repositories)
-│   └── WebAPI/              (Controllers, Program.cs)
-└── tests/
+src/
+├── Domain/              (Entities, ValueObjects, Interfaces)
+├── Application/         (Services, DTOs, Validators)
+├── Infrastructure/      (DbContext, Repositories)
+└── WebAPI/              (Controllers, Program.cs)
 ```
 
 ## C# Standards
@@ -255,25 +278,38 @@ public class UsersController : ControllerBase
 }
 ```
 
-## When Suggesting Code
+## Quality Requirements
 
-Always:
-- Follow Clean Architecture layers
-- Use proper C# naming conventions
-- Include CancellationToken in async methods
-- Use nullable reference types correctly
-- Add XML documentation comments
-- Include proper error handling
-- Suggest tests alongside implementation
-- Validate against quality requirements
+**Every code change MUST:**
+1. ✅ Compile with zero warnings
+2. ✅ Pass all tests
+3. ✅ Be formatted (dotnet format)
+4. ✅ Use nullable reference types correctly
+5. ✅ Include async/await with CancellationToken
+6. ✅ Follow Clean Architecture layers
+
+## Implementation Workflow
+
+When implementing features:
+1. **Analyze** - Identify affected layers
+2. **Plan** - Define entities, services, controllers, tests
+3. **Implement** - Domain → Application → Infrastructure → WebAPI
+4. **Test** - Unit tests per layer
+5. **Validate** - Build, test, format
+
+## Common Patterns to Apply
+
+- Use `record` types for DTOs
+- Apply `sealed` to non-inheritable classes
+- Use `required` for required properties (C# 11+)
+- Prefer `is not null` over `!= null`
+- Use `nameof()` in exceptions
 
 ## Build Commands
 
-Suggest these validation steps:
 ```bash
 dotnet restore
 dotnet build
 dotnet format
 dotnet test
-dotnet ef migrations list  # if EF Core is used
 ```

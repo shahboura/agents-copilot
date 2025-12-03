@@ -1,8 +1,6 @@
 ---
 description: Apply .NET Clean Architecture principles and C# best practices
-patterns:
-  - '**/*.cs'
-  - '**/*.csproj'
+applyTo: '**/*.{cs,csproj}'
 ---
 
 # .NET Clean Architecture Instructions

@@ -1,8 +1,6 @@
 ---
 description: TypeScript strict mode with type safety and modern patterns
-patterns:
-  - '**/*.ts'
-  - '**/*.tsx'
+applyTo: '**/*.{ts,tsx}'
 ---
 
 # TypeScript Strict Mode Instructions

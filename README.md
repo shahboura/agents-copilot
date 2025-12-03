@@ -2,7 +2,7 @@
 
 ## GitHub Copilot Custom Agents for Plan-First Development
 
-**Specialized agents:** @orchestrator • @codebase • @docs • @review  
+**Specialized agents:** @orchestrator • @codebase • @docs • @review • @em-advisor  
 **Auto-detection:** TypeScript • Python • .NET • Generic  
 **Workflow:** Plan → Approve → Implement → Review
 
@@ -15,7 +15,7 @@
 **In VS Code:**
 
 1. Open GitHub Copilot Chat (Ctrl+Shift+I or Cmd+Shift+I)
-2. Select agent from dropdown: `@orchestrator`, `@codebase`, `@docs`, or `@review`
+2. Select agent from dropdown: `@orchestrator`, `@codebase`, `@docs`, `@review`, or `@em-advisor`
 3. Describe what you want
 
 **Example:**
@@ -87,6 +87,18 @@ Security and quality-focused reviewer.
 - Best practices validation
 - Code quality checks
 
+### 🧠 @em-advisor - Engineering Manager Advisor
+
+Strategic thinking partner for engineering leadership decisions.
+
+**Use for:**
+
+- Performance conversations and 1-on-1 preparation
+- Technical strategy and roadmap planning
+- Team dynamics and conflict resolution
+- Stakeholder communication frameworks
+- Leadership skill development
+
 ---
 
 ## Agent Capabilities Summary
@@ -95,25 +107,26 @@ Each agent has access to specific tools that enable their specialized functional
 
 | Agent | Available Tools | Capabilities |
 |-------|----------------|-------------|
-| **@orchestrator** | `readFile`, `textSearch`, `editFiles`, `createFile`, `runInTerminal`, `fileSearch`, `codebase`, `problems` | • Read and analyze code<br>• Edit and create files<br>• Run terminal commands<br>• Search codebase<br>• Access problems/errors<br>• Coordinate multi-phase workflows |
-| **@codebase** | `readFile`, `editFiles`, `createFile`, `textSearch`, `usages`, `runInTerminal`, `problems`, `fileSearch`, `codebase` | • Read and edit code<br>• Create new files<br>• Find code usages/references<br>• Run builds and tests<br>• Check compilation errors<br>• Search across workspace |
-| **@docs** | `readFile`, `textSearch`, `editFiles`, `createFile`, `fileSearch`, `codebase` | • Read existing documentation<br>• Search for content<br>• Edit and create docs<br>• Find files and references<br>• Analyze codebase for documentation |
-| **@review** | `readFile`, `textSearch`, `usages`, `problems`, `fileSearch`, `codebase`, `changes` | • Read code for review<br>• Find all references<br>• Check compilation/lint errors<br>• Search for patterns<br>• Review source control changes<br>• Analyze security issues |
+| **@orchestrator** | `search/readFile`, `search/textSearch`, `edit/editFiles`, `edit/createFile`, `terminal/runInTerminal`, `search/fileSearch`, `search/codebase`, `problems` | • Read and analyze code<br>• Edit and create files<br>• Run terminal commands<br>• Search codebase<br>• Access problems/errors<br>• Coordinate multi-phase workflows |
+| **@codebase** | `search/readFile`, `edit/editFiles`, `edit/createFile`, `search/textSearch`, `search/usages`, `terminal/runInTerminal`, `problems`, `search/fileSearch`, `search/codebase` | • Read and edit code<br>• Create new files<br>• Find code usages/references<br>• Run builds and tests<br>• Check compilation errors<br>• Search across workspace |
+| **@docs** | `search/readFile`, `search/textSearch`, `edit/editFiles`, `edit/createFile`, `search/fileSearch`, `search/codebase` | • Read existing documentation<br>• Search for content<br>• Edit and create docs<br>• Find files and references<br>• Analyze codebase for documentation |
+| **@review** | `search/readFile`, `search/textSearch`, `search/usages`, `problems`, `search/fileSearch`, `search/codebase`, `sourceControl/changes` | • Read code for review<br>• Find all references<br>• Check compilation/lint errors<br>• Search for patterns<br>• Review source control changes<br>• Analyze security issues |
+| **@em-advisor** | `search/readFile`, `search/textSearch`, `search/codebase`, `problems`, `search/fileSearch` | • Read codebase for context<br>• Search for patterns and issues<br>• Analyze technical challenges<br>• Provide leadership frameworks<br>• Strategic thinking partner<br>• No editing (advisor only) |
 
 ### Tool Definitions
 
 | Tool | Description |
 |------|-------------|
-| `readFile` | Read file contents |
-| `editFiles` | Apply edits to existing files |
-| `createFile` | Create new files in workspace |
-| `textSearch` | Search text within files |
-| `fileSearch` | Find files by name/pattern |
-| `usages` | Find references, implementations, and definitions |
-| `runInTerminal` | Execute shell commands |
+| `search/readFile` | Read file contents |
+| `edit/editFiles` | Apply edits to existing files |
+| `edit/createFile` | Create new files in workspace |
+| `search/textSearch` | Search text within files |
+| `search/fileSearch` | Find files by name/pattern |
+| `search/usages` | Find references, implementations, and definitions |
+| `terminal/runInTerminal` | Execute shell commands |
 | `problems` | Access compiler/linter errors and warnings |
-| `codebase` | Semantic code search across workspace |
-| `changes` | Access source control changes |
+| `search/codebase` | Semantic code search across workspace |
+| `sourceControl/changes` | Access source control changes |
 
 ---
 

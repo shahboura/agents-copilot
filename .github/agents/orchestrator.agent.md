@@ -1,7 +1,8 @@
 ---
 name: orchestrator
 description: Task orchestrator for complex multi-step workflows requiring coordination between specialized agents
-tools: ['search/readFile', 'search/textSearch', 'edit/editFiles', 'edit/createFile', 'runCommands/runInTerminal', 'search/fileSearch', 'search/codebase', 'problems']
+argument-hint: Describe the multi-phase project or complex workflow
+tools: ['search/readFile', 'search/textSearch', 'edit/editFiles', 'edit/createFile', 'terminal/runInTerminal', 'search/fileSearch', 'search/codebase', 'problems']
 handoffs:
   - label: Implement Features
     agent: codebase

@@ -101,6 +101,21 @@ Strategic thinking partner for engineering leadership decisions.
 
 ---
 
+## Reusable Prompts
+
+Invoke common tasks with `/` commands in Copilot Chat:
+
+| Prompt | Usage | Description |
+|--------|-------|-------------|
+| `/code-review` | `/code-review` | Comprehensive security, performance, and quality review |
+| `/generate-tests` | `/generate-tests` | Generate unit tests with proper coverage and patterns |
+| `/1-on-1-prep` | `/1-on-1-prep` | Prepare agenda and questions for team 1-on-1s |
+| `/architecture-decision` | `/architecture-decision` | Create Architecture Decision Record (ADR) |
+
+**Location:** `.github/prompts/*.prompt.md`
+
+---
+
 ## Agent Capabilities Summary
 
 Each agent has access to specific tools that enable their specialized functionality:

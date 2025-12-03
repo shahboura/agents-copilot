@@ -1,6 +1,7 @@
 ---
 name: docs
 description: Documentation and wiki generation specialist
+argument-hint: Describe the documentation you need created or updated
 tools: ['search/readFile', 'search/textSearch', 'edit/editFiles', 'edit/createFile', 'search/fileSearch', 'search/codebase']
 handoffs:
   - label: Validate Changes

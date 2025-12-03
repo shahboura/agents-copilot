@@ -2,7 +2,7 @@
 
 ## GitHub Copilot Custom Agents for Plan-First Development
 
-**Specialized agents:** @orchestrator • @codebase • @docs • @review • @em-advisor  
+**Specialized agents:** @planner • @orchestrator • @codebase • @docs • @review • @em-advisor  
 **Auto-detection:** TypeScript • Python • .NET • Generic  
 **Workflow:** Plan → Approve → Implement → Review
 
@@ -15,7 +15,7 @@
 **In VS Code:**
 
 1. Open GitHub Copilot Chat (Ctrl+Shift+I or Cmd+Shift+I)
-2. Select agent from dropdown: `@orchestrator`, `@codebase`, `@docs`, `@review`, or `@em-advisor`
+2. Select agent from dropdown: `@planner`, `@orchestrator`, `@codebase`, `@docs`, `@review`, or `@em-advisor`
 3. Describe what you want
 
 **Example:**
@@ -34,6 +34,18 @@ The agent will:
 ---
 
 ## Available Agents
+
+### 📋 @planner - Planning Agent
+
+Read-only planning specialist that analyzes and creates implementation plans without making code changes.
+
+**Use for:**
+
+- Complex features requiring detailed planning
+- Refactoring large code sections
+- Architectural changes and migrations
+- Risk assessment before implementation
+- Multi-step project planning
 
 ### 🎯 @orchestrator - Task Coordinator
 
@@ -107,6 +119,7 @@ Invoke common tasks with `/` commands in Copilot Chat:
 
 | Prompt | Usage | Description |
 |--------|-------|-------------|
+| `/create-readme` | `/create-readme` | Generate comprehensive, professional README.md |
 | `/code-review` | `/code-review` | Comprehensive security, performance, and quality review |
 | `/generate-tests` | `/generate-tests` | Generate unit tests with proper coverage and patterns |
 | `/1-on-1-prep` | `/1-on-1-prep` | Prepare agenda and questions for team 1-on-1s |
@@ -116,16 +129,33 @@ Invoke common tasks with `/` commands in Copilot Chat:
 
 ---
 
+## Auto-Applied Instructions
+
+Coding standards automatically injected based on file type - no manual prompting needed:
+
+| File Pattern | Instructions Applied | Standards |
+|--------------|---------------------|-----------|
+| `**/*.cs`, `**/*.csproj` | .NET Clean Architecture | Async/await, nullable types, dependency injection, EF Core patterns |
+| `**/*.py` | Python Best Practices | Type hints, context managers, pytest, black formatting |
+| `**/*.ts`, `**/*.tsx` | TypeScript Strict Mode | Strict null checks, explicit types, no implicit any |
+
+**Location:** `.github/instructions/*.instructions.md`
+
+**How it works:** When you edit a `.cs` file, Clean Architecture rules are automatically active. Edit a `.py` file, and type hints are enforced. Zero configuration required.
+
+---
+
 ## Agent Capabilities Summary
 
 Each agent has access to specific tools that enable their specialized functionality:
 
 | Agent | Available Tools | Capabilities |
 |-------|----------------|-------------|
-| **@orchestrator** | `search/readFile`, `search/textSearch`, `edit/editFiles`, `edit/createFile`, `terminal/runInTerminal`, `search/fileSearch`, `search/codebase`, `problems`, `fetch` | • Read and analyze code<br>• Edit and create files<br>• Run terminal commands<br>• Search codebase<br>• Access problems/errors<br>• Fetch web content/docs<br>• Coordinate multi-phase workflows |
-| **@codebase** | `search/readFile`, `edit/editFiles`, `edit/createFile`, `search/textSearch`, `search/usages`, `terminal/runInTerminal`, `problems`, `search/fileSearch`, `search/codebase`, `fetch` | • Read and edit code<br>• Create new files<br>• Find code usages/references<br>• Run builds and tests<br>• Check compilation errors<br>• Fetch external documentation<br>• Search across workspace |
+| **@planner** | `search/readFile`, `search/textSearch`, `search/fileSearch`, `search/codebase`, `usages`, `problems`, `fetch` | • Read and analyze code (read-only)<br>• Create implementation plans<br>• No code editing capability<br>• Fetch documentation<br>• Identify risks and dependencies<br>• Force thoughtful planning |
+| **@orchestrator** | `search/readFile`, `search/textSearch`, `edit/editFiles`, `edit/createFile`, `runCommands/runInTerminal`, `search/fileSearch`, `search/codebase`, `problems`, `fetch` | • Read and analyze code<br>• Edit and create files<br>• Run terminal commands<br>• Search codebase<br>• Access problems/errors<br>• Fetch web content/docs<br>• Coordinate multi-phase workflows |
+| **@codebase** | `search/readFile`, `edit/editFiles`, `edit/createFile`, `search/textSearch`, `usages`, `runCommands/runInTerminal`, `problems`, `search/fileSearch`, `search/codebase`, `fetch` | • Read and edit code<br>• Create new files<br>• Find code usages/references<br>• Run builds and tests<br>• Check compilation errors<br>• Fetch external documentation<br>• Search across workspace |
 | **@docs** | `search/readFile`, `search/textSearch`, `edit/editFiles`, `edit/createFile`, `search/fileSearch`, `search/codebase`, `fetch` | • Read existing documentation<br>• Search for content<br>• Edit and create docs<br>• Find files and references<br>• Fetch web resources<br>• Analyze codebase for documentation |
-| **@review** | `search/readFile`, `search/textSearch`, `search/usages`, `problems`, `search/fileSearch`, `search/codebase`, `sourceControl/changes`, `fetch` | • Read code for review<br>• Find all references<br>• Check compilation/lint errors<br>• Search for patterns<br>• Review source control changes<br>• Fetch security advisories<br>• Analyze security issues |
+| **@review** | `search/readFile`, `search/textSearch`, `usages`, `problems`, `search/fileSearch`, `search/codebase`, `changes`, `fetch` | • Read code for review<br>• Find all references<br>• Check compilation/lint errors<br>• Search for patterns<br>• Review source control changes<br>• Fetch security advisories<br>• Analyze security issues |
 | **@em-advisor** | `search/readFile`, `search/textSearch`, `search/codebase`, `problems`, `search/fileSearch`, `fetch` | • Read codebase for context<br>• Search for patterns and issues<br>• Analyze technical challenges<br>• Fetch leadership resources<br>• Provide leadership frameworks<br>• Strategic thinking partner<br>• No editing (advisor only) |
 
 ### Tool Definitions

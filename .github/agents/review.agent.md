@@ -1,7 +1,7 @@
 ---
 name: review
 description: Code review specialist focusing on security, performance, and best practices
-tools: ['search/readFile', 'search/textSearch', 'search/usages', 'problems', 'search/fileSearch', 'search/codebase', 'sourceControl/changes']
+tools: ['search/readFile', 'search/textSearch', 'usages', 'problems', 'search/fileSearch', 'search/codebase', 'changes']
 handoffs:
   - label: Implement Fixes
     agent: codebase

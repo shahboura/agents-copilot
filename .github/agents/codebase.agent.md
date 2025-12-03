@@ -1,7 +1,7 @@
 ---
 name: codebase
 description: Multi-language development agent with profile auto-detection (dotnet, python, typescript, generic)
-tools: ['readFile', 'editFiles', 'createFile', 'textSearch', 'usages', 'runInTerminal', 'problems', 'fileSearch', 'codebase']
+tools: ['search/readFile', 'edit/editFiles', 'edit/createFile', 'search/textSearch', 'search/usages', 'terminal/runInTerminal', 'problems', 'search/fileSearch', 'search/codebase']
 handoffs:
   - label: Generate Documentation
     agent: docs

@@ -2,18 +2,6 @@
 
 GitHub Pages is automatically enabled for this repository.
 
-## Access Your Documentation
-
-Once Pages is enabled, your docs will be available at:
-```
-https://github.com/pages/darrenhinde/OpenAgents
-```
-
-Or if you have a custom domain configured:
-```
-https://your-domain.com
-```
-
 ## Documentation Structure
 
 The documentation is built from the `docs/` folder:
@@ -40,6 +28,7 @@ That's it! GitHub Pages will automatically build and deploy.
 ## Theme
 
 Configured with Just-the-Docs theme via `docs/_config.yml`:
+
 - Clean, professional layout
 - Search functionality
 - Mobile-responsive

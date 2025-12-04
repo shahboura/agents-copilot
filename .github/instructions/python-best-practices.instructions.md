@@ -170,10 +170,10 @@ def test_get_user_success(user_service: UserService) -> None:
     user_service.db.query.return_value.filter.return_value.first.return_value = User(
         id=1, email="test@example.com", name="Test User"
     )
-    
+
     # Act
     user = user_service.get_user(1)
-    
+
     # Assert
     assert user is not None
     assert user.email == "test@example.com"
@@ -254,7 +254,7 @@ class UserService:
     def __init__(self, db: Database) -> None:
         self._db = db  # Private
         self.cache = {}  # Public
-    
+
     def _validate_email(self, email: str) -> bool:
         """Private method."""
         return "@" in email
@@ -266,19 +266,19 @@ class UserService:
 ```python
 def create_user(email: str, name: str, age: int) -> User:
     """Create a new user in the database.
-    
+
     Args:
         email: User's email address
         name: User's full name
         age: User's age in years
-    
+
     Returns:
         Created user instance
-    
+
     Raises:
         ValueError: If email is invalid
         DatabaseError: If database operation fails
-    
+
     Example:
         >>> user = create_user("test@example.com", "Test User", 25)
         >>> print(user.email)
@@ -286,7 +286,7 @@ def create_user(email: str, name: str, age: int) -> User:
     """
     if not validate_email(email):
         raise ValueError(f"Invalid email: {email}")
-    
+
     user = User(email=email, name=name, age=age)
     db.add(user)
     db.commit()

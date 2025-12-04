@@ -122,15 +122,15 @@ interface ApiResponse<T> {
 // Generic class
 class Repository<T extends { id: number }> {
   private items: Map<number, T> = new Map();
-  
+
   add(item: T): void {
     this.items.set(item.id, item);
   }
-  
+
   findById(id: number): T | undefined {
     return this.items.get(id);
   }
-  
+
   getAll(): T[] {
     return Array.from(this.items.values());
   }
@@ -230,11 +230,11 @@ interface UserListProps {
 const UserList: FC<UserListProps> = ({ initialUsers }) => {
   const [users, setUsers] = useState<User[]>(initialUsers);
   const [selectedId, setSelectedId] = useState<number | null>(null);
-  
+
   const handleSelect = (id: number): void => {
     setSelectedId(id);
   };
-  
+
   return (
     <div>
       {users.map(user => (
@@ -308,13 +308,13 @@ describe('UserService', () => {
       createdAt: new Date(),
       isActive: true,
     };
-    
+
     const userService = new UserService();
     vi.spyOn(userService, 'getUser').mockResolvedValue(mockUser);
-    
+
     // Act
     const result = await userService.getUser(1);
-    
+
     // Assert
     expect(result).toEqual(mockUser);
     expect(result.email).toBe('test@example.com');

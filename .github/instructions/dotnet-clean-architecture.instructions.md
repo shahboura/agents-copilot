@@ -64,7 +64,7 @@ public class UserService : IUserService
 {
     private readonly IUserRepository _repository;
     private readonly ILogger<UserService> _logger;
-    
+
     public UserService(
         IUserRepository repository,
         ILogger<UserService> logger)
@@ -111,13 +111,13 @@ public class UserServiceTests
 {
     private readonly Mock<IUserRepository> _mockRepo;
     private readonly UserService _sut;
-    
+
     public UserServiceTests()
     {
         _mockRepo = new Mock<IUserRepository>();
         _sut = new UserService(_mockRepo.Object);
     }
-    
+
     [Fact]
     public async Task GetUserAsync_ExistingUser_ReturnsUser()
     {
@@ -125,10 +125,10 @@ public class UserServiceTests
         var user = new User { Id = 1, Email = "test@example.com" };
         _mockRepo.Setup(r => r.GetByIdAsync(1, default))
             .ReturnsAsync(user);
-        
+
         // Act
         var result = await _sut.GetUserAsync(1, default);
-        
+
         // Assert
         result.Should().NotBeNull();
         result.Email.Should().Be(user.Email);
@@ -150,12 +150,12 @@ public interface IUserRepository
 public class UserRepository : IUserRepository
 {
     private readonly ApplicationDbContext _context;
-    
+
     public UserRepository(ApplicationDbContext context)
     {
         _context = context;
     }
-    
+
     public async Task<User?> GetByIdAsync(int id, CancellationToken cancellationToken)
     {
         return await _context.Users
@@ -172,12 +172,12 @@ public class UserRepository : IUserRepository
 public class UsersController : ControllerBase
 {
     private readonly IUserService _userService;
-    
+
     public UsersController(IUserService userService)
     {
         _userService = userService;
     }
-    
+
     [HttpGet("{id}")]
     [ProducesResponseType(typeof(UserDto), StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status404NotFound)]

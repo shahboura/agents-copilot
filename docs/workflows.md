@@ -344,7 +344,7 @@ Document as you go, not after.
    - PCI compliance
    - Retry logic (3 attempts)
    - Timeout after 30s
-   
+
 ❌ @codebase Create payment processing
 ```
 

@@ -2,7 +2,7 @@
 
 Specialized GitHub Copilot agents for intelligent, plan-first development workflows.
 
-**Agents:** @planner • @orchestrator • @codebase • @docs • @review • @em-advisor
+**Agents:** @orchestrator • @codebase • @docs • @review • @em-advisor
 
 ---
 
@@ -11,16 +11,16 @@ Specialized GitHub Copilot agents for intelligent, plan-first development workfl
 ### Use an Agent
 
 1. Open GitHub Copilot Chat: `Ctrl+Shift+I` (or `Cmd+Shift+I`)
-2. Select an agent: `@codebase`, `@planner`, `@review`, etc.
+2. Select an agent: `@orchestrator`, `@codebase`, `@review`, etc.
 3. Describe what you want:
 
 ```
-@codebase Create a user REST API endpoint with JWT authentication
+@orchestrator Build a user REST API endpoint with JWT authentication
 ```
 
 **The agent will:**
 - 📋 Propose a step-by-step plan
-- ⏸️ Wait for your approval
+- ⏸️ Wait for your approval (or proceed if you approve execution)
 - 🔨 Implement with validation
 - ✨ Suggest next steps (docs, review, etc.)
 ---
@@ -31,16 +31,15 @@ Specialized GitHub Copilot agents for intelligent, plan-first development workfl
 
 ### 6 Specialized Agents
 
+### 5 Specialized Agents
+
 | Agent | Purpose | Use For |
 |-------|---------|---------|
-| **@planner** | Read-only planning | Complex features, refactoring, risk assessment |
-| **@orchestrator** | Multi-phase coordination | Complex workflows, multi-domain tasks |
-| **@codebase** | Multi-language dev | Implementation, bug fixes, code generation |
+| **@orchestrator** | Strategic planning & coordination | Complex features, risk assessment, multi-phase projects, end-to-end execution |
+| **@codebase** | Multi-language dev | Direct implementation, bug fixes, code generation |
 | **@docs** | Documentation | README, API docs, guides |
 | **@review** | Security & quality | Audits, performance, best practices |
 | **@em-advisor** | Leadership guidance | Strategy, team dynamics, 1-on-1s |
-
-**[👉 Full Agent Details](./docs/agents/README.md)**
 
 ---
 
@@ -74,12 +73,17 @@ No configuration needed. When you edit files, standards activate automatically:
 
 ## 💡 Example Workflows
 
-### Build Authentication System
+### Build Authentication System (End-to-End)
 ```
 @orchestrator Build JWT auth with endpoints, tests, security review, and docs
 ```
 
-### Implement Feature Fast
+### Plan Before Implementing (Design Review)
+```
+@orchestrator Create detailed plan for JWT authentication—analyze current code and propose architecture
+```
+
+### Direct Implementation
 ```
 @codebase Create user CRUD service with repository pattern and unit tests
 ```

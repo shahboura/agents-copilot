@@ -11,13 +11,12 @@
 
 ## Custom Agent System
 
-### 6 Agents Created
-1. **@planner** - Read-only planning (no edits, prevents mistakes)
-2. **@orchestrator** - Multi-phase workflow coordinator
-3. **@codebase** - Multi-language dev with profile auto-detection
-4. **@docs** - Documentation specialist
-5. **@review** - Security/quality reviewer
-6. **@em-advisor** - Engineering Manager strategic advisor
+### 5 Agents Created
+1. **@orchestrator** - Strategic planning & multi-phase execution (planning + implementation coordination)
+2. **@codebase** - Multi-language development
+3. **@docs** - Documentation specialist
+4. **@review** - Security/quality reviewer
+5. **@em-advisor** - Engineering Manager strategic advisor
 
 ### 5 Reusable Prompts
 - `/create-readme` - Professional README generation

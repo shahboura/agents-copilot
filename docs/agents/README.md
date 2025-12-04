@@ -7,14 +7,13 @@ has_children: true
 
 # GitHub Copilot Agents
 
-Six specialized agents, each excelling at specific tasks.
+Five specialized agents, each excelling at specific tasks.
 
 ## Overview
 
 | Agent | Specialization | Key Capability |
 |-------|---|---|
-| [@planner](./planner.md) | Planning | Read-only analysis and planning |
-| [@orchestrator](./orchestrator.md) | Coordination | Multi-phase workflows |
+| [@orchestrator](./orchestrator.md) | Planning & Coordination | Strategic analysis, planning, multi-phase workflows |
 | [@codebase](./codebase.md) | Development | Multi-language implementation |
 | [@docs](./docs.md) | Documentation | README, API docs, guides |
 | [@review](./review.md) | Quality | Security, performance, best practices |
@@ -24,14 +23,14 @@ Six specialized agents, each excelling at specific tasks.
 
 ## When to Use Each Agent
 
-### Need to Plan Complex Work?
-👉 Use **[@planner](./planner.md)** - Analyzes, plans, identifies risks (no code edits)
+### Need a Detailed Plan or Risk Assessment?
+👉 Use **[@orchestrator](./orchestrator.md)** in Planning Mode - Analyzes, plans, identifies risks (read-only option available)
 
 ### Implementing Features?
 👉 Use **[@codebase](./codebase.md)** - Writes code, runs tests, validates (multi-language)
 
-### Coordinating Big Projects?
-👉 Use **[@orchestrator](./orchestrator.md)** - Manages phases, delegates to specialists
+### Coordinating Big Projects End-to-End?
+👉 Use **[@orchestrator](./orchestrator.md)** in Execution Mode - Plans + delegates to specialists
 
 ### Checking Quality?
 👉 Use **[@review](./review.md)** - Security audits, performance checks, best practices
@@ -56,10 +55,9 @@ All agents can:
 ### Edit & Create
 Only some agents can:
 - **@codebase** - Full edit access
-- **@orchestrator** - Full edit access
+- **@orchestrator** - Full edit access (planning mode reads-only, execution mode edits)
 - **@docs** - Documentation edit access
 - **@review** - Read-only (no edits)
-- **@planner** - Read-only (no edits)
 - **@em-advisor** - Read-only (no edits)
 
 ### Execute
@@ -132,8 +130,7 @@ Agent suggests next steps (review, document, etc.).
 
 ## Detailed Agent Guides
 
-- **[@planner](./planner.md)** - Read-only planning specialist
-- **[@orchestrator](./orchestrator.md)** - Multi-phase workflow coordinator
+- **[@orchestrator](./orchestrator.md)** - Planning & execution coordinator
 - **[@codebase](./codebase.md)** - Multi-language development
 - **[@docs](./docs.md)** - Documentation creation
 - **[@review](./review.md)** - Code quality audits
@@ -189,7 +186,7 @@ This context is reused in all future sessions!
 
 ## Next Steps
 
-- **[Deep Dive: @planner](./planner.md)** - Master planning workflows
+- **[Deep Dive: @orchestrator](./orchestrator.md)** - Master planning and execution workflows
 - **[Deep Dive: @codebase](./codebase.md)** - Multi-language development
 - **[View Workflows](../workflows.md)** - Real-world examples
 - **[Reference: Tools & Capabilities](../reference/README.md)** - What each agent can do

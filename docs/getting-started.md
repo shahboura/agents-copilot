@@ -19,11 +19,10 @@ Get up and running with GitHub Copilot agents in just 5 minutes.
 
 | Agent | What It Does |
 |-------|-------------|
-| @planner | Analyzes and plans (no code changes) |
+| @orchestrator | Plans and orchestrates complex projects (read-only plan mode or end-to-end execution) |
 | @codebase | Implements features (code changes) |
 | @review | Audits for security & quality |
 | @docs | Creates documentation |
-| @orchestrator | Coordinates multi-phase projects |
 | @em-advisor | Helps with leadership decisions |
 
 ## Step 2: Start Your First Conversation (2 min)

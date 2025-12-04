@@ -22,11 +22,10 @@ Common questions and solutions.
 **[→ Full Getting Started](./getting-started.md)**
 
 ### Which agent should I use?
-- **Planning** → @planner
-- **Implementing** → @codebase
+- **Planning or complex projects** → @orchestrator
+- **Direct implementation** → @codebase
 - **Quality review** → @review
 - **Documentation** → @docs
-- **Complex projects** → @orchestrator
 - **Leadership** → @em-advisor
 
 **[→ Agents Guide](./agents/README.md)**
@@ -313,11 +312,10 @@ Please fix them
 
 ### Use Multiple Agents in Sequence
 ```
-@planner Create detailed plan
+@orchestrator Create detailed plan
 → @codebase Implement
 → @review Audit
 → @docs Document
-→ @orchestrator Coordinate next phase
 ```
 
 ### Combine Agents with Prompts
@@ -353,8 +351,7 @@ In your request, reference saved context:
 - **Learning:** [Workflows](./workflows.md)
 
 ### If You're a Tech Lead
-- **Planning:** [@planner Agent](./agents/planner.md)
-- **Coordination:** [@orchestrator Agent](./agents/orchestrator.md)
+- **Planning & Coordination:** [@orchestrator Agent](./agents/orchestrator.md)
 - **Quality:** [@review Agent](./agents/review.md)
 
 ### If You're a Manager

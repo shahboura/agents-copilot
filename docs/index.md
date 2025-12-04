@@ -23,12 +23,11 @@ Welcome to the comprehensive documentation for GitHub Copilot custom agents.
 
 ## What Are These Agents?
 
-Six specialized GitHub Copilot agents that work together for intelligent development:
+Five specialized GitHub Copilot agents that work together for intelligent development:
 
 | Agent | Purpose |
 |-------|---------|
-| @planner | Read-only planning before implementation |
-| @orchestrator | Multi-phase workflow coordination |
+| @orchestrator | Planning and multi-phase workflow coordination |
 | @codebase | Multi-language code implementation |
 | @docs | Documentation creation and updates |
 | @review | Security and quality audits |

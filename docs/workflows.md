@@ -16,7 +16,7 @@ See agents working together on realistic projects.
 
 ### Step 1: Plan the Architecture
 ```
-@planner Create plan for user API with:
+@orchestrator Create plan for user API with:
 - User entity (email, password, name)
 - CRUD endpoints
 - JWT authentication
@@ -95,7 +95,7 @@ Agents handled: Planning → Implementation → Security → Fixes → Documenta
 
 ### Step 1: Analyze Current State
 ```
-@planner Analyze current user management code:
+@orchestrator Analyze current user management code:
 - Identify tight coupling issues
 - Find code duplication
 - Map dependencies
@@ -104,7 +104,7 @@ Agents handled: Planning → Implementation → Security → Fixes → Documenta
 
 ### Step 2: Create Migration Plan
 ```
-@planner Create refactoring plan:
+@orchestrator Create refactoring plan:
 - Keep all functionality identical
 - Migrate incrementally
 - Ensure tests don't break
@@ -139,7 +139,7 @@ Agents handled: Planning → Implementation → Security → Fixes → Documenta
 
 ### Step 1: Plan Architecture
 ```
-@planner Design data pipeline:
+@orchestrator Design data pipeline:
 - Input validation
 - Transformation logic
 - Error handling
@@ -308,7 +308,7 @@ Agents handled: Planning → Implementation → Security → Fixes → Documenta
 ## General Patterns
 
 ### ✅ DO: Start with Planning
-Always let @planner propose before implementing.
+Always let @orchestrator propose a plan before implementing.
 
 ### ✅ DO: Review Plans
 Take time to review and refine proposed plans.

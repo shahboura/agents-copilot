@@ -1,7 +1,8 @@
 title: GitHub Copilot Agents
 description: Specialized agents for intelligent, plan-first development
-theme: just-the-docs
-color_scheme: dark
+remote_theme: pages-themes/slate@v0.2.0
+plugins:
+- jekyll-remote-theme # add this line to the plugins list if you already have one
 search_enabled: true
 search_tokenizer_separator: /[\s/]+/
 search.heading_level: 2

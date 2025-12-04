@@ -65,6 +65,7 @@ Yes! Create files in `.github/prompts/` with `.prompt.md` extension.
 - `.github/agents/docs.agent.md`
 - `.github/agents/review.agent.md`
 - `.github/agents/em-advisor.agent.md`
+
 ---
 
 ### Agent Ignoring My Instructions
@@ -359,6 +360,7 @@ In your request, reference saved context:
 ### If You're a Manager
 - **Support:** [@em-advisor Agent](./agents/em-advisor.md)
 - **1-on-1 Prep:** [/1-on-1-prep Prompt](./prompts.md#1-on-1-prep)
+
 ---
 
 ## Contact & Support
@@ -366,6 +368,7 @@ In your request, reference saved context:
 - **Issues:** [GitHub Issues](https://github.com/OpenAgents/repo/issues)
 - **Discussions:** [GitHub Discussions](https://github.com/OpenAgents/repo/discussions)
 - **Documentation:** You're reading it!
+
 ---
 
 ## Next Steps

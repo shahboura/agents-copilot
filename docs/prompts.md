@@ -35,7 +35,6 @@ Auto-detects your project and creates comprehensive documentation:
 - New projects needing documentation
 - Existing projects with missing README
 - Standardizing documentation style
-
 ---
 
 ### `/code-review`
@@ -56,7 +55,6 @@ Audits code for:
 - Pulling PRs before merging
 - Auditing critical modules
 - Teaching code quality standards
-
 ---
 
 ### `/generate-tests`
@@ -78,7 +76,6 @@ Creates tests following best practices:
 - Adding tests to untested code
 - Increasing code coverage
 - Learning testing best practices
-
 ---
 
 ### `/1-on-1-prep`
@@ -100,7 +97,6 @@ Generates agenda and guidance for:
 - Team leads & managers
 - Regular 1-on-1s
 - Difficult conversations
-
 ---
 
 ### `/architecture-decision`
@@ -123,7 +119,6 @@ Documents decisions with:
 - Recording major technical decisions
 - Maintaining decision history
 - Onboarding new team members
-
 ---
 
 ## How to Use

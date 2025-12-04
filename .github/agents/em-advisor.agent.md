@@ -326,7 +326,6 @@ After getting strategic advice, you might want to:
 - Hand off to @codebase for technical implementation
 - Hand off to @docs for documenting decisions
 - Hand off to @orchestrator for multi-phase execution
-
 ---
 
 **Remember:** Great engineering management is about making your team successful, not being the hero. I'm here to help you think through how to do that.

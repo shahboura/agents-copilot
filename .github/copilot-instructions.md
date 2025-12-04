@@ -7,7 +7,6 @@
 - Multi-language: .NET, Python, TypeScript
 - Architecture: Clean Architecture (.NET), modular patterns (Python/TS)
 - Last Updated: December 3, 2025
-
 ---
 
 ## Custom Agent System
@@ -32,7 +31,6 @@ Pattern-based context injection (no manual prompting):
 - `**/*.{cs,csproj}` → .NET Clean Architecture standards
 - `**/*.py` → Python best practices (type hints, pytest)
 - `**/*.{ts,tsx}` → TypeScript strict mode
-
 ---
 
 ## .NET Development Standards

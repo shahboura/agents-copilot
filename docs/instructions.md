@@ -283,7 +283,6 @@ Each standard has comprehensive details:
 - **[.NET Clean Architecture](../.github/instructions/dotnet-clean-architecture.instructions.md)** - Full reference
 - **[Python Best Practices](../.github/instructions/python-best-practices.instructions.md)** - Full reference
 - **[TypeScript Strict Mode](../.github/instructions/typescript-strict.instructions.md)** - Full reference
-
 ---
 
 ## Override Standards

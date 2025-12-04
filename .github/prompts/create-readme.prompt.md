@@ -253,7 +253,6 @@ After generating README, ensure:
 - Explain "why" not just "what"
 - Use active voice
 - Be specific with versions and requirements
-
 ---
 
 Generate the README now based on the current project structure and code.

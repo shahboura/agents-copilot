@@ -72,7 +72,6 @@ All agents can:
 - Fetch documentation from web
 - Look up best practices
 - Reference external APIs
-
 ---
 
 ## Agent Workflow
@@ -139,7 +138,6 @@ Agent suggests next steps (review, document, etc.).
 - **[@docs](./docs.md)** - Documentation creation
 - **[@review](./review.md)** - Code quality audits
 - **[@em-advisor](./em-advisor.md)** - Leadership guidance
-
 ---
 
 ## Profile Auto-Detection

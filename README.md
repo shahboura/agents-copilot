@@ -23,7 +23,6 @@ Specialized GitHub Copilot agents for intelligent, plan-first development workfl
 - ⏸️ Wait for your approval
 - 🔨 Implement with validation
 - ✨ Suggest next steps (docs, review, etc.)
-
 ---
 
 ## 📚 Core Concepts

@@ -1,446 +1,136 @@
-# GitHub Copilot Agents
+# GitHub Copilot Custom Agents
 
-## GitHub Copilot Custom Agents for Plan-First Development
+Specialized GitHub Copilot agents for intelligent, plan-first development workflows.
 
-**Specialized agents:** @planner • @orchestrator • @codebase • @docs • @review • @em-advisor  
-**Auto-detection:** TypeScript • Python • .NET • Generic  
-**Workflow:** Plan → Approve → Implement → Review
+**Agents:** @planner • @orchestrator • @codebase • @docs • @review • @em-advisor
 
 ---
 
-## Quick Start
+## 🚀 Quick Start (60 seconds)
 
-### 1. Start Using Agents
+### Use an Agent
 
-**In VS Code:**
-
-1. Open GitHub Copilot Chat (Ctrl+Shift+I or Cmd+Shift+I)
-2. Select agent from dropdown: `@planner`, `@orchestrator`, `@codebase`, `@docs`, `@review`, or `@em-advisor`
-3. Describe what you want
-
-**Example:**
+1. Open GitHub Copilot Chat: `Ctrl+Shift+I` (or `Cmd+Shift+I`)
+2. Select an agent: `@codebase`, `@planner`, `@review`, etc.
+3. Describe what you want:
 
 ```
-@codebase Create a REST API endpoint for user authentication with JWT
+@codebase Create a user REST API endpoint with JWT authentication
 ```
 
-The agent will:
-
-1. ✅ Propose an implementation plan
-2. ⏸️ Wait for your approval  
-3. 🔨 Implement step-by-step with validation
-4. ✨ Suggest handoffs to @docs or @review
+**The agent will:**
+- 📋 Propose a step-by-step plan
+- ⏸️ Wait for your approval
+- 🔨 Implement with validation
+- ✨ Suggest next steps (docs, review, etc.)
 
 ---
 
-## Available Agents
+## 📚 Core Concepts
 
-### 📋 @planner - Planning Agent
+### 6 Specialized Agents
 
-Read-only planning specialist that analyzes and creates implementation plans without making code changes.
+### 6 Specialized Agents
 
-**Use for:**
+| Agent | Purpose | Use For |
+|-------|---------|---------|
+| **@planner** | Read-only planning | Complex features, refactoring, risk assessment |
+| **@orchestrator** | Multi-phase coordination | Complex workflows, multi-domain tasks |
+| **@codebase** | Multi-language dev | Implementation, bug fixes, code generation |
+| **@docs** | Documentation | README, API docs, guides |
+| **@review** | Security & quality | Audits, performance, best practices |
+| **@em-advisor** | Leadership guidance | Strategy, team dynamics, 1-on-1s |
 
-- Complex features requiring detailed planning
-- Refactoring large code sections
-- Architectural changes and migrations
-- Risk assessment before implementation
-- Multi-step project planning
-
-### 🎯 @orchestrator - Task Coordinator
-
-Orchestrates complex multi-step workflows requiring coordination between specialized agents.
-
-**Use for:**
-
-- Complex features requiring implementation + docs + review
-- Multi-phase projects with dependencies
-- Tasks spanning multiple domains
-- Refactoring projects affecting multiple modules
-- Migration projects with validation steps
-
-### 🔧 @codebase - Development Agent
-
-Multi-language implementation specialist with profile auto-detection.
-
-**Detects and adapts to:**
-
-- **.NET** - Clean Architecture, async/await, nullable types
-- **Python** - Type hints, virtual env, testing  
-- **TypeScript** - Strict types, build validation
-- **Generic** - Polyglot projects
-
-**Use for:**
-
-- Feature implementation
-- Bug fixes
-- Refactoring
-- Code generation
-
-### 📝 @docs - Documentation Agent
-
-Creates and maintains documentation with consistent formatting.
-
-**Use for:**
-
-- README files
-- API documentation
-- Architecture docs
-- User guides
-
-### 🔍 @review - Code Review Agent
-
-Security and quality-focused reviewer.
-
-**Use for:**
-
-- Security audits
-- Performance reviews
-- Best practices validation
-- Code quality checks
-
-### 🧠 @em-advisor - Engineering Manager Advisor
-
-Strategic thinking partner for engineering leadership decisions.
-
-**Use for:**
-
-- Performance conversations and 1-on-1 preparation
-- Technical strategy and roadmap planning
-- Team dynamics and conflict resolution
-- Stakeholder communication frameworks
-- Leadership skill development
+**[👉 Full Agent Details](./docs/agents/README.md)**
 
 ---
 
-## Reusable Prompts
+## ⚡ 5 Reusable Prompts
 
-Invoke common tasks with `/` commands in Copilot Chat:
+Invoke with `/` in Copilot Chat:
 
-| Prompt | Usage | Description |
-|--------|-------|-------------|
-| `/create-readme` | `/create-readme` | Generate comprehensive, professional README.md |
-| `/code-review` | `/code-review` | Comprehensive security, performance, and quality review |
-| `/generate-tests` | `/generate-tests` | Generate unit tests with proper coverage and patterns |
-| `/1-on-1-prep` | `/1-on-1-prep` | Prepare agenda and questions for team 1-on-1s |
-| `/architecture-decision` | `/architecture-decision` | Create Architecture Decision Record (ADR) |
+- `/create-readme` - Generate professional README
+- `/code-review` - Comprehensive code review
+- `/generate-tests` - Unit test generation
+- `/1-on-1-prep` - EM meeting prep
+- `/architecture-decision` - ADR creation
 
-**Location:** `.github/prompts/*.prompt.md`
+**[👉 Learn More](./docs/prompts.md)**
 
 ---
 
-## Auto-Applied Instructions
+## 🎯 Auto-Applied Coding Standards
 
-Coding standards automatically injected based on file type - no manual prompting needed:
+No configuration needed. When you edit files, standards activate automatically:
 
-| File Pattern | Instructions Applied | Standards |
-|--------------|---------------------|-----------|
-| `**/*.cs`, `**/*.csproj` | .NET Clean Architecture | Async/await, nullable types, dependency injection, EF Core patterns |
-| `**/*.py` | Python Best Practices | Type hints, context managers, pytest, black formatting |
-| `**/*.ts`, `**/*.tsx` | TypeScript Strict Mode | Strict null checks, explicit types, no implicit any |
+| Pattern | Standards |
+|---------|-----------|
+| `.cs` / `.csproj` | .NET Clean Architecture, async/await, nullable types |
+| `.py` | Python type hints, pytest, black formatting |
+| `.ts` / `.tsx` | TypeScript strict mode, null safety |
 
-**Location:** `.github/instructions/*.instructions.md`
-
-**How it works:** When you edit a `.cs` file, Clean Architecture rules are automatically active. Edit a `.py` file, and type hints are enforced. Zero configuration required.
+**[👉 View Standards](./docs/instructions.md)**
 
 ---
 
-## Agent Capabilities Summary
+## 💡 Example Workflows
 
-Each agent has access to specific tools that enable their specialized functionality:
-
-| Agent | Available Tools | Capabilities |
-|-------|----------------|-------------|
-| **@planner** | `search/readFile`, `search/textSearch`, `search/fileSearch`, `search/codebase`, `usages`, `problems`, `fetch` | • Read and analyze code (read-only)<br>• Create implementation plans<br>• No code editing capability<br>• Fetch documentation<br>• Identify risks and dependencies<br>• Force thoughtful planning |
-| **@orchestrator** | `search/readFile`, `search/textSearch`, `edit/editFiles`, `edit/createFile`, `runCommands/runInTerminal`, `search/fileSearch`, `search/codebase`, `problems`, `fetch` | • Read and analyze code<br>• Edit and create files<br>• Run terminal commands<br>• Search codebase<br>• Access problems/errors<br>• Fetch web content/docs<br>• Coordinate multi-phase workflows |
-| **@codebase** | `search/readFile`, `edit/editFiles`, `edit/createFile`, `search/textSearch`, `usages`, `runCommands/runInTerminal`, `problems`, `search/fileSearch`, `search/codebase`, `fetch` | • Read and edit code<br>• Create new files<br>• Find code usages/references<br>• Run builds and tests<br>• Check compilation errors<br>• Fetch external documentation<br>• Search across workspace |
-| **@docs** | `search/readFile`, `search/textSearch`, `edit/editFiles`, `edit/createFile`, `search/fileSearch`, `search/codebase`, `fetch` | • Read existing documentation<br>• Search for content<br>• Edit and create docs<br>• Find files and references<br>• Fetch web resources<br>• Analyze codebase for documentation |
-| **@review** | `search/readFile`, `search/textSearch`, `usages`, `problems`, `search/fileSearch`, `search/codebase`, `changes`, `fetch` | • Read code for review<br>• Find all references<br>• Check compilation/lint errors<br>• Search for patterns<br>• Review source control changes<br>• Fetch security advisories<br>• Analyze security issues |
-| **@em-advisor** | `search/readFile`, `search/textSearch`, `search/codebase`, `problems`, `search/fileSearch`, `fetch` | • Read codebase for context<br>• Search for patterns and issues<br>• Analyze technical challenges<br>• Fetch leadership resources<br>• Provide leadership frameworks<br>• Strategic thinking partner<br>• No editing (advisor only) |
-
-### Tool Definitions
-
-| Tool | Description |
-|------|-------------|
-| `search/readFile` | Read file contents |
-| `edit/editFiles` | Apply edits to existing files |
-| `edit/createFile` | Create new files in workspace |
-| `search/textSearch` | Search text within files |
-| `search/fileSearch` | Find files by name/pattern |
-| `search/usages` | Find references, implementations, and definitions |
-| `terminal/runInTerminal` | Execute shell commands |
-| `problems` | Access compiler/linter errors and warnings |
-| `search/codebase` | Semantic code search across workspace |
-| `sourceControl/changes` | Access source control changes |
-| `fetch` | Fetch content from web pages (documentation, APIs, resources) |
-
----
-
-## Example Workflows
-
-### Complex Multi-Phase Project
-
+### Build Authentication System
 ```
-@orchestrator Build a user authentication system with JWT, including API endpoints, 
-tests, security review, and documentation
+@orchestrator Build JWT auth with endpoints, tests, security review, and docs
 ```
 
-**Orchestrator will:**
-1. Create implementation plan with phases
-2. Hand off to @codebase for development
-3. Coordinate @review for security audit
-4. Route fixes back to @codebase
-5. Engage @docs for documentation
-6. Provide final validation
-
-### Feature Implementation
-
+### Implement Feature Fast
 ```
-@codebase Create a user service with CRUD operations following repository pattern.
-Include:
-- UserService with dependency injection
-- IUserRepository interface
-- Entity Framework implementation  
-- Unit tests using xUnit and Moq
-```
-
-**Agent response:**
-
-```markdown
-DIGGING IN...
-
-Detected active profile: dotnet
-
-## Implementation Plan
-1. Create domain entities and interfaces
-2. Implement repository pattern with EF Core
-3. Create service layer with DI
-4. Add unit tests with Moq
-5. Validate with dotnet build & test
-
-Approval needed before proceeding.
-```
-
-### Documentation Update
-
-```
-@docs Update README with:
-- New authentication endpoints
-- JWT configuration steps
-- Example requests/responses
+@codebase Create user CRUD service with repository pattern and unit tests
 ```
 
 ### Code Review
+```
+@review Security and performance audit of auth module
+```
 
-```
-@review Audit the authentication module for security issues
-```
+**[👉 More Examples](./docs/workflows.md)**
 
 ---
 
-## Workflow Features
+## 🛠️ Customization
 
-### ✅ Plan-First Approach
-
-Every agent proposes a plan before executing. You review and approve before any changes.
-
-### 🔄 Step-by-Step Execution  
-
-Agents implement one step at a time, validating after each step.
-
-### 🎯 Profile Auto-Detection
-
-The @codebase agent detects your project type and adapts:
-
-| Profile | Detection | Adaptations |
-|---------|-----------|-------------|
-| **dotnet** | `*.sln`, `*.csproj` | Clean Architecture, async/await, nullable types |
-| **python** | `pyproject.toml`, `requirements.txt` | Virtual env, type hints, pytest |
-| **typescript** | `package.json`, `tsconfig.json` | Strict types, incremental builds |
-| **generic** | Mixed or unclear | Language-agnostic patterns |
-
-### 🔗 Agent Handoffs
-
-Seamless transitions between specialized agents:
-
-```
-@codebase → @review → @docs
-```
-
-Each agent suggests relevant next steps with pre-filled prompts.
-
----
-
-## Customization
-
-### Add Project Context
-
-Create `.github/copilot-instructions.md` to provide project-specific context:
+Add project context to `.github/copilot-instructions.md`:
 
 ```markdown
-# Project Context
-This is a microservices architecture using:
-- Clean Architecture pattern
-- CQRS with MediatR
-- Entity Framework Core
-- JWT authentication
+## Your Project
 
-## Coding Standards
-- Use async/await for all I/O operations
-- Apply repository pattern for data access
-- Write unit tests for all public methods
-- Follow conventional commits format
+Multi-language microservices using:
+- Clean Architecture (.NET)
+- FastAPI (Python)
+- React TypeScript
 
-## Architecture
-
+## Your Standards
+- Async/await on all I/O
+- Repository pattern for data
+- Unit tests for public methods
 ```
 
-src/
-├── Domain/           # Entities, ValueObjects, Interfaces
-├── Application/      # Services, DTOs, Validators  
-├── Infrastructure/   # DbContext, Repositories
-└── WebAPI/           # Controllers, Program.cs
+Agents automatically use this context!
 
-```
-
-
-Agents will automatically use this context!
+**[👉 Full Customization Guide](./docs/customization.md)**
 
 ---
 
-## Agent File Structure
+## ❓ FAQ & Troubleshooting
 
-```
-.github/agents/
-├── codebase.agent.md   # Development specialist
-├── docs.agent.md       # Documentation specialist
-└── review.agent.md     # Code review specialist
-```
-
-Each agent file contains:
-
-- **YAML frontmatter** - Configuration (name, description, tools, handoffs)
-- **Markdown body** - Instructions and guidelines
-
-Example structure:
-
-```markdown
----
-name: codebase
-description: Multi-language development agent
-tools: ['read', 'edit', 'write', 'search']
-handoffs:
-  - label: Generate Documentation
-    agent: docs
-    prompt: Create docs for changes above
----
-
-# Agent Instructions
-Your detailed instructions here...
-```
-
----
-
-## Best Practices
-
-### 1. Be Specific in Prompts
-
-❌ "Add authentication"  
-✅ "Create JWT authentication with refresh tokens, rate limiting, and secure password hashing using bcrypt"
-
-### 2. Review Plans Carefully
-
-Always review the proposed implementation plan before approving.
-
-### 3. Use Handoffs
-
-Let agents transition between tasks:
-
-```
-@codebase (implement) → @review (audit) → @docs (document)
-```
-
-### 4. Add Project Context
-
-Use `.github/copilot-instructions.md` to provide persistent context about your project's architecture, standards, and conventions.
-
-### 5. Leverage Profile Detection
-
-Trust the @codebase agent to detect your project type, or explicitly mention it:
-
-```
-@codebase Using .NET Clean Architecture, create...
-```
-
----
-
-## Troubleshooting
-
-**Q: Agent not showing in dropdown?**  
-A: Ensure files are in `.github/agents/` with `.agent.md` extension. Reload VS Code window.
-
-**Q: Agent not following instructions?**  
-A: Add more context in your prompt or use `.github/copilot-instructions.md` for persistent instructions.
-
-**Q: Wrong profile detected?**  
-A: Explicitly mention the language/framework in your prompt or add it to project context.
+**Q: How do I get agents to show up?**  
+A: Ensure files are in `.github/agents/` with `.agent.md` extension. Reload VS Code.
 
 **Q: How do I modify agent behavior?**  
-A: Edit the corresponding `.agent.md` file in `.github/agents/` directory.
+A: Edit `.github/agents/[agent-name].agent.md` directly.
 
-**Q: Do agents persist context after task completion?**  
-A: **Yes, with your approval.** Agents will propose updates to `.github/copilot-instructions.md` at task completion to save important decisions, patterns, and architectural choices. You must approve each edit, but once saved, all future sessions automatically load this context.
+**Q: Do agents save context between sessions?**  
+A: Yes! They update `.github/copilot-instructions.md` automatically (with your approval).
 
-**Q: What gets persisted?**  
-A: Architectural decisions, design patterns, technical constraints, documentation standards, code review insights, and project-specific conventions.
-
-**Q: How do I preserve important information across sessions?**  
-A: Agents handle this automatically by updating `.github/copilot-instructions.md`. You can also manually edit this file to add context that should persist for all future sessions.
+**[👉 Full FAQ](./docs/troubleshooting.md)**
 
 ---
 
-## Contributing
-
-We welcome contributions!
-
-1. Fork this repository
-2. Create a feature branch
-3. Modify/add agents in `.github/agents/`
-4. Test your changes
-5. Submit a pull request
-
-**Ideas for new agents:**
-
-- @test - Testing specialist
-- @refactor - Refactoring specialist  
-- @deploy - Deployment specialist
-- @api - API design specialist
-
----
-
-## Resources
-
-- **GitHub Docs:** [Custom Agents Guide](https://docs.github.com/en/copilot/concepts/agents/coding-agent/about-custom-agents)
-- **VS Code Docs:** [Custom Agents in VS Code](https://code.visualstudio.com/docs/copilot/customization/custom-agents)
-- **Examples:** [Awesome Copilot Repository](https://github.com/github/awesome-copilot)
-
----
-
-## License
-
-MIT License - See LICENSE file for details
-
----
-
-## Support
-
-If you find this useful, consider:
-
-- ⭐ Starring the repository
-- 🐛 Reporting issues
-- 💡 Suggesting improvements
-- 🔀 Contributing new agents
-
----
-
-**Made with ❤️ for the GitHub Copilot community**
+## 📖 Full Documentation

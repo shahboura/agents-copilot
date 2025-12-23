@@ -1,32 +1,32 @@
-name: Release
+# name: Release
 
-on:
-  push:
-    branches:
-      - main
+# on:
+#   push:
+#     branches:
+#       - main
 
-jobs:
-  release:
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v4
+# jobs:
+#   release:
+#     runs-on: ubuntu-latest
+#     steps:
+#       - name: Checkout code
+#         uses: actions/checkout@v4
 
-      - name: Get version
-        id: version
-        run: echo "version=$(cat VERSION)" >> $GITHUB_OUTPUT
+#       - name: Get version
+#         id: version
+#         run: echo "version=$(cat VERSION)" >> $GITHUB_OUTPUT
 
-      - name: Create release
-        uses: softprops/action-gh-release@v1
-        with:
-          tag_name: v${{ steps.version.outputs.version }}
-          name: Release v${{ steps.version.outputs.version }}
-          body: |
-            Automated release for version ${{ steps.version.outputs.version }}
+#       - name: Create release
+#         uses: softprops/action-gh-release@v1
+#         with:
+#           tag_name: v${{ steps.version.outputs.version }}
+#           name: Release v${{ steps.version.outputs.version }}
+#           body: |
+#             Automated release for version ${{ steps.version.outputs.version }}
 
-            ## Changes
-            - See commit history for details
-          draft: false
-          prerelease: false
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+#             ## Changes
+#             - See commit history for details
+#           draft: false
+#           prerelease: false
+#         env:
+#           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

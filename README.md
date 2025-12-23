@@ -2,15 +2,38 @@
 
 [![Validate Agents](https://github.com/shahboura/agents-copilot/actions/workflows/validate.yml/badge.svg)](https://github.com/shahboura/agents-copilot/actions/workflows/validate.yml)
 [![Documentation](https://img.shields.io/badge/docs-GitHub%20Pages-blue)](https://shahboura.github.io/agents-copilot/)
-[![Version](https://img.shields.io/badge/version-1.0.0-blue)](https://github.com/shahboura/agents-copilot/releases)
 
 Specialized GitHub Copilot agents for intelligent, plan-first development workflows.
 
 **Agents:** @planner • @orchestrator • @codebase • @docs • @review • @em-advisor
 
+---
+
+## 🚀 Quick Start (60 seconds)
+
+### Use an Agent
+
+1. Open GitHub Copilot Chat: `Ctrl+Shift+I` (or `Cmd+Shift+I`)
+2. Select an agent: `@codebase`, `@planner`, `@review`, etc.
+3. Describe what you want:
+
+   ```bash
+   @codebase Create a user REST API endpoint with JWT authentication
+   ```
+
+**The agent will:**
+
+- 📋 Propose a step-by-step plan
+- ⏸️ Wait for your approval
+- 🔨 Implement with validation
+- ✨ Suggest next steps (docs, review, etc.)
+
+**[👉 Full Documentation](#-full-documentation)**
+
+---
+
 ## Table of Contents
 
-- [🚀 Quick Start (60 seconds)](#-quick-start-60-seconds)
 - [📚 Core Concepts](#-core-concepts)
 - [⚡ Reusable Prompts](#-reusable-prompts)
 - [🎯 Auto-Applied Coding Standards](#-auto-applied-coding-standards)
@@ -18,10 +41,6 @@ Specialized GitHub Copilot agents for intelligent, plan-first development workfl
 - [🛠️ Customization](#️-customization)
 - [❓ FAQ & Troubleshooting](#-faq--troubleshooting)
 - [📖 Full Documentation](#-full-documentation)
-
----
-
-## 🚀 Quick Start (60 seconds)
 
 ### Use an Agent
 

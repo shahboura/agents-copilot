@@ -1,10 +1,15 @@
 # Agent Context & Project Summary
 
-**Last Updated:** 2025-12-23 22:15
+**Last Updated:** 2025-12-23 22:30
 
 ## Recent Activity
 
-### 2025-12-23 22:15 - Added table of contents to long documentation pages
+### 2025-12-23 22:30 - Improved quick start and paused release workflow
+**Agent:** opencode  
+**Summary:** Made quick start more prominent and disabled release automation.
+- Moved Quick Start section to top of README before TOC
+- Removed version badge from README
+- Commented out release.yml workflow to pause automation
 **Agent:** opencode  
 **Summary:** Improved navigation by adding TOC to README and long docs pages.
 - Added TOC to README.md for easy jumping

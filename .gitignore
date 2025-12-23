@@ -5,6 +5,9 @@ yarn-debug.log*
 yarn-error.log*
 pnpm-debug.log*
 
+# Package lock (use npm ci in CI)
+package-lock.json
+
 # Environment variables
 .env
 .env.local

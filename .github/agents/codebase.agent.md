@@ -2,7 +2,7 @@
 name: codebase
 description: Multi-language development agent with profile auto-detection (dotnet, python, typescript, generic)
 argument-hint: Describe the feature to implement or code to modify
-tools: ['search/readFile', 'edit/editFiles', 'edit/createFile', 'search/textSearch', 'usages', 'runCommands/runInTerminal', 'problems', 'search/fileSearch', 'search/codebase', 'fetch']
+tools: ['read/readFile', 'edit/editFiles', 'edit/createFile', 'search/textSearch', 'search/usages', 'execute/runInTerminal', 'read/problems', 'search/fileSearch', 'search/codebase', 'web/fetch']
 handoffs:
   - label: Generate Documentation
     agent: docs
@@ -80,6 +80,18 @@ Log detected profile at start: `Detected active profile: <profile>`
 - Follow SOLID principles
 - Use proper type systems when available
 
+## Standards
+- Obey auto-applied instructions based on file type:
+  - [.github/instructions/dotnet-clean-architecture.instructions.md](../instructions/dotnet-clean-architecture.instructions.md)
+  - [.github/instructions/python-best-practices.instructions.md](../instructions/python-best-practices.instructions.md)
+  - [.github/instructions/typescript-strict.instructions.md](../instructions/typescript-strict.instructions.md)
+  - [.github/instructions/flutter-dart.instructions.md](../instructions/flutter-dart.instructions.md)
+  - [.github/instructions/node-express.instructions.md](../instructions/node-express.instructions.md)
+  - [.github/instructions/react-next.instructions.md](../instructions/react-next.instructions.md)
+  - [.github/instructions/go.instructions.md](../instructions/go.instructions.md)
+  - [.github/instructions/sql-migrations.instructions.md](../instructions/sql-migrations.instructions.md)
+  - [.github/instructions/ci-cd-hygiene.instructions.md](../instructions/ci-cd-hygiene.instructions.md)
+
 ## Commit Messages
 Use conventional commits format:
 ```
@@ -91,47 +103,31 @@ docs(scope): description
 ```
 
 ## Context Persistence
-**At task completion, ALWAYS update `.github/copilot-instructions.md` with:**
 
-1. **Architectural Decisions**
-   - New patterns introduced
-   - Design choices and rationale
-   - Layer/module structure changes
+**At session start:**
+1. Read `.github/agents.md` for project context and recent activity
+2. Apply architectural decisions and patterns from previous sessions
 
-2. **Project-Specific Patterns**
-   - Custom utilities or helpers created
-   - Naming conventions established
-   - Code organization decisions
+**At task completion:**
+Update `.github/agents.md` with timestamped entry (latest first):
 
-3. **Technical Constraints**
-   - Dependencies added/removed
-   - Configuration changes
-   - Environment requirements
-
-4. **Context Cleanup**
-   - Remove outdated decisions
-   - Update superseded patterns
-   - Keep file under 500 lines
-
-**Format for updates:**
 ```markdown
-## [Feature/Module Name] - [Date]
-### Decision
-[What was decided]
-
-### Rationale
-[Why this approach]
-
-### Implementation Pattern
-```language
-[Code example if applicable]
+### YYYY-MM-DD HH:MM - [Brief Task Description]
+**Agent:** codebase  
+**Summary:** [What was accomplished]
+- Architectural decisions and rationale
+- New patterns or utilities introduced
+- Technical constraints or dependencies added
 ```
 
-### Impact
-[What this affects going forward]
-```
+**Format requirements:**
+- Date/time format: `YYYY-MM-DD HH:MM` (to minute precision)
+- Latest entries first (prepend, don't append)
+- Keep entries concise (3-5 bullets max)
+- Include design choices, patterns, and technical impacts
+- File auto-prunes when exceeding 100KB
 
-**Present the update as file edit for approval before ending task.**
+**Present update for approval before ending task.**
 
 ## Memory & Context
 - Remember architectural decisions within session

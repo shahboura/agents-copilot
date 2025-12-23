@@ -1,0 +1,43 @@
+name: Validate Agents
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+    types: [opened, reopened, synchronize, ready_for_review]
+  workflow_dispatch:
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - uses: actions/checkout@v4
+    
+    - name: Validate Agent Configurations
+      shell: pwsh
+      run: |
+        ./scripts/validate-agents.ps1
+
+    - name: Check Context File Size
+      shell: pwsh
+      run: |
+        ./scripts/check-context-size.ps1
+
+    - name: Validate Documentation Links
+      shell: pwsh
+      run: |
+        ./scripts/validate-docs.ps1
+
+    - name: Setup Node.js
+      uses: actions/setup-node@v4
+      with:
+        node-version: '20'
+        cache: 'npm'
+
+    - name: Install markdownlint-cli
+      run: npm install -g markdownlint-cli
+
+    - name: Lint Markdown Files
+      run: markdownlint "**/*.md" --ignore node_modules --ignore .github

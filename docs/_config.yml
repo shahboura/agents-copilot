@@ -1,18 +1,98 @@
+# Jekyll Configuration for GitHub Pages
 title: GitHub Copilot Agents
-description: Specialized agents for intelligent, plan-first development
-remote_theme: pages-themes/slate@v0.2.0
+description: Specialized agents for intelligent, plan-first development workflows
+url: https://shahboura.github.io
+baseurl: /agents-copilot
+repository: shahboura/agents-copilot
+
+# Theme Configuration
+# Using both theme and remote_theme ensures compatibility with local builds and GitHub Pages
+theme: just-the-docs
+remote_theme: just-the-docs/just-the-docs
+
+# Plugins
 plugins:
-- jekyll-remote-theme # add this line to the plugins list if you already have one
+  - jekyll-feed
+  - jekyll-seo-tag
+
+# Color scheme
+color_scheme: light
+
+# Logo and branding
+logo: false
+
+# Search Configuration
 search_enabled: true
-search_tokenizer_separator: /[\s/]+/
-search.heading_level: 2
-search.previews: 2
-search.preview_words_before: 5
-search.preview_words_after: 10
+search:
+  heading_level: 2
+  previews: 3
+  preview_words_before: 5
+  preview_words_after: 10
+  tokenizer_separator: /[\s/]+/
+  rel_url: true
+  button: false
 
-nav_order: 1
+# Navigation
+nav_sort: order
+nav_external_links:
+  - title: GitHub Repository
+    url: https://github.com/shahboura/agents-copilot
 
-footer_content: "Copyright &copy; 2025 OpenAgents Community"
+# Footer
+footer_content: "Copyright &copy; 2025 Shehab Elhadidy. Licensed under the MIT License."
 
+# Aux links
+aux_links:
+  "View on GitHub":
+    - "https://github.com/shahboura/agents-copilot"
+
+aux_links_new_tab: true
+
+# Back to top link
 back_to_top: true
 back_to_top_text: "Back to top"
+
+# Heading anchors
+heading_anchors: true
+
+# Code highlighting
+kramdown:
+  syntax_highlighter_opts:
+    block:
+      line_numbers: false
+
+# SEO Metadata
+lang: en_US
+author:
+  name: "Shehab ElHadidy"
+  twitter: "shahboura"
+
+twitter:
+  username: shahboura
+  card: summary_large_image
+
+social:
+  name: GitHub Copilot Agents
+  links:
+    - https://github.com/shahboura/agents-copilot
+
+# Default SEO tags
+defaults:
+  - scope:
+      path: ""
+    values:
+      image: /assets/images/og-image.png
+
+# Collections for agent pages
+collections:
+  agents:
+    output: true
+
+# Exclude from processing
+exclude:
+  - node_modules/
+  - vendor/
+  - .sass-cache/
+  - .jekyll-cache/
+  - Gemfile
+  - Gemfile.lock

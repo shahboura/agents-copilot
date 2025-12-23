@@ -1,0 +1,27 @@
+{
+  "name": "agents-copilot",
+  "version": "1.0.0",
+  "description": "GitHub Copilot specialized agents for intelligent development workflows",
+  "scripts": {
+    "lint:md": "markdownlint \"**/*.md\" --ignore node_modules --ignore .github",
+    "lint:md:fix": "markdownlint \"**/*.md\" --ignore node_modules --ignore .github --fix",
+    "docs:serve": "cd docs && bundle exec jekyll serve",
+    "docs:build": "cd docs && bundle exec jekyll build"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/shahboura/agents-copilot"
+  },
+  "keywords": [
+    "github-copilot",
+    "ai-agents",
+    "development-workflow",
+    "automation",
+    "documentation"
+  ],
+  "author": "shahboura",
+  "license": "MIT",
+  "devDependencies": {
+    "markdownlint-cli": "^0.38.0"
+  }
+}

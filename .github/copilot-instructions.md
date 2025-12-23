@@ -1,35 +1,33 @@
 # GitHub Copilot Custom Instructions
 
-## Context Management
-**Auto-maintained by agents.** Persists decisions, patterns, and context across sessions.
+## Project Overview
 
-**Project Context:**
-- Multi-language: .NET, Python, TypeScript
-- Architecture: Clean Architecture (.NET), modular patterns (Python/TS)
-- Last Updated: December 3, 2025
+Multi-language GitHub Copilot agent orchestration system with specialized agents for .NET, Python, and TypeScript development.
+
+**Agents:** 6 specialized agents (@planner, @orchestrator, @codebase, @docs, @review, @em-advisor)  
+**Prompts:** 9 reusable slash commands  
+**Standards:** Auto-applied coding standards by file type
+
+> **Agent Context:** Agents read/write session context from `.github/agents.md`
+
 ---
 
-## Custom Agent System
+## Auto-Applied Coding Standards
 
-### 5 Agents Created
-1. **@orchestrator** - Strategic planning & multi-phase execution (planning + implementation coordination)
-2. **@codebase** - Multi-language development
-3. **@docs** - Documentation specialist
-4. **@review** - Security/quality reviewer
-5. **@em-advisor** - Engineering Manager strategic advisor
+Pattern-based standards activate automatically when editing files:
 
-### 5 Reusable Prompts
-- `/create-readme` - Professional README generation
-- `/code-review` - Comprehensive code review
-- `/generate-tests` - Unit test generation
-- `/1-on-1-prep` - EM meeting preparation
-- `/architecture-decision` - ADR creation
+- `**/*.{cs,csproj}` → [.NET Clean Architecture](instructions/dotnet-clean-architecture.instructions.md)
+- `**/*.py` → [Python Best Practices](instructions/python-best-practices.instructions.md)
+- `**/*.{ts,tsx}` → [TypeScript Strict Mode](instructions/typescript-strict.instructions.md)
+- `**/*.dart` → [Flutter/Dart Best Practices](instructions/flutter-dart.instructions.md)
+- `**/*.{js,ts}` (Node) → [Node.js + Express](instructions/node-express.instructions.md)
+- `**/*.{tsx,jsx}` (React) → [React / Next.js](instructions/react-next.instructions.md)
+- `**/*.go` → [Go Best Practices](instructions/go.instructions.md)
+- `**/*.kt` → [Kotlin Best Practices](instructions/kotlin.instructions.md)
+- `**/*.rs` → [Rust Best Practices](instructions/rust.instructions.md)
+- `**/*.sql` → [SQL & Migrations](instructions/sql-migrations.instructions.md)
+- `.github/workflows/*.{yml,yaml}` → [CI/CD Hygiene](instructions/ci-cd-hygiene.instructions.md)
 
-### 3 Auto-Applied Instructions
-Pattern-based context injection (no manual prompting):
-- `**/*.{cs,csproj}` → .NET Clean Architecture standards
-- `**/*.py` → Python best practices (type hints, pytest)
-- `**/*.{ts,tsx}` → TypeScript strict mode
 ---
 
 ## .NET Development Standards
@@ -285,28 +283,17 @@ public class UsersController : ControllerBase
 5. ✅ Include async/await with CancellationToken
 6. ✅ Follow Clean Architecture layers
 
-## Implementation Workflow
-
-When implementing features:
-1. **Analyze** - Identify affected layers
-2. **Plan** - Define entities, services, controllers, tests
-3. **Implement** - Domain → Application → Infrastructure → WebAPI
-4. **Test** - Unit tests per layer
-5. **Validate** - Build, test, format
-
-## Common Patterns to Apply
-
-- Use `record` types for DTOs
-- Apply `sealed` to non-inheritable classes
-- Use `required` for required properties (C# 11+)
-- Prefer `is not null` over `!= null`
-- Use `nameof()` in exceptions
-
-## Build Commands
+## Validation Commands
 
 ```bash
+# .NET
 dotnet restore
 dotnet build
 dotnet format
 dotnet test
+
+# Project validation
+.\scripts\validate-agents.ps1      # Validate agent configs
+.\scripts\check-context-size.ps1   # Check context file size
+.\scripts\validate-docs.ps1        # Check documentation links
 ```

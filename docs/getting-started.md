@@ -19,10 +19,11 @@ Get up and running with GitHub Copilot agents in just 5 minutes.
 
 | Agent | What It Does |
 |-------|-------------|
-| @orchestrator | Plans and orchestrates complex projects (read-only plan mode or end-to-end execution) |
+| @planner | Analyzes and plans (no code changes) |
 | @codebase | Implements features (code changes) |
 | @review | Audits for security & quality |
 | @docs | Creates documentation |
+| @orchestrator | Coordinates multi-phase projects |
 | @em-advisor | Helps with leadership decisions |
 
 ## Step 2: Start Your First Conversation (2 min)
@@ -36,6 +37,7 @@ Get up and running with GitHub Copilot agents in just 5 minutes.
    - Choose `@codebase` (start with the most versatile)
 
 3. **Type Your Request**
+
    ```
    @codebase Create a REST API endpoint for getting users by ID
    ```
@@ -71,6 +73,7 @@ Make agents smarter by providing project context:
 1. **Create file**: `.github/copilot-instructions.md`
 
 2. **Add context**:
+
 ```markdown
 # My Project
 
@@ -86,13 +89,14 @@ We build microservices using:
 - OpenAPI for API docs
 ```
 
-3. **Agents automatically use this context!**
+1. **Agents automatically use this context!**
 
 ## Step 5: Try a Workflow (0 min)
 
 Now you're ready! Try these:
 
 ### 👤 Create User Service
+
 ```
 @codebase Create UserService with:
 - Get, create, update, delete methods
@@ -102,11 +106,13 @@ Now you're ready! Try these:
 ```
 
 ### 🔐 Secure Review
+
 ```
 @review Audit this code for security issues
 ```
 
 ### 📖 Generate Docs
+
 ```
 @docs Create README with installation, usage, and API examples
 ```
@@ -116,20 +122,24 @@ Now you're ready! Try these:
 ## Common Patterns
 
 ### ✅ DO: Be Specific
+
 ```
 @codebase Create an authentication middleware that validates JWT tokens 
 and extracts user info to req.user
 ```
 
 ### ❌ DON'T: Be Vague
+
 ```
 @codebase Add auth
 ```
 
 ### ✅ DO: Review Plans
+
 Always review the agent's proposed plan before approving implementation.
 
 ### ✅ DO: Use Handoffs
+
 ```
 @codebase (implement) → @review (audit) → @docs (document)
 ```

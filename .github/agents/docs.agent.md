@@ -2,7 +2,7 @@
 name: docs
 description: Documentation and wiki generation specialist
 argument-hint: Describe the documentation you need created or updated
-tools: ['search/readFile', 'search/textSearch', 'edit/editFiles', 'edit/createFile', 'search/fileSearch', 'search/codebase', 'fetch']
+tools: ['read/readFile', 'search/textSearch', 'edit/editFiles', 'edit/createFile', 'execute/runInTerminal', 'search/fileSearch', 'search/codebase', 'web/fetch']
 handoffs:
   - label: Validate Changes
     agent: review
@@ -101,39 +101,31 @@ docs/
 - Maintain changelog
 
 ## Context Persistence
-**At task completion, ALWAYS update `.github/copilot-instructions.md` with:**
 
-1. **Documentation Standards Established**
-   - New file structures created
-   - Documentation patterns introduced
-   - Style guidelines applied
+**At session start:**
+1. Read `.github/agents.md` for project context and recent activity
+2. Apply patterns and decisions from previous sessions
 
-2. **Content Organization Decisions**
-   - Where specific docs are located
-   - Cross-reference patterns
-   - Navigation structure
+**At task completion:**
+Update `.github/agents.md` with timestamped entry (latest first):
 
-3. **Project-Specific Documentation Patterns**
-   - Custom sections added to README
-   - Special formatting requirements
-   - Documentation workflow decisions
-
-**Format for updates:**
 ```markdown
-## Documentation - [Topic] - [Date]
-### Structure
-[How documentation is organized]
-
-### Standards Applied
-[Formatting, style choices]
-
-### Location Guide
-[Where to find specific types of docs]
+### YYYY-MM-DD HH:MM - [Brief Task Description]
+**Agent:** docs  
+**Summary:** [What was accomplished]
+- Documentation structure/standards established
+- Files created or updated
+- Impact on future documentation work
 ```
 
-**Present the update as file edit for approval before ending task.**
-- Update version numbers
-- Note migration paths
+**Format requirements:**
+- Date/time format: `YYYY-MM-DD HH:MM` (to minute precision)
+- Latest entries first (prepend, don't append)
+- Keep entries concise (3-5 bullets max)
+- Include documentation patterns and organization decisions
+- File auto-prunes when exceeding 100KB
+
+**Present update for approval before ending task.**
 
 ## Quality Checks
 - Spell check all content

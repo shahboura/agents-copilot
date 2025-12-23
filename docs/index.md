@@ -1,53 +1,94 @@
 ---
 layout: default
-title: Documentation
+title: Home
 nav_order: 0
-has_children: true
-has_toc: false
+description: "Specialized GitHub Copilot agents for intelligent, plan-first development workflows"
+permalink: /
 ---
 
-# GitHub Copilot Agents - Full Documentation
+# GitHub Copilot Agents
 
-Welcome to the comprehensive documentation for GitHub Copilot custom agents.
+{: .fs-9 }
 
-## Quick Navigation
+Specialized agents for intelligent, plan-first development workflows.
+{: .fs-6 .fw-300 }
 
-- **[Getting Started](./getting-started.md)** - 5-minute setup guide
-- **[Agents](./agents/README.md)** - Detailed agent capabilities and usage
-- **[Prompts](./prompts.md)** - Reusable prompt commands
-- **[Coding Standards](./instructions.md)** - Auto-applied standards by language
-- **[Workflows](./workflows.md)** - Real-world workflow examples
-- **[Customization](./customization.md)** - Adapt agents to your project
-- **[API Reference](./reference/README.md)** - Tools and capabilities reference
-- **[FAQ & Troubleshooting](./troubleshooting.md)** - Common questions and fixes
+[Get Started](getting-started.md){: .btn .btn-primary .fs-5 .mb-4 .mb-md-0 .mr-2 }
+[View on GitHub](https://github.com/shahboura/agents-copilot){: .btn .fs-5 .mb-4 .mb-md-0 }
 
-## What Are These Agents?
+---
 
-Five specialized GitHub Copilot agents that work together for intelligent development:
+## What Are Agents?
 
-| Agent | Purpose |
-|-------|---------|
-| @orchestrator | Planning and multi-phase workflow coordination |
-| @codebase | Multi-language code implementation |
-| @docs | Documentation creation and updates |
-| @review | Security and quality audits |
-| @em-advisor | Leadership and strategy guidance |
+Specialized versions of GitHub Copilot that excel at specific tasks:
+
+- **@planner** - Analyzes and plans (read-only)
+- **@orchestrator** - Coordinates multi-phase projects
+- **@codebase** - Implements features (multi-language)
+- **@docs** - Creates documentation
+- **@review** - Audits security & quality
+- **@em-advisor** - Helps with leadership decisions
+
+## Quick Start
+
+1. Open GitHub Copilot Chat: `Ctrl+Shift+I` (or `Cmd+Shift+I`)
+2. Select an agent (e.g., `@codebase`)
+3. Describe your task:
+
+```
+@codebase Create a REST API endpoint for user authentication with JWT
+```
+
+The agent will propose a plan, wait for approval, then implement step-by-step.
 
 ## Key Features
 
-✅ **Plan-First Workflow** - Agents propose plans, you approve before changes  
-✅ **Multi-Language** - Auto-detects .NET, Python, TypeScript  
-✅ **Auto-Applied Standards** - Coding rules activated by file type  
-✅ **Agent Handoffs** - Seamless transitions between specialists  
-✅ **Context Persistence** - Decisions saved automatically  
+### 🎯 Plan-First Workflow
 
-## Next Steps
+Agents propose detailed plans before making changes. You review and approve.
 
-1. **[Get Started in 5 minutes](./getting-started.md)**
-2. **[Explore Agents](./agents/README.md)**
-3. **[Try a Workflow](./workflows.md)**
-4. **[Customize for Your Project](./customization.md)**
+### 🔧 Auto-Applied Standards
+
+File-specific coding standards activate automatically:
+
+- `**/*.cs` → .NET Clean Architecture
+- `**/*.py` → Python type hints & testing
+- `**/*.ts` → TypeScript strict mode
+- And more...
+
+### 🤝 Agent Collaboration
+
+Agents work together for complex tasks:
+
+```
+orchestrator → @codebase (implement) 
+           → @review (audit)
+           → @docs (document)
+```
+
+### 📝 Context Persistence
+
+Agents read/write project context to `.github/agents.md` for continuity.
+
+## Documentation
+
+- [Getting Started](getting-started.md) - 5-minute quickstart
+- [Agents](agents/) - Detailed agent capabilities
+- [Workflows](workflows.md) - Real-world examples
+- [Customization](customization.md) - Adapt to your project
+- [Troubleshooting](troubleshooting.md) - Common issues
+ - [Deployment](DEPLOYMENT.md) - GitHub Pages setup
+
+## Why Use Agents?
+
+✅ **Consistent quality** - Standards applied automatically  
+✅ **Reduced errors** - Plan-first approach catches issues early  
+✅ **Better documentation** - Specialized agent keeps docs current  
+✅ **Security by default** - Review agent audits changes  
+✅ **Team alignment** - Shared context and workflows
 
 ---
 
-**Need help?** Check [FAQ & Troubleshooting](./troubleshooting.md)
+## License
+
+MIT License - see [LICENSE](https://github.com/shahboura/agents-copilot/blob/main/LICENSE)

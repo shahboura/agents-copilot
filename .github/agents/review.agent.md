@@ -2,7 +2,7 @@
 name: review
 description: Code review specialist focusing on security, performance, and best practices
 argument-hint: Specify what code or changes to review
-tools: ['search/readFile', 'search/textSearch', 'usages', 'problems', 'search/fileSearch', 'search/codebase', 'changes', 'fetch']
+tools: ['read/readFile', 'search/textSearch', 'search/usages', 'read/problems', 'search/fileSearch', 'search/codebase', 'search/changes', 'web/fetch']
 handoffs:
   - label: Implement Fixes
     agent: codebase
@@ -106,36 +106,31 @@ For each file:
 - Virtual environment dependencies
 
 ## Context Persistence
-**At review completion, update `.github/copilot-instructions.md` if:**
 
-1. **Recurring Issues Found**
-   - Common security vulnerabilities in this project
-   - Repeated performance anti-patterns
-   - Persistent code quality issues
+**At session start:**
+1. Read `.github/agents.md` for project context and recent activity
+2. Apply known security/quality patterns from previous reviews
 
-2. **Project-Specific Review Checklist**
-   - Custom security requirements
-   - Performance SLAs/constraints
-   - Compliance requirements
+**At task completion:**
+Update `.github/agents.md` with timestamped entry (latest first):
 
-3. **Approved Patterns**
-   - Validated approaches that should be replicated
-   - Good examples worth preserving
-
-**Format for updates:**
 ```markdown
-## Code Review Insights - [Date]
-### Common Issues
-- [Issue pattern and fix]
-
-### Approved Patterns
-- [Good pattern to follow]
-
-### Project-Specific Checks
-- [What to always verify in this codebase]
+### YYYY-MM-DD HH:MM - [Brief Task Description]
+**Agent:** review  
+**Summary:** [What was reviewed]
+- Critical issues found (or none)
+- Recurring patterns identified
+- Quality/security recommendations
 ```
 
-**Only update if significant patterns emerge. Present as file edit for approval.**
+**Format requirements:**
+- Date/time format: `YYYY-MM-DD HH:MM` (to minute precision)
+- Latest entries first (prepend, don't append)
+- Keep entries concise (3-5 bullets max)
+- Include security findings, quality patterns, and project-specific checks
+- File auto-prunes when exceeding 100KB
+
+**Present update for approval before ending task.**
 
 ### TypeScript/JavaScript
 - Type safety (any usage)
@@ -152,6 +147,18 @@ For each file:
 - Acknowledge good practices
 - Consider context and requirements
 - Balance perfection with pragmatism
+
+## Standards
+- Review against the auto-applied instructions for each stack:
+  - [.github/instructions/dotnet-clean-architecture.instructions.md](../instructions/dotnet-clean-architecture.instructions.md)
+  - [.github/instructions/python-best-practices.instructions.md](../instructions/python-best-practices.instructions.md)
+  - [.github/instructions/typescript-strict.instructions.md](../instructions/typescript-strict.instructions.md)
+  - [.github/instructions/flutter-dart.instructions.md](../instructions/flutter-dart.instructions.md)
+  - [.github/instructions/node-express.instructions.md](../instructions/node-express.instructions.md)
+  - [.github/instructions/react-next.instructions.md](../instructions/react-next.instructions.md)
+  - [.github/instructions/go.instructions.md](../instructions/go.instructions.md)
+  - [.github/instructions/sql-migrations.instructions.md](../instructions/sql-migrations.instructions.md)
+  - [.github/instructions/ci-cd-hygiene.instructions.md](../instructions/ci-cd-hygiene.instructions.md)
 
 ## After Review
 - Summarize key findings

@@ -14,7 +14,14 @@ When you edit a file, GitHub Copilot checks the file extension and applies relev
 
 - `.cs` or `.csproj` → .NET Clean Architecture rules
 - `.py` → Python best practices
-- `.ts` or `.tsx` → TypeScript strict mode
+- `.ts` or `.tsx` → TypeScript strict mode (includes React/Next.js)
+- `.js` or `.ts` → Node.js + Express service patterns
+- `.dart` → Flutter/Dart best practices
+- `.go` → Go modules, testing, and concurrency
+- `.kt` → Kotlin (Android + backend/Ktor) best practices
+- `.rs` → Rust ownership, error handling, and testing
+- `.sql` → SQL & database migrations
+- `.github/workflows/*.yml` or `.yaml` → CI/CD hygiene
 
 **You don't configure anything** - it just works!
 
@@ -25,6 +32,7 @@ When you edit a file, GitHub Copilot checks the file extension and applies relev
 **Applies to:** `.cs` and `.csproj` files
 
 ### Architecture: Clean Architecture
+
 ```
 Domain → Application → Infrastructure → WebAPI
 ```
@@ -34,6 +42,7 @@ All code follows layered architecture with strict dependency rules.
 ### Key Standards
 
 #### Async/Await with CancellationToken
+
 ```csharp
 // ✅ Always include CancellationToken
 public async Task<User> GetUserAsync(
@@ -48,6 +57,7 @@ public async Task<User> GetUserAsync(
 ```
 
 #### Nullable Reference Types
+
 ```csharp
 // Enabled globally
 <Nullable>enable</Nullable>
@@ -60,6 +70,7 @@ public string? PhoneNumber { get; set; }
 ```
 
 #### Dependency Injection
+
 ```csharp
 public class UserService : IUserService
 {
@@ -77,6 +88,7 @@ public class UserService : IUserService
 ```
 
 #### Entity Framework Core
+
 ```csharp
 // Configuration pattern
 public class UserConfiguration : IEntityTypeConfiguration<User>
@@ -110,6 +122,7 @@ dotnet format         # Format code
 ### Key Standards
 
 #### Type Hints (Required)
+
 ```python
 from typing import Optional, List
 
@@ -125,6 +138,7 @@ async def fetch_users(limit: int = 10) -> List[User]:
 ```
 
 #### Context Managers
+
 ```python
 # Always use 'with' for resource management
 def read_file(filepath: Path) -> str:
@@ -146,6 +160,7 @@ def db_session() -> Iterator[Session]:
 ```
 
 #### List Comprehensions
+
 ```python
 # ✅ Prefer comprehensions
 active_users = [u for u in users if u.is_active]
@@ -159,6 +174,7 @@ for u in users:
 ```
 
 #### Testing with pytest
+
 ```python
 @pytest.fixture
 def user_service() -> UserService:
@@ -189,6 +205,7 @@ pytest --cov=app             # Coverage
 ### Key Standards
 
 #### Strict Type Checking
+
 ```typescript
 // Enable in tsconfig.json
 {
@@ -201,6 +218,7 @@ pytest --cov=app             # Coverage
 ```
 
 #### Explicit Function Types
+
 ```typescript
 // ✅ Good - explicit types
 function getUser(id: number): User | null {
@@ -214,6 +232,7 @@ function getUser(id) {
 ```
 
 #### Null Safety
+
 ```typescript
 // Optional chaining & nullish coalescing
 const email = user?.contact?.email ?? 'no-email@example.com';
@@ -225,6 +244,7 @@ function isUser(value: unknown): value is User {
 ```
 
 #### Generics
+
 ```typescript
 interface ApiResponse<T> {
     data: T;
@@ -239,6 +259,7 @@ class Repository<T extends { id: number }> {
 ```
 
 #### React with TypeScript
+
 ```typescript
 interface ButtonProps {
     label: string;
@@ -280,9 +301,18 @@ All files must pass:
 
 Each standard has comprehensive details:
 
-- **[.NET Clean Architecture](../.github/instructions/dotnet-clean-architecture.instructions.md)** - Full reference
-- **[Python Best Practices](../.github/instructions/python-best-practices.instructions.md)** - Full reference
-- **[TypeScript Strict Mode](../.github/instructions/typescript-strict.instructions.md)** - Full reference
+- **[.NET Clean Architecture](../.github/instructions/dotnet-clean-architecture.instructions.md)**
+- **[Python Best Practices](../.github/instructions/python-best-practices.instructions.md)**
+- **[TypeScript Strict Mode](../.github/instructions/typescript-strict.instructions.md)**
+- **[Node.js + Express](../.github/instructions/node-express.instructions.md)**
+- **[React / Next.js](../.github/instructions/react-next.instructions.md)**
+- **[Flutter/Dart Best Practices](../.github/instructions/flutter-dart.instructions.md)**
+- **[Go Best Practices](../.github/instructions/go.instructions.md)**
+- **[Kotlin Best Practices](../.github/instructions/kotlin.instructions.md)**
+- **[Rust Best Practices](../.github/instructions/rust.instructions.md)**
+- **[SQL & Migrations](../.github/instructions/sql-migrations.instructions.md)**
+- **[CI/CD Hygiene](../.github/instructions/ci-cd-hygiene.instructions.md)**
+
 ---
 
 ## Override Standards
@@ -294,6 +324,7 @@ If you need to bypass standards for a specific piece of code:
 3. **Keep scope minimal**
 
 **Example:**
+
 ```python
 # type: ignore - Legacy API returns untyped dict
 result: Any = legacy_api_call()

@@ -34,14 +34,14 @@ Specialized GitHub Copilot agents for intelligent, plan-first development workfl
 
 ### 6 Specialized Agents
 
-| Agent | Purpose | Use For |
+|Agent|Purpose|Use For|
 |-------|---------|---------|
-| **@planner** | Read-only planning | Complex features, refactoring, risk assessment |
-| **@orchestrator** | Multi-phase coordination | Complex workflows, multi-domain tasks |
-| **@codebase** | Multi-language dev | Implementation, bug fixes, code generation |
-| **@docs** | Documentation | README, API docs, guides |
-| **@review** | Security & quality | Audits, performance, best practices |
-| **@em-advisor** | Leadership guidance | Strategy, team dynamics, 1-on-1s |
+|**@planner**|Read-only planning|Complex features, refactoring, risk assessment|
+|**@orchestrator**|Multi-phase coordination|Complex workflows, multi-domain tasks|
+|**@codebase**|Multi-language dev|Implementation, bug fixes, code generation|
+|**@docs**|Documentation|README, API docs, guides|
+|**@review**|Security & quality|Audits, performance, best practices|
+|**@em-advisor**|Leadership guidance|Strategy, team dynamics, 1-on-1s|
 
 **[👉 Full Agent Details](./docs/agents/README.md)**
 

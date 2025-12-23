@@ -1,10 +1,17 @@
 # Agent Context & Project Summary
 
-**Last Updated:** 2025-12-23 21:30
+**Last Updated:** 2025-12-23 21:45
 
 ## Recent Activity
 
-### 2025-12-23 21:30 - Revised documentation and updated agents with latest features
+### 2025-12-23 21:45 - Implemented semantic versioning and automated releases
+**Agent:** opencode  
+**Summary:** Added versioning system starting at 1.0.0 with semver rules.
+- Created VERSION file with 1.0.0
+- Added version badge to README.md
+- Created release.yml workflow for automated releases on main merges
+- Updated CHANGELOG.md with 1.0.0 release notes
+- Version bump rules: major for new agents, minor for new instructions/prompts
 **Agent:** opencode  
 **Summary:** Validated all documentation links, updated codebase agent with Kotlin/Rust support and new instructions.
 - Verified all 42 markdown files have valid links

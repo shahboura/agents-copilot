@@ -4,7 +4,7 @@ All notable changes to this project will be documented in this file.
 
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
-## [Unreleased]
+## [1.0.0] - 2025-12-23
 
 ### Added
 
@@ -22,17 +22,23 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 - 5 new workflow examples (microservices migration, database migration, error monitoring, API versioning, team onboarding)
 - Agent collaboration decision tree
 - Community templates: SECURITY.md, CODE_OF_CONDUCT.md, issue templates, PR template
+- Versioning system with semantic versioning
+- Automated releases on merge to main
+- Release workflow for GitHub releases
 
 ### Changed
 
 - All 6 agents now use agents.md for context persistence
 - Simplified documentation structure
 - Streamlined copilot-instructions.md
+- Updated codebase agent with 11 language support (added Kotlin, Rust)
 
 ### Fixed
 
 - Documentation links in docs/index.md now include .md extensions for proper Jekyll rendering
 - Removed `continue-on-error` from documentation validation workflow step
+- Fixed all markdown linting issues (MD040, MD060)
+- Corrected table formatting for compact style
 
 ### Removed
 

@@ -2,6 +2,7 @@
 
 [![Validate Agents](https://github.com/shahboura/agents-copilot/actions/workflows/validate.yml/badge.svg)](https://github.com/shahboura/agents-copilot/actions/workflows/validate.yml)
 [![Documentation](https://img.shields.io/badge/docs-GitHub%20Pages-blue)](https://shahboura.github.io/agents-copilot/)
+[![Version](https://img.shields.io/badge/version-1.0.0-blue)](https://github.com/shahboura/agents-copilot/releases)
 
 Specialized GitHub Copilot agents for intelligent, plan-first development workflows.
 

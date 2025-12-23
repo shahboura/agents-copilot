@@ -1,10 +1,16 @@
 # Agent Context & Project Summary
 
-**Last Updated:** 2025-12-23 21:45
+**Last Updated:** 2025-12-23 22:00
 
 ## Recent Activity
 
-### 2025-12-23 21:45 - Implemented semantic versioning and automated releases
+### 2025-12-23 22:00 - Release workflow permission issues
+**Agent:** opencode  
+**Summary:** Attempted automated releases but encountered permission errors with GitHub Actions.
+- Implemented VERSION file and release.yml workflow
+- Tried actions/create-release and softprops/action-gh-release
+- Both failed with "Resource not accessible by integration" error
+- Will investigate and fix permissions later
 **Agent:** opencode  
 **Summary:** Added versioning system starting at 1.0.0 with semver rules.
 - Created VERSION file with 1.0.0

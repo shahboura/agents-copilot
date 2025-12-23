@@ -1,10 +1,16 @@
 # Agent Context & Project Summary
 
-**Last Updated:** 2025-12-23 21:15
+**Last Updated:** 2025-12-23 21:30
 
 ## Recent Activity
 
-### 2025-12-23 21:15 - Fixed markdown linting issues
+### 2025-12-23 21:30 - Revised documentation and updated agents with latest features
+**Agent:** opencode  
+**Summary:** Validated all documentation links, updated codebase agent with Kotlin/Rust support and new instructions.
+- Verified all 42 markdown files have valid links
+- Added Kotlin and Rust profile detection and adaptations to codebase agent
+- Included kotlin.instructions.md and rust.instructions.md in standards list
+- Updated agent description to reflect 11 supported languages
 **Agent:** opencode  
 **Summary:** Resolved CI linting failures by disabling MD040 rule for fenced code languages.
 - Updated .markdownlint.json to disable MD040

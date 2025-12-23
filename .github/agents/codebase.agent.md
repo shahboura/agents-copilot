@@ -1,6 +1,6 @@
 ---
 name: codebase
-description: Multi-language development agent with profile auto-detection (dotnet, python, typescript, generic)
+description: Multi-language development agent with profile auto-detection (dotnet, python, typescript, kotlin, rust, flutter, go, generic)
 argument-hint: Describe the feature to implement or code to modify
 tools: ['read/readFile', 'edit/editFiles', 'edit/createFile', 'search/textSearch', 'search/usages', 'execute/runInTerminal', 'read/problems', 'search/fileSearch', 'search/codebase', 'web/fetch']
 handoffs:
@@ -27,6 +27,10 @@ Analyze project structure to determine active profile:
 - **dotnet**: Presence of `*.sln`, `*.csproj`, `Directory.Build.props`, `global.json`
 - **python**: Presence of `pyproject.toml`, `requirements.txt`, `.python-version`, or high `.py` density
 - **typescript**: Presence of `package.json`, `tsconfig.json`, or high `.ts` density
+- **kotlin**: Presence of `build.gradle.kts`, `settings.gradle.kts`, or high `.kt` density
+- **rust**: Presence of `Cargo.toml`, `Cargo.lock`, or high `.rs` density
+- **flutter**: Presence of `pubspec.yaml`, `lib/` directory, or high `.dart` density
+- **go**: Presence of `go.mod`, `go.sum`, or high `.go` density
 - **generic**: Mixed languages or unclear dominant technology
 
 Log detected profile at start: `Detected active profile: <profile>`
@@ -68,6 +72,30 @@ Log detected profile at start: `Detected active profile: <profile>`
 - Run incremental builds
 - Execute: `tsc`, `npm test`, linting
 
+### Kotlin Profile
+- Enforce null safety with nullable types
+- Use coroutines for async operations
+- Apply immutability patterns
+- Run: `./gradlew build`, `./gradlew test`, ktlint if configured
+
+### Rust Profile
+- Use Result<T, E> for error handling
+- Leverage ownership and borrowing
+- Implement async with Tokio
+- Run: `cargo build`, `cargo test`, `cargo clippy`
+
+### Flutter Profile
+- Ensure null safety
+- Use provider/state management
+- Implement proper widget lifecycles
+- Run: `flutter analyze`, `flutter test`
+
+### Go Profile
+- Follow Go conventions and idioms
+- Use goroutines for concurrency
+- Implement proper error handling
+- Run: `go build`, `go test`, `gofmt`
+
 ### Generic Profile
 - Keep tasks language-agnostic
 - Focus on portable patterns
@@ -85,6 +113,8 @@ Log detected profile at start: `Detected active profile: <profile>`
   - [.github/instructions/dotnet-clean-architecture.instructions.md](../instructions/dotnet-clean-architecture.instructions.md)
   - [.github/instructions/python-best-practices.instructions.md](../instructions/python-best-practices.instructions.md)
   - [.github/instructions/typescript-strict.instructions.md](../instructions/typescript-strict.instructions.md)
+  - [.github/instructions/kotlin.instructions.md](../instructions/kotlin.instructions.md)
+  - [.github/instructions/rust.instructions.md](../instructions/rust.instructions.md)
   - [.github/instructions/flutter-dart.instructions.md](../instructions/flutter-dart.instructions.md)
   - [.github/instructions/node-express.instructions.md](../instructions/node-express.instructions.md)
   - [.github/instructions/react-next.instructions.md](../instructions/react-next.instructions.md)

@@ -11,21 +11,21 @@ Adapt agents to your specific project needs.
 ## Table of Contents
 
 - [Add Project Context](#add-project-context)
-  - [Overview](#overview)
-  - [Tech Stack](#tech-stack)
-  - [Architecture](#architecture)
-  - [Coding Standards](#coding-standards)
-  - [Project Structure](#project-structure)
-  - [Key Files & Standards](#key-files--standards)
-  - [Running the Project](#running-the-project)
-  - [Dependencies to Know About](#dependencies-to-know-about)
-  - [Important Constraints](#important-constraints)
-  - [Common Patterns in This Project](#common-patterns-in-this-project)
-- [Customize Agent Behavior](#customize-agent-behavior)
+  - Overview
+  - Tech Stack
+  - Architecture
+  - Coding Standards
+  - Project Structure
+  - Key Files & Standards
+  - Running the Project
+  - Dependencies to Know About
+  - Important Constraints
+  - Common Patterns in This Project
+- Customize Agent Behavior
 - [Create Custom Prompts](#create-custom-prompts)
 - [Add Coding Standards for Your Stack](#add-coding-standards-for-your-stack)
 - [Template: Minimal Project Context](#template-minimal-project-context)
-- [Template: Comprehensive Project Context](#template-comprehensive-project-context)
+- Template: Comprehensive Project Context
 - [Troubleshooting Customization](#troubleshooting-customization)
 - [Next Steps](#next-steps)
 
@@ -47,16 +47,16 @@ Create `.github/copilot-instructions.md` in your repository root.
 ## Overview
 [1-2 sentence description of what your project does]
 
-## Tech Stack
+## Tech Stack {#tech-stack}
 - Backend: Node.js 18+ with Express
 - Frontend: React 18 with TypeScript
 - Database: PostgreSQL 14
 - DevOps: Docker, Kubernetes
 
-## Architecture
+## Architecture {#architecture}
 [Describe your architecture]
 
-## Coding Standards
+## Coding Standards {#coding-standards}
 
 ### JavaScript/TypeScript
 - Use async/await, no callbacks
@@ -71,7 +71,7 @@ Create `.github/copilot-instructions.md` in your repository root.
 - Clean error handling with codes
 - Structured logging (JSON format)
 
-## Project Structure
+## Project Structure {#project-structure}
 ```
 
 src/
@@ -88,14 +88,14 @@ config/
 
 ```
 
-## Key Files & Standards
+## Key Files & Standards {#key-files--standards}
 - `package.json` - Dependencies (always npm ci in CI/CD)
 - `.eslintrc.json` - Linting rules
 - `.prettierrc` - Formatting
 - `jest.config.js` - Testing config
 - `Dockerfile` - Container setup
 
-## Running the Project
+## Running the Project {#running-the-project}
 
 ### Local Development
 ```bash
@@ -155,7 +155,7 @@ Now when you:
 
 ---
 
-## Customize Agent Behavior
+## Customize Agent Behavior {#customize-agent-behavior}
 
 ### Modify an Agent
 
@@ -329,7 +329,7 @@ This creates a continuously improving knowledge base!
 
 ---
 
-## Template: Minimal Project Context
+## Template: Minimal Project Context {#template-minimal-project-context}
 
 For quick setup, use this template:
 
@@ -360,7 +360,7 @@ For quick setup, use this template:
 
 ---
 
-## Template: Comprehensive Project Context
+## Template: Comprehensive Project Context {#template-comprehensive-project-context}
 
 For mature projects:
 

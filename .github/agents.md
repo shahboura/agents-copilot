@@ -1,10 +1,16 @@
 # Agent Context & Project Summary
 
-**Last Updated:** 2025-12-23 22:00
+**Last Updated:** 2025-12-23 22:15
 
 ## Recent Activity
 
-### 2025-12-23 22:00 - Release workflow permission issues
+### 2025-12-23 22:15 - Added table of contents to long documentation pages
+**Agent:** opencode  
+**Summary:** Improved navigation by adding TOC to README and long docs pages.
+- Added TOC to README.md for easy jumping
+- Added TOC to docs/workflows.md (749 lines)
+- Added TOC to docs/collaboration-patterns.md (439 lines)
+- Added TOC to docs/customization.md (338 lines)
 **Agent:** opencode  
 **Summary:** Attempted automated releases but encountered permission errors with GitHub Actions.
 - Implemented VERSION file and release.yml workflow

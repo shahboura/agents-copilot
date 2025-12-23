@@ -8,6 +8,17 @@ nav_order: 6
 
 Effective multi-agent workflows for complex tasks.
 
+## Table of Contents
+
+- [Core Collaboration Principles](#core-collaboration-principles)
+- [Pattern Catalog](#pattern-catalog)
+- [Handoff Best Practices](#handoff-best-practices)
+- [Anti-Patterns to Avoid](#anti-patterns-to-avoid)
+- [Collaboration Decision Tree](#collaboration-decision-tree)
+- [Measuring Success](#measuring-success)
+- [Advanced Patterns](#advanced-patterns)
+- [Next Steps](#next-steps)
+
 ---
 
 ## Core Collaboration Principles

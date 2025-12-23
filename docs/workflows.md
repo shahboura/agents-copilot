@@ -8,6 +8,24 @@ nav_order: 5
 
 See agents working together on realistic projects.
 
+## Table of Contents
+
+- [Workflow 1: Build REST API (30 min)](#workflow-1-build-rest-api-30-min)
+- [Workflow 2: Refactor Monolith Module (1-2 hours)](#workflow-2-refactor-monolith-module-1-2-hours)
+- [Workflow 3: Create Python Data Pipeline (45 min)](#workflow-3-create-python-data-pipeline-45-min)
+- [Workflow 4: Code Review & Improvement (20 min)](#workflow-4-code-review--improvement-20-min)
+- [Workflow 5: Leadership: Team Issues (30 min)](#workflow-5-leadership-team-issues-30-min)
+- [Workflow 6: Multi-Phase Feature (2-3 hours)](#workflow-6-multi-phase-feature-2-3-hours)
+- [General Patterns](#general-patterns)
+- [Tips for Success](#tips-for-success)
+- [Workflow 7: Microservices Migration (2-4 hours)](#workflow-7-microservices-migration-2-4-hours)
+- [Workflow 8: Database Schema Migration (1 hour)](#workflow-8-database-schema-migration-1-hour)
+- [Workflow 9: Error Monitoring Setup (45 min)](#workflow-9-error-monitoring-setup-45-min)
+- [Workflow 10: API Versioning Strategy (1-2 hours)](#workflow-10-api-versioning-strategy-1-2-hours)
+- [Workflow 11: Team Onboarding (Engineering Manager)](#workflow-11-team-onboarding-engineering-manager)
+- [Agent Collaboration Patterns](#agent-collaboration-patterns)
+- [Next Steps](#next-steps)
+
 ---
 
 ## Workflow 1: Build REST API (30 min)

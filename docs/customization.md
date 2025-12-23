@@ -8,6 +8,27 @@ nav_order: 6
 
 Adapt agents to your specific project needs.
 
+## Table of Contents
+
+- [Add Project Context](#add-project-context)
+  - [Overview](#overview)
+  - [Tech Stack](#tech-stack)
+  - [Architecture](#architecture)
+  - [Coding Standards](#coding-standards)
+  - [Project Structure](#project-structure)
+  - [Key Files & Standards](#key-files--standards)
+  - [Running the Project](#running-the-project)
+  - [Dependencies to Know About](#dependencies-to-know-about)
+  - [Important Constraints](#important-constraints)
+  - [Common Patterns in This Project](#common-patterns-in-this-project)
+- [Customize Agent Behavior](#customize-agent-behavior)
+- [Create Custom Prompts](#create-custom-prompts)
+- [Add Coding Standards for Your Stack](#add-coding-standards-for-your-stack)
+- [Template: Minimal Project Context](#template-minimal-project-context)
+- [Template: Comprehensive Project Context](#template-comprehensive-project-context)
+- [Troubleshooting Customization](#troubleshooting-customization)
+- [Next Steps](#next-steps)
+
 ---
 
 ## Add Project Context

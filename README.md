@@ -8,6 +8,17 @@ Specialized GitHub Copilot agents for intelligent, plan-first development workfl
 
 **Agents:** @planner • @orchestrator • @codebase • @docs • @review • @em-advisor
 
+## Table of Contents
+
+- [🚀 Quick Start (60 seconds)](#-quick-start-60-seconds)
+- [📚 Core Concepts](#-core-concepts)
+- [⚡ Reusable Prompts](#-reusable-prompts)
+- [🎯 Auto-Applied Coding Standards](#-auto-applied-coding-standards)
+- [💡 Example Workflows](#-example-workflows)
+- [🛠️ Customization](#️-customization)
+- [❓ FAQ & Troubleshooting](#-faq--troubleshooting)
+- [📖 Full Documentation](#-full-documentation)
+
 ---
 
 ## 🚀 Quick Start (60 seconds)

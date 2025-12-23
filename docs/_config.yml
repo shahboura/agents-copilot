@@ -6,8 +6,7 @@ baseurl: /agents-copilot
 repository: shahboura/agents-copilot
 
 # Theme Configuration
-# Using both theme and remote_theme ensures compatibility with local builds and GitHub Pages
-theme: just-the-docs
+# Using remote_theme for GitHub Pages compatibility
 remote_theme: just-the-docs/just-the-docs
 
 # Plugins

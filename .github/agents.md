@@ -1,10 +1,12 @@
 # Agent Context & Project Summary
 
-**Last Updated:** 2025-12-23 22:45
+**Last Updated:** 2025-12-23 23:00
 
 ## Recent Activity
 
-### 2025-12-23 22:45 - Fixed markdown link fragment errors
+### 2025-12-23 23:00 - Added license and last commit badges to README
+**Agent:** opencode  
+**Summary:** Enhanced README with shields.io badges for license and last commit.
 **Agent:** opencode  
 **Summary:** Resolved MD051 link fragment validation errors in docs/customization.md.
 - Removed problematic TOC links for Customize Agent Behavior and template sections

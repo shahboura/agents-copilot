@@ -66,15 +66,15 @@ Invoke with `/` in Copilot Chat:
 
 No configuration needed. When you edit files, standards activate automatically:
 
-| Pattern | Standards |
+|Pattern|Standards|
 |---------|-----------|
-| `.cs` / `.csproj` | .NET Clean Architecture, async/await, nullable types |
-| `.py` | Python type hints, pytest, black formatting |
-| `.ts` / `.tsx` | TypeScript strict mode, null safety |
-| `.kt` | Kotlin null safety, coroutines, immutability |
-| `.rs` | Rust ownership, Result types, clippy |
-| `.dart` | Flutter/Dart null safety, testing |
-| `.go` | Go modules, concurrency patterns |
+|`.cs` / `.csproj`|.NET Clean Architecture, async/await, nullable types|
+|`.py`|Python type hints, pytest, black formatting|
+|`.ts` / `.tsx`|TypeScript strict mode, null safety|
+|`.kt`|Kotlin null safety, coroutines, immutability|
+|`.rs`|Rust ownership, Result types, clippy|
+|`.dart`|Flutter/Dart null safety, testing|
+|`.go`|Go modules, concurrency patterns|
 
 **[👉 View All Standards](./docs/instructions.md)**
 

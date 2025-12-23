@@ -11,14 +11,14 @@ Six specialized agents, each excelling at specific tasks.
 
 ## Overview
 
-| Agent | Specialization | Key Capability |
+|Agent|Specialization|Key Capability|
 |-------|---|---|
-| @planner | Planning | Read-only analysis and planning |
-| @orchestrator | Coordination | Multi-phase workflows |
-| @codebase | Development | Multi-language implementation |
-| @docs | Documentation | README, API docs, guides |
-| @review | Quality | Security, performance, best practices |
-| @em-advisor | Leadership | Strategy, team dynamics |
+|@planner|Planning|Read-only analysis and planning|
+|@orchestrator|Coordination|Multi-phase workflows|
+|@codebase|Development|Multi-language implementation|
+|@docs|Documentation|README, API docs, guides|
+|@review|Quality|Security, performance, best practices|
+|@em-advisor|Leadership|Strategy, team dynamics|
 
 ---
 
@@ -140,12 +140,12 @@ Agent suggests next steps (review, document, etc.).
 
 @codebase automatically detects your project type:
 
-| Detection | Language | Adaptations |
+|Detection|Language|Adaptations|
 |-----------|----------|-------------|
-| `*.sln`, `*.csproj` | .NET | Clean Architecture, async/await, nullable types |
-| `pyproject.toml`, `requirements.txt` | Python | Virtual env, type hints, pytest |
-| `package.json`, `tsconfig.json` | TypeScript | Strict types, incremental builds |
-| Mixed or unclear | Generic | Language-agnostic patterns |
+|`*.sln`, `*.csproj`|.NET|Clean Architecture, async/await, nullable types|
+|`pyproject.toml`, `requirements.txt`|Python|Virtual env, type hints, pytest|
+|`package.json`, `tsconfig.json`|TypeScript|Strict types, incremental builds|
+|Mixed or unclear|Generic|Language-agnostic patterns|
 
 **Tip:** Mention your language if detection is ambiguous:
 

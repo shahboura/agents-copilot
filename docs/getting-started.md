@@ -17,14 +17,14 @@ Get up and running with GitHub Copilot agents in just 5 minutes.
 
 **Agents** are specialized versions of GitHub Copilot that excel at specific tasks.
 
-| Agent | What It Does |
+|Agent|What It Does|
 |-------|-------------|
-| @planner | Analyzes and plans (no code changes) |
-| @codebase | Implements features (code changes) |
-| @review | Audits for security & quality |
-| @docs | Creates documentation |
-| @orchestrator | Coordinates multi-phase projects |
-| @em-advisor | Helps with leadership decisions |
+|@planner|Analyzes and plans (no code changes)|
+|@codebase|Implements features (code changes)|
+|@review|Audits for security & quality|
+|@docs|Creates documentation|
+|@orchestrator|Coordinates multi-phase projects|
+|@em-advisor|Helps with leadership decisions|
 
 ## Step 2: Start Your First Conversation (2 min)
 

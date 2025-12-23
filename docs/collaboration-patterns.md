@@ -21,6 +21,7 @@ Agents pass work from one specialist to another in sequence.
 ```
 
 **When to use:**
+
 - Clear linear dependency chain
 - Each phase builds on previous
 - No parallel work possible
@@ -39,6 +40,7 @@ Orchestrator coordinates multiple agents and phases.
 ```
 
 **When to use:**
+
 - Complex multi-domain tasks
 - Multiple implementation phases
 - Need coordination and status tracking
@@ -52,6 +54,7 @@ Agent cycles back for improvements based on feedback.
 ```
 
 **When to use:**
+
 - Security-critical features
 - Performance optimization
 - Quality gate enforcement
@@ -67,6 +70,7 @@ Multiple agents work independently, then integrate.
 ```
 
 **When to use:**
+
 - Independent components
 - Different technical stacks
 - Speed optimization
@@ -80,6 +84,7 @@ Multiple agents work independently, then integrate.
 **Goal:** Implement new feature from idea to production-ready.
 
 **Flow:**
+
 ```
 1. @planner     - Analyze requirements, propose architecture
 2. @codebase    - Implement with tests
@@ -90,6 +95,7 @@ Multiple agents work independently, then integrate.
 ```
 
 **Example:**
+
 ```
 User: @planner Design user notification system with email and push
 
@@ -119,6 +125,7 @@ User: @docs Document API endpoints
 **Goal:** Safely refactor without breaking functionality.
 
 **Flow:**
+
 ```
 1. @planner     - Analyze current code, identify issues
 2. @planner     - Propose incremental refactoring plan
@@ -139,6 +146,7 @@ User: @docs Document API endpoints
 **Goal:** Debug and fix production issue quickly.
 
 **Flow:**
+
 ```
 1. @planner     - Analyze logs, identify root cause
 2. @codebase    - Implement hotfix
@@ -156,6 +164,7 @@ User: @docs Document API endpoints
 **Goal:** Systematically reduce technical debt.
 
 **Flow:**
+
 ```
 1. @review      - Audit codebase, identify debt
 2. @planner     - Prioritize issues, create roadmap
@@ -172,6 +181,7 @@ User: @docs Document API endpoints
 **Goal:** Design robust, user-friendly API.
 
 **Flow:**
+
 ```
 1. @docs        - Draft API specification (OpenAPI)
 2. @planner     - Review design, suggest improvements
@@ -190,6 +200,7 @@ User: @docs Document API endpoints
 **Goal:** Improve system performance systematically.
 
 **Flow:**
+
 ```
 1. @planner     - Analyze metrics, identify bottlenecks
 2. @codebase    - Add performance tests/benchmarks
@@ -207,6 +218,7 @@ User: @docs Document API endpoints
 **Goal:** Comprehensive security improvement.
 
 **Flow:**
+
 ```
 1. @review      - Security audit (OWASP Top 10)
 2. @planner     - Prioritize findings
@@ -226,6 +238,7 @@ User: @docs Document API endpoints
 **Goal:** Extract service from monolith.
 
 **Flow:**
+
 ```
 1. /architecture-review - Assess current architecture
 2. @planner            - Design migration strategy
@@ -245,6 +258,7 @@ User: @docs Document API endpoints
 **Goal:** Make informed technical or people decision.
 
 **Flow:**
+
 ```
 1. @em-advisor   - Analyze situation, provide framework
 2. @planner      - Technical feasibility (if applicable)
@@ -253,6 +267,7 @@ User: @docs Document API endpoints
 ```
 
 **Example Decisions:**
+
 - Technology adoption
 - Team restructuring
 - Promotion decisions

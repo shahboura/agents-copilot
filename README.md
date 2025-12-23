@@ -17,9 +17,9 @@ Specialized GitHub Copilot agents for intelligent, plan-first development workfl
 2. Select an agent: `@codebase`, `@planner`, `@review`, etc.
 3. Describe what you want:
 
-```
-@codebase Create a user REST API endpoint with JWT authentication
-```
+   ```bash
+   @codebase Create a user REST API endpoint with JWT authentication
+   ```
 
 **The agent will:**
 
@@ -84,19 +84,19 @@ No configuration needed. When you edit files, standards activate automatically:
 
 ### Build Authentication System
 
-```
+```bash
 @orchestrator Build JWT auth with endpoints, tests, security review, and docs
 ```
 
 ### Implement Feature Fast
 
-```
+```bash
 @codebase Create user CRUD service with repository pattern and unit tests
 ```
 
 ### Code Review
 
-```
+```bash
 @review Security and performance audit of auth module
 ```
 

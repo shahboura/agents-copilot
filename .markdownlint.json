@@ -21,6 +21,9 @@
   "MD036": false,
   "$comment_MD036": "Emphasis as heading allowed - Used intentionally for prompt descriptions in prompts.md",
   
-  "MD041": false,
-  "$comment_MD041": "First line H1 disabled - Jekyll requires YAML front matter at the top, not H1"
+   "MD041": false,
+   "$comment_MD041": "First line H1 disabled - Jekyll requires YAML front matter at the top, not H1",
+
+   "MD040": false,
+   "$comment_MD040": "Fenced code language disabled - many code blocks are examples without specific languages"
 }

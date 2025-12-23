@@ -413,6 +413,7 @@ Document as you go, not after.
 ```
 
 **Review identifies:**
+
 - User module has clean boundaries
 - Shared database needs splitting
 - 12 API endpoints to migrate

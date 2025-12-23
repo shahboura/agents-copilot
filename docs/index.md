@@ -77,7 +77,7 @@ Agents read/write project context to `.github/agents.md` for continuity.
 - [Workflows](workflows.md) - Real-world examples
 - [Customization](customization.md) - Adapt to your project
 - [Troubleshooting](troubleshooting.md) - Common issues
- - [Deployment](DEPLOYMENT.md) - GitHub Pages setup
+- [Deployment](DEPLOYMENT.md) - GitHub Pages setup
 
 ## Why Use Agents?
 

@@ -16,13 +16,6 @@ jobs:
         id: version
         run: echo "version=$(cat VERSION)" >> $GITHUB_OUTPUT
 
-      - name: Create tag
-        run: |
-          git config --local user.email "action@github.com"
-          git config --local user.name "GitHub Action"
-          git tag v${{ steps.version.outputs.version }}
-          git push origin v${{ steps.version.outputs.version }}
-
       - name: Create release
         uses: actions/create-release@v1
         env:

@@ -47,14 +47,14 @@
 
 ## 🤖 Available Agents
 
-| Agent | Purpose |
-|-------|---------|
-| `@orchestrator` | Strategic planning & coordination |
-| `@planner` | Read-only analysis & planning |
-| `@codebase` | Multi-language implementation |
-| `@docs` | Documentation generation |
-| `@review` | Security & quality audits |
-| `@em-advisor` | Leadership & team guidance |
+|Agent|Purpose|
+|-----|---------|
+|`@orchestrator`|Strategic planning & coordination|
+|`@planner`|Read-only analysis & planning|
+|`@codebase`|Multi-language implementation|
+|`@docs`|Documentation generation|
+|`@review`|Security & quality audits|
+|`@em-advisor`|Leadership & team guidance|
 
 ## 🌟 Key Features
 

@@ -68,7 +68,7 @@ orchestrator → @codebase (implement)
 
 ### 📝 Context Persistence
 
-Agents read/write project context to `.github/agents.md` for continuity.
+Agents read/write project context to `AGENTS.md` for continuity.
 
 ## Documentation
 

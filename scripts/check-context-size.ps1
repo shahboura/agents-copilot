@@ -1,6 +1,6 @@
 # Context File Size Monitor
 $ErrorActionPreference = "Stop"
-$contextFile = ".github/agents.md"
+$contextFile = "AGENTS.md"
 $maxSizeKB = 100
 $pruneToKB = 75
 

@@ -318,7 +318,7 @@ User: @docs Document API endpoints
 
 ### Accept Context Updates
 
-When agents propose updating `.github/agents.md`, accept to maintain continuity.
+When agents propose updating `AGENTS.md`, accept to maintain continuity.
 
 ---
 

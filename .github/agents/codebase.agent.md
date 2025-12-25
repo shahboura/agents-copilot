@@ -135,11 +135,11 @@ docs(scope): description
 ## Context Persistence
 
 **At session start:**
-1. Read `.github/agents.md` for project context and recent activity
+1. Read `AGENTS.md` for project context and recent activity
 2. Apply architectural decisions and patterns from previous sessions
 
 **At task completion:**
-Update `.github/agents.md` with timestamped entry (latest first):
+Update `AGENTS.md` with timestamped entry (latest first):
 
 ```markdown
 ### YYYY-MM-DD HH:MM - [Brief Task Description]

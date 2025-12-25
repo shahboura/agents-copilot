@@ -5,7 +5,7 @@
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 [![Last Commit](https://img.shields.io/github/last-commit/shahboura/agents-copilot)](https://github.com/shahboura/agents-copilot/commits/main)
 
-**6 specialized AI agents** for intelligent development workflows. Multi-language support with auto-applied coding standards.
+**Advanced AI coding assistants** for GitHub Copilot. 6 specialized agents that automate software development workflows with intelligent planning, code generation, documentation, security audits, and quality assurance across 11+ programming languages including .NET, Python, TypeScript, React, Flutter, Go, Rust, and Kotlin.
 
 ## 🚀 Installation
 
@@ -58,11 +58,13 @@
 
 ## 🌟 Key Features
 
-- **11+ Languages** with auto-applied standards (.NET, Python, TypeScript, Flutter, Go, etc.)
-- **Context Aware** - Learns from your `AGENTS.md` file
-- **Session Logging** - Automatic summaries between conversations
-- **Multi-Agent Workflows** - Agents can hand off to each other
-- **Zero Config** - Works out of the box
+- **🤖 AI-Powered Development** - Intelligent code generation and automated workflows
+- **🌐 Multi-Language Support** - 11+ languages with auto-applied coding standards (.NET, Python, TypeScript, Flutter, Go, Rust, Kotlin, etc.)
+- **🧠 Context Awareness** - Learns from project history in `AGENTS.md` for smarter suggestions
+- **📝 Automatic Documentation** - Generates READMEs, API docs, and technical guides
+- **🔒 Security & Quality Assurance** - Built-in code review, security audits, and performance analysis
+- **⚡ Workflow Automation** - Multi-agent collaboration for end-to-end development tasks
+- **🚀 Zero Configuration** - Works immediately with GitHub Copilot Chat
 
 ## 📚 Examples
 
@@ -229,5 +231,9 @@ A: Yes! They update `.github/copilot-instructions.md` automatically (with your a
 **[👉 Full FAQ](./docs/troubleshooting.md)**
 
 ---
+
+## 🏷️ Topics
+
+`github-copilot` `ai-coding-assistant` `software-development` `code-generation` `automation` `dev-tools` `programming-assistant` `intelligent-coding` `workflow-automation` `multi-language` `code-review` `documentation-generator` `development-productivity`
 
 ## 📖 Full Documentation

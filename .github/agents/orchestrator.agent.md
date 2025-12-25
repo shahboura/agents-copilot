@@ -156,6 +156,11 @@ Update `AGENTS.md` with timestamped entry (latest first):
 - Include orchestration patterns and coordination approaches
 - File auto-prunes when exceeding 100KB
 
+**Context Optimization:**
+- Optimize context before adding new entries if file > 80KB
+- Merge related entries, remove redundancy, prioritize high-value context
+- Use optimization template when performing cleanup
+
 **Present update for approval before ending task.**
 
 ## Communication Style

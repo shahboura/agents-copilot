@@ -194,11 +194,58 @@
 - Keep summaries concise (3-5 bullet points max)
 - Oldest entries auto-pruned when file exceeds 100KB
 
+### Context Optimization Instructions
+
+**When to Optimize Context:**
+
+- Before adding new entries if file size > 80KB
+- After completing major multi-step tasks
+- When noticing redundant information across entries
+- During project milestones or version releases
+
+**Optimization Strategies:**
+
+1. **Merge Related Entries**
+   - Combine multiple small tasks from same day into single entry
+   - Example: Multiple documentation fixes → "Fixed multiple documentation issues"
+
+2. **Remove Redundancy**
+   - Eliminate duplicate information across recent entries
+   - Consolidate similar patterns/decisions
+   - Remove superseded information
+
+3. **Prioritize High-Value Context**
+   - Keep architectural decisions and patterns
+   - Keep breaking changes and migrations
+   - Remove routine maintenance tasks
+   - Remove temporary workarounds
+
+4. **Compact Formatting**
+   - Use single-line bullets when possible
+   - Combine related bullet points
+   - Remove unnecessary adjectives/qualifiers
+
+5. **Archive Historical Context**
+   - Move entries older than 30 days to separate archive section
+   - Keep only essential historical patterns
+
+**Optimization Template:**
+
+```markdown
+### YYYY-MM-DD HH:MM - Context optimization: [reason]
+**Agent:** [agent-name]
+**Summary:** Optimized context for better performance and relevance
+- Merged [X] related entries from [date range]
+- Removed [Y] redundant items
+- Prioritized [Z] high-value decisions
+- File size reduced from [old]KB to [new]KB
+```
+
 **Entry Template:**
 
 ```markdown
 ### YYYY-MM-DD HH:MM - [Brief Task Description]
-**Agent:** [agent-name]  
+**Agent:** [agent-name]
 **Summary:** [What was accomplished]
 - Key decision/pattern 1
 - Key decision/pattern 2

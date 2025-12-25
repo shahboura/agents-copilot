@@ -1,36 +1,73 @@
 # GitHub Copilot Custom Agents
 
-[![Validate Agents](https://github.com/shahboura/agents-copilot/actions/workflows/validate.yml/badge.svg)](https://github.com/shahboura/agents-copilot/actions/workflows/validate.yml)
+[![Validate Agents & Documentation](https://github.com/shahboura/agents-copilot/actions/workflows/validate.yml/badge.svg)](https://github.com/shahboura/agents-copilot/actions/workflows/validate.yml)
 [![Documentation](https://img.shields.io/badge/docs-GitHub%20Pages-blue)](https://shahboura.github.io/agents-copilot/)
-[![License](https://img.shields.io/github/license/shahboura/agents-copilot)](https://github.com/shahboura/agents-copilot/blob/main/LICENSE)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 [![Last Commit](https://img.shields.io/github/last-commit/shahboura/agents-copilot)](https://github.com/shahboura/agents-copilot/commits/main)
 
-Specialized GitHub Copilot agents for intelligent, plan-first development workflows.
+**6 specialized AI agents** for intelligent development workflows. Multi-language support with auto-applied coding standards.
 
-**Agents:** @planner • @orchestrator • @codebase • @docs • @review • @em-advisor
+## 🚀 One-Command Install
+
+**Requires:** Node.js + Git
+
+```bash
+# Global install (available in all projects)
+curl -fsSL https://raw.githubusercontent.com/shahboura/agents-copilot/main/install.js -o install.js && node install.js --global && rm install.js
+
+# Project install (current directory only)
+curl -fsSL https://raw.githubusercontent.com/shahboura/agents-copilot/main/install.js -o install.js && node install.js --project . && rm install.js
+
+# Uninstall
+curl -fsSL https://raw.githubusercontent.com/shahboura/agents-copilot/main/install.js -o install.js && node install.js --uninstall
+```
+
+**Installation Locations:**
+
+- **Global:** `~/.config/agents-copilot/` (Linux/macOS/Windows)
+- **Project:** `./.agents-copilot/` in your project directory
+
+**That's it!** Agents are ready to use. No configuration needed.
 
 ---
 
-## 🚀 Quick Start (60 seconds)
+## 🎯 Quick Start
 
-### Use an Agent
+1. **Install** (above)
+2. **Run:** Configure your preferred chat interface
+3. **Use:** `@orchestrator Build a REST API with JWT auth`
 
-1. Open GitHub Copilot Chat: `Ctrl+Shift+I` (or `Cmd+Shift+I`)
-2. Select an agent: `@codebase`, `@planner`, `@review`, etc.
-3. Describe what you want:
+**That's it!** Agents handle planning, implementation, testing, and documentation automatically.
 
-   ```bash
-   @codebase Create a user REST API endpoint with JWT authentication
-   ```
+## 🤖 Available Agents
 
-**The agent will:**
+| Agent | Purpose |
+|-------|---------|
+| `@orchestrator` | Strategic planning & coordination |
+| `@planner` | Read-only analysis & planning |
+| `@codebase` | Multi-language implementation |
+| `@docs` | Documentation generation |
+| `@review` | Security & quality audits |
+| `@em-advisor` | Leadership & team guidance |
 
-- 📋 Propose a step-by-step plan
-- ⏸️ Wait for your approval
-- 🔨 Implement with validation
-- ✨ Suggest next steps (docs, review, etc.)
+## 🌟 Key Features
 
-**[👉 Full Documentation](#-full-documentation)**
+- **11+ Languages** with auto-applied standards (.NET, Python, TypeScript, Flutter, Go, etc.)
+- **Context Aware** - Learns from your `AGENTS.md` file
+- **Session Logging** - Automatic summaries between conversations
+- **Multi-Agent Workflows** - Agents can hand off to each other
+- **Zero Config** - Works out of the box
+
+## 📚 Examples
+
+```bash
+@orchestrator Build JWT auth with endpoints, tests, security review, and docs
+@codebase Create user CRUD service with repository pattern and unit tests
+@review Security and performance audit of auth module
+@planner Analyze codebase architecture and suggest improvements
+```
+
+---
 
 ---
 

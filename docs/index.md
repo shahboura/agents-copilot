@@ -26,14 +26,14 @@ permalink: /
 
 **Specialized Expertise** - Each agent excels at specific tasks:
 
-| Agent | 🎯 Purpose | ⚡ Key Benefit |
-|-------|------------|---------------|
-| **@planner** | Analysis & Planning | Risk-free exploration |
-| **@orchestrator** | Project Coordination | Multi-phase automation |
-| **@codebase** | Code Implementation | Multi-language development |
-| **@docs** | Documentation | Professional docs & guides |
-| **@review** | Quality Assurance | Security & performance audits |
-| **@em-advisor** | Leadership Support | Strategy & team guidance |
+|Agent|🎯 Purpose|⚡ Key Benefit|
+|-----|------------|---------------|
+|**@planner**|Analysis & Planning|Risk-free exploration|
+|**@orchestrator**|Project Coordination|Multi-phase automation|
+|**@codebase**|Code Implementation|Multi-language development|
+|**@docs**|Documentation|Professional docs & guides|
+|**@review**|Quality Assurance|Security & performance audits|
+|**@em-advisor**|Leadership Support|Strategy & team guidance|
 
 ## 🚀 Try It Now (30 seconds)
 

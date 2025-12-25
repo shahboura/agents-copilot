@@ -19,14 +19,14 @@ Transform your development workflow with AI-powered coding assistants.
 
 **Agents** are specialized Copilot experts. Pick the right one for your task:
 
-| Agent | 🎯 Best For | ⚡ Example |
-|-------|-------------|-----------|
-| `@codebase` | **Writing Code** | "Create a user login API" |
-| `@planner` | **Analysis Only** | "Analyze this codebase architecture" |
-| `@review` | **Code Quality** | "Audit for security issues" |
-| `@docs` | **Documentation** | "Create API documentation" |
-| `@orchestrator` | **Big Projects** | "Build a complete auth system" |
-| `@em-advisor` | **Leadership** | "Prepare for team meeting" |
+|Agent|🎯 Best For|⚡ Example|
+|------|-------------|-----------|
+|`@codebase`|**Writing Code**|"Create a user login API"|
+|`@planner`|**Analysis Only**|"Analyze this codebase architecture"|
+|`@review`|**Code Quality**|"Audit for security issues"|
+|`@docs`|**Documentation**|"Create API documentation"|
+|`@orchestrator`|**Big Projects**|"Build a complete auth system"|
+|`@em-advisor`|**Leadership**|"Prepare for team meeting"|
 
 ## 🎯 Step 2: Your First Agent Interaction (2 min)
 

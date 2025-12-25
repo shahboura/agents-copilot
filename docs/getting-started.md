@@ -2,159 +2,145 @@
 layout: default
 title: Getting Started
 nav_order: 1
+description: "Get up and running with GitHub Copilot agents in 5 minutes"
 ---
 
-# Getting Started in 5 Minutes
+# 🚀 Getting Started (5 Minutes)
 
-Get up and running with GitHub Copilot agents in just 5 minutes.
+{: .fs-6 .fw-300 }
+Transform your development workflow with AI-powered coding assistants.
 
-## Prerequisites
+## 📋 Prerequisites
 
-- VS Code with GitHub Copilot extension installed
-- Any project (this works with existing repos)
+- ✅ VS Code with GitHub Copilot installed
+- ✅ Any project (works with existing repos)
 
-## Step 1: Understand Agent Concepts (1 min)
+## 🎯 Step 1: Choose Your Agent (1 min)
 
-**Agents** are specialized versions of GitHub Copilot that excel at specific tasks.
+**Agents** are specialized Copilot experts. Pick the right one for your task:
 
-|Agent|What It Does|
-|-------|-------------|
-|@planner|Analyzes and plans (no code changes)|
-|@codebase|Implements features (code changes)|
-|@review|Audits for security & quality|
-|@docs|Creates documentation|
-|@orchestrator|Coordinates multi-phase projects|
-|@em-advisor|Helps with leadership decisions|
+| Agent | 🎯 Best For | ⚡ Example |
+|-------|-------------|-----------|
+| `@codebase` | **Writing Code** | "Create a user login API" |
+| `@planner` | **Analysis Only** | "Analyze this codebase architecture" |
+| `@review` | **Code Quality** | "Audit for security issues" |
+| `@docs` | **Documentation** | "Create API documentation" |
+| `@orchestrator` | **Big Projects** | "Build a complete auth system" |
+| `@em-advisor` | **Leadership** | "Prepare for team meeting" |
 
-## Step 2: Start Your First Conversation (2 min)
+## 🎯 Step 2: Your First Agent Interaction (2 min)
 
-1. **Open Copilot Chat**
-   - Windows: `Ctrl+Shift+I`
-   - Mac: `Cmd+Shift+I`
+### 1. Open Copilot Chat
 
-2. **Select an Agent**
-   - Click the agent dropdown at the top
-   - Choose `@codebase` (start with the most versatile)
+- **Windows/Linux**: `Ctrl + Shift + I`
+- **Mac**: `Cmd + Shift + I`
 
-3. **Type Your Request**
+### 2. Select an Agent
 
-   ```
-   @codebase Create a REST API endpoint for getting users by ID
-   ```
+Click the dropdown at the top and choose `@codebase` (most versatile for beginners)
 
-4. **Review the Plan**
-   - The agent will propose a step-by-step plan
-   - Review it carefully
-   - Type "Yes" or "Approved" to proceed
+### 3. Try Your First Request
 
-5. **Watch Implementation**
-   - Agent implements one step at a time
-   - Each step shows what changed
-   - Can stop or adjust at any time
-
-## Step 3: Use Reusable Prompts (1 min)
-
-Save time with `/` commands:
-
-```
-/code-review          # Quick code review
-/generate-tests       # Unit test generation
-/create-readme        # Professional README
-/1-on-1-prep         # Team meeting prep
-/architecture-decision # Design documentation
+```bash
+@codebase Create a REST API endpoint for user authentication with JWT
 ```
 
-Type `/` in Copilot Chat to see all available prompts.
+### 4. Review & Approve
 
-## Step 4: Add Project Context (1 min)
+- Agent shows you a detailed plan
+- Review each step carefully
+- Type "yes" or "approved" to proceed
+- Watch it implement step-by-step!
 
-Make agents smarter by providing project context:
+## ⚡ Step 3: Power Up with Prompts (1 min)
 
-1. **Create file**: `.github/copilot-instructions.md`
+Use `/` commands for instant results:
 
-2. **Add context**:
+```bash
+/code-review          # Quick security & quality check
+/generate-tests       # Create unit tests automatically
+/create-readme        # Professional documentation
+/1-on-1-prep         # Leadership meeting preparation
+```
+
+**Tip**: Type `/` in chat to see all available prompts.
+
+## 🎨 Step 4: Customize for Your Project (1 min)
+
+Make agents project-aware by creating `.github/copilot-instructions.md`:
 
 ```markdown
-# My Project
+# My Project Context
 
-We build microservices using:
-- Node.js + TypeScript
-- PostgreSQL
-- Docker
+Tech Stack:
+- Node.js + TypeScript + Express
+- PostgreSQL database
+- Docker containers
 
-## Standards
-- Use async/await everywhere
-- Write tests for new features
-- Follow conventional commits
-- OpenAPI for API docs
+Standards:
+- Async/await everywhere
+- Comprehensive error handling
+- OpenAPI documentation
+- Jest for testing
 ```
 
-1. **Agents automatically use this context!**
-
-## Step 5: Try a Workflow (0 min)
-
-Now you're ready! Try these:
-
-### 👤 Create User Service
-
-```
-@codebase Create UserService with:
-- Get, create, update, delete methods
-- Proper error handling
-- Unit tests with Jest
-- TypeScript strict mode
-```
-
-### 🔐 Secure Review
-
-```
-@review Audit this code for security issues
-```
-
-### 📖 Generate Docs
-
-```
-@docs Create README with installation, usage, and API examples
-```
+**Agents automatically learn from this file!**
 
 ---
 
-## Common Patterns
+## 💡 Pro Tips for Success
 
-### ✅ DO: Be Specific
+### 🎯 **Be Specific**
 
-```
-@codebase Create an authentication middleware that validates JWT tokens 
-and extracts user info to req.user
-```
+```bash
+✅ Good: @codebase Create authentication middleware that validates JWT tokens and extracts user info to req.user
 
-### ❌ DON'T: Be Vague
-
-```
-@codebase Add auth
+❌ Bad:  @codebase Add auth
 ```
 
-### ✅ DO: Review Plans
+### 🔍 **Always Review Plans**
 
-Always review the agent's proposed plan before approving implementation.
+Agents show you exactly what they'll do before making changes. Take a moment to review!
 
-### ✅ DO: Use Handoffs
+### 🤝 **Use Agent Handoffs**
 
-```
+```bash
 @codebase (implement) → @review (audit) → @docs (document)
 ```
 
+### 🚀 **Try These Next**
+
+<div class="grid">
+  <div class="card">
+    <h3>🔧 Build Features</h3>
+    <p>@codebase Create user management API with CRUD operations</p>
+  </div>
+  <div class="card">
+    <h3>🔒 Security Audit</h3>
+    <p>@review Check authentication code for vulnerabilities</p>
+  </div>
+  <div class="card">
+    <h3>📚 Documentation</h3>
+    <p>@docs Generate API documentation with examples</p>
+  </div>
+</div>
+
 ---
 
-## Next Steps
+## 📚 Learn More
 
-- **[Explore All Agents](./agents/README.md)** - Deep dive into each agent
-- **[View Workflows](./workflows.md)** - Real-world examples
-- **[Customize Agents](./customization.md)** - Adapt to your project
-- **[Troubleshooting](./troubleshooting.md)** - Common issues and fixes
+- **[📖 Agent Deep Dive](./agents/README.md)** - Detailed capabilities
+- **[💡 Real Examples](./workflows.md)** - Production workflows
+- **[⚙️ Customization](./customization.md)** - Adapt to your needs
+- **[🔧 Troubleshooting](./troubleshooting.md)** - Common issues
 
-## Need Help?
+## ❓ Need Help?
 
-- Check the [FAQ](./troubleshooting.md#faq)
-- Review [Agent Capabilities](./agents/README.md)
-- Browse [Real Workflows](./workflows.md)
+- **Quick Start**: Revisit this guide
+- **Agent Guide**: Check [detailed capabilities](./agents/README.md)
+- **Examples**: Browse [real workflows](./workflows.md)
+- **Issues**: See [troubleshooting](./troubleshooting.md)
+
+---
+
+**🎉 You're all set! Start building with AI-powered development assistants.**

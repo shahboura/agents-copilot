@@ -1,9 +1,12 @@
 # Jekyll Configuration for GitHub Pages
-title: GitHub Copilot Agents
-description: Specialized agents for intelligent, plan-first development workflows
+title: "GitHub Copilot Agents - AI Coding Assistants for Intelligent Development"
+description: "Advanced AI coding assistants for GitHub Copilot. 6 specialized agents that automate software development workflows with intelligent planning, code generation, documentation, and quality assurance across 11+ programming languages."
 url: https://shahboura.github.io
 baseurl: /agents-copilot
 repository: shahboura/agents-copilot
+
+# SEO Keywords
+keywords: "github copilot, ai coding assistant, software development, code generation, automation, dev tools, programming assistant, intelligent coding, workflow automation, multi-language, code review, documentation generator, development productivity"
 
 # Theme Configuration
 # Using remote_theme for GitHub Pages compatibility

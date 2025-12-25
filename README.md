@@ -237,3 +237,26 @@ A: Yes! They update `.github/copilot-instructions.md` automatically (with your a
 `github-copilot` `ai-coding-assistant` `software-development` `code-generation` `automation` `dev-tools` `programming-assistant` `intelligent-coding` `workflow-automation` `multi-language` `code-review` `documentation-generator` `development-productivity`
 
 ## 📖 Full Documentation
+
+## 🤝 Contributing
+
+We welcome contributions! See our [GitHub Issues](https://github.com/shahboura/agents-copilot/issues) for ways to help.
+
+### Development Setup
+
+**Pre-commit Hooks:** Markdown linting runs automatically before each commit to ensure code quality.
+
+**Manual Linting:**
+
+```bash
+npm run lint:md        # Check for formatting issues
+npm run lint:md:fix    # Auto-fix formatting issues
+```
+
+**Validation Scripts:**
+
+```bash
+pwsh scripts/validate-agents.ps1    # Validate agent configurations
+pwsh scripts/validate-docs.ps1      # Check documentation links
+pwsh scripts/check-context-size.ps1 # Monitor AGENTS.md file size
+```

@@ -7,25 +7,31 @@
 
 **6 specialized AI agents** for intelligent development workflows. Multi-language support with auto-applied coding standards.
 
-## 🚀 One-Command Install
+## 🚀 Installation
 
-**Requires:** Node.js + Git
+**Manual Installation:**
 
-```bash
-# Global install (available in all projects)
-curl -fsSL https://raw.githubusercontent.com/shahboura/agents-copilot/main/install.js -o install.js && node install.js --global && rm install.js
+1. **Clone or download** this repository
+2. **Copy agent files** to your project:
 
-# Project install (current directory only)
-curl -fsSL https://raw.githubusercontent.com/shahboura/agents-copilot/main/install.js -o install.js && node install.js --project . && rm install.js
+   ```bash
+   # Copy agent configurations
+   cp -r .github/agents/ ~/.config/agents-copilot/
 
-# Uninstall
-curl -fsSL https://raw.githubusercontent.com/shahboura/agents-copilot/main/install.js -o install.js && node install.js --uninstall
-```
+   # Copy language instructions
+   cp -r .github/instructions/ ~/.config/agents-copilot/instructions/
+
+   # Copy reusable prompts
+   cp -r .github/prompts/ ~/.config/agents-copilot/prompts/
+
+   # Copy session log template (if not exists)
+   cp AGENTS.md ~/.config/agents-copilot/ 2>/dev/null || true
+   ```
 
 **Installation Locations:**
 
 - **Global:** `~/.config/agents-copilot/` (Linux/macOS/Windows)
-- **Project:** `./.agents-copilot/` in your project directory
+- **Project:** Copy files directly to your project directory
 
 **That's it!** Agents are ready to use. No configuration needed.
 
